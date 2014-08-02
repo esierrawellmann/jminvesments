@@ -12,7 +12,7 @@ class database {
   if(!isset($this->conexion))
   {
     $this->conexion = (mysql_connect("localhost","USUARIO","PASSWORD")) or die(mysql_error());
-    mysql_select_db("BASE_DE_DATOS",$this->conexion) or die(mysql_error());
+    mysql_select_db("tmbs",$this->conexion) or die(mysql_error());
   }
  } 
 
