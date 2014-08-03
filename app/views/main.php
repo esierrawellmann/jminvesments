@@ -1,5 +1,5 @@
 <?php  include("header.php"); ?>
 
-contenido
+<?php phpinfo(); ?>
 
 <?php  include("footer.php"); ?>
