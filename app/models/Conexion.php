@@ -13,20 +13,8 @@ class database {
 
   if(!isset($this->conexion))
   {
-
-    //$this->conexion = (mysql_connect("localhost","root","")) or die(mysql_error());
-   // mysql_select_db("tmbs",$this->conexion) or die(mysql_error());
-      echo 'conectando ala puta';
       $this ->conexion = (mysql_connect("localhost","root","")) or die(mysql_error()); 
-      //$connect=mysqli_connect('localhost','root','') or die("Unable to Connect");
-      echo 'conectando ala segunda puta';
         mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
-        $showtablequery="SHOW TABLES FROM tmbs";
-        $query_result=mysql_query($showtablequery);
-        while($showtablerow = mysql_fetch_array($query_result))
-        {
-          echo $showtablerow[0]." ";
-        }
  } 
 }
   /* METODO PARA REALIZAR UNA CONSULTA 

@@ -17,7 +17,7 @@ class Rol extends database {
     while ( $tsArray = $this->fetch_assoc($query) )
      $data[] = $tsArray;   
 
-    return json_encode ($data);
+    return $data;
   }else
   {
    return '{ }';
