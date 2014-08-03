@@ -16,39 +16,41 @@
     <title> The Man's Barbershop</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo $pt; ?>/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="<?php echo $pt; ?>/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="<?php echo $pt; ?>/public/css/plugins/timeline.css" rel="stylesheet">
+    <link href="/public/css/plugins/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo $pt; ?>/public/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/public/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="<?php echo $pt; ?>/public/css/plugins/morris.css" rel="stylesheet">
+    <link href="/public/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo $pt; ?>/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- jQuery Version 1.11.0 -->
-    <script src="<?php echo $pt; ?>/public/js/jquery-1.11.0.js"></script>
+    <script src="/public/js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo $pt; ?>/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo $pt; ?>/public/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/metisMenu.min.js"></script>
 
+    <script src="/public/js/angular.min.js" type="text/javascript"></script>
     <!-- Morris Charts JavaScript -->
-    <script src="<?php echo $pt; ?>/public/js/plugins/morris/raphael.min.js"></script>
-    <script src="<?php echo $pt; ?>/public/js/plugins/morris/morris.min.js"></script>
+    <script src="/public/js/angular-route.min.js" type="text/javascript"></script>
+    <script src="/public/js/plugins/morris/raphael.min.js"></script>
+    <script src="/public/js/plugins/morris/morris.min.js"></script>
     <!--<script src="../../public/js/plugins/morris/morris-data.js"></script> -->
 
     <!-- Custom Theme JavaScript -->
-    <script src="<?php echo $pt; ?>/public/js/sb-admin-2.js"></script>
+    <script src="/public/js/sb-admin-2.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -290,7 +292,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/product/index.php"><i class="fa fa-database fa-fw"></i> Productos</a>
+                            <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Productos</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>

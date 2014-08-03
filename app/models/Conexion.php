@@ -9,13 +9,26 @@ class database {
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
  {
+
+
   if(!isset($this->conexion))
   {
-    $this->conexion = (mysql_connect("localhost","USUARIO","PASSWORD")) or die(mysql_error());
-    mysql_select_db("tmbs",$this->conexion) or die(mysql_error());
-  }
- } 
 
+    //$this->conexion = (mysql_connect("localhost","root","")) or die(mysql_error());
+   // mysql_select_db("tmbs",$this->conexion) or die(mysql_error());
+      echo 'conectando ala puta';
+      $this ->conexion = (mysql_connect("localhost","root","")) or die(mysql_error()); 
+      //$connect=mysqli_connect('localhost','root','') or die("Unable to Connect");
+      echo 'conectando ala segunda puta';
+        mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
+        $showtablequery="SHOW TABLES FROM tmbs";
+        $query_result=mysql_query($showtablequery);
+        while($showtablerow = mysql_fetch_array($query_result))
+        {
+          echo $showtablerow[0]." ";
+        }
+ } 
+}
   /* METODO PARA REALIZAR UNA CONSULTA 
  INPUT:
  $sql | codigo sql para ejecutar la consulta
@@ -23,7 +36,10 @@ class database {
  */
  public function consulta($sql)
  {
+
+
     $resultado = mysql_query($sql,$this->conexion);
+
     if(!$resultado){
      echo 'MySQL Error: ' . mysql_error();
      exit;
@@ -36,6 +52,7 @@ class database {
  OUTPUT: cantidad de registros encontrados
  */
  function numero_de_filas($result){
+
   if(!is_resource($result)) return false;
   return mysql_num_rows($result);
  }
