@@ -2,10 +2,9 @@
 <?php  include("../header.php");
 		require_once '../../models/Rol.php';	
 
-
 		$objRol = new Rol();
 		$objRol =  $objRol->getRoles();
-                //var_dump($objRol);
+                $json_rol = json_encode($objRol);
 
  ?>
 
@@ -15,17 +14,11 @@
  var app = angular.module('rol', ['ngRoute']);
  function controller($scope)
  {
-	$scope.getRoles = function(){
-	  	$http({method: 'GET', url: '../../models/Rol.php'}).
-	    success(function(data, status, headers, config) {
-	      // this callback will be called asynchronously
-	      // when the response is available
-	    }).
-	    error(function(data, status, headers, config) {
-	      // called asynchronously if an error occurs
-	      // or server returns response with an error status.
-	    });
-	}
+        $scope.initialRoles = <?php echo $json_rol; ?>;
+       
+    angular.element(document).ready(function () {
+     
+    });
  }
  </script>
 <div ng-app="rol">
@@ -54,9 +47,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX"> 
-                                            <td>1</td>
-                                            <td>Administrador</td>    
+                                        <tr ng-repeat="data in initialRoles" class="odd gradeX"> 
+                                            <td>{{data.id_role}}</td>
+                                            <td>{{data.nombre}}</td>    
                                         </tr>
                                     </tbody>
                                 </table>
