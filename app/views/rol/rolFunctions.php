@@ -7,10 +7,8 @@
 	    case "insert":
 	    	$rol = new Rol();
 	    	if(isset($data['rolName'])){
-		    	$rol -> insertRol($data['rolName']);
-		        echo json_encode($rol);
-	        }else{
-	        	echo '{"success":false}';
+		    	$objRol = $rol -> newRole($data['rolName']);
+		        echo json_encode($objRol);
 	        }
 	        break;
 	    case "1":

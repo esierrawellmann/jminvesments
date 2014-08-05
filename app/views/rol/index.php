@@ -33,9 +33,8 @@
 
         modalInstance.result.then(function (rol) {
              $http.post('rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
-                if(!data.success){
-                    alert('failed');
-                }
+                console.log(data);
+                $scope.initialRoles.push(data[0]);
              });
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -76,7 +75,7 @@
                                         <th>Role</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-show="data.lenght > 0">
+                                <tbody ng-show="initialRoles.length > 0">
                                     <tr ng-repeat="data in initialRoles" class="odd gradeX"> 
                                         <td>{{data.id_role}}</td>
                                         <td>{{data.nombre}}</td>    

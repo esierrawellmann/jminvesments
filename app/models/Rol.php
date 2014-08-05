@@ -17,9 +17,9 @@ class Rol extends database {
     }
   }
   function newRole($rolName){
-    $this.conectar();
-    $query = $this->consulta("insert into role(nombre) values (".$rolName.");");
-    $queryObject = $this.consulta("SELECT * from role ORDER BY id DESC LIMIT 1 ");
+    $this -> conectar();
+    $query = $this->consulta("insert into role(nombre) values ('".$rolName."');");
+    $queryObject = $this->consulta("SELECT * from role ORDER BY id_role DESC LIMIT 1 ");
     $this->disconnect();
     if($this->numero_de_filas($queryObject) > 0){
       while ( $tsArray = $this->fetch_assoc($queryObject) )
