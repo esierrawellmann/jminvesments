@@ -1,6 +1,6 @@
 
 <?php  include("../header.php");
-		require_once '../../models/Rol.php';	
+	   require_once '../../models/Rol.php';	
 
 		$objRol = new Rol();
 		$objRol =  $objRol->getRoles();
@@ -13,8 +13,9 @@
  <script>
  var app = angular.module('rol', ['ngRoute']);
  angular.module('rol', ['ui.bootstrap']);
- function controller($scope, $modal, $log)
+ function controller($scope, $modal, $log , $http)
  {
+    $scope.rol = [];
     $scope.initialRoles = <?php echo $json_rol; ?>;
     
     $scope.open = function (size) {
@@ -30,17 +31,22 @@
         //  }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
+        modalInstance.result.then(function (rol) {
+             $http.post('rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
+                if(!data.success){
+                    alert('failed');
+                }
+             });
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
  }
  var ModalInstanceCtrl = function ($scope, $modalInstance) {
-
-    $scope.ok = function () {
-        $modalInstance.close('ok');
+    $scope.rol = [];
+    $scope.ok = function (rol) {
+        $scope.rol.nombre = rol.nombre;
+        $modalInstance.close(rol);
     };
 
     $scope.cancel = function () {
@@ -70,7 +76,7 @@
                                         <th>Role</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody ng-show="data.lenght > 0">
                                     <tr ng-repeat="data in initialRoles" class="odd gradeX"> 
                                         <td>{{data.id_role}}</td>
                                         <td>{{data.nombre}}</td>    
@@ -78,7 +84,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>   
             </div>      
@@ -91,13 +96,13 @@
                 <form role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Rol">
+                        <input type="text" class="form-control" ng-model="rol.nombre" id="exampleInputEmail1" placeholder="Nombre del Rol"/>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" ng-click="ok()">OK</button>
-                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="ok(rol)">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>
 	</div>
