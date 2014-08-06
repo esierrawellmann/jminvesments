@@ -16,8 +16,14 @@
  function controller($scope, $modal, $log , $http)
  {
     $scope.rol = [];
-    $scope.initialRoles = <?php echo $json_rol; ?>;
-    
+    $scope.initialRoles =[] 
+
+    angular.element(document).ready(function () {
+    	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
+            console.log(data);
+            $scope.initialRoles = data ;
+         });
+    });
     $scope.open = function (size) {
 
         var modalInstance = $modal.open({
@@ -32,7 +38,7 @@
         });
 
         modalInstance.result.then(function (rol) {
-             $http.post('rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
+             $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
                 console.log(data);
                 $scope.initialRoles.push(data[0]);
              });
@@ -73,12 +79,24 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Role</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody ng-show="initialRoles.length > 0">
                                     <tr ng-repeat="data in initialRoles" class="odd gradeX"> 
                                         <td>{{data.id_role}}</td>
-                                        <td>{{data.nombre}}</td>    
+                                        <td>{{data.nombre}}</td>
+                                        <td>
+                                        	<div class="btn-group">
+											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+											    <i class="fa fa-cog"></i>Acciones <span class="caret"></span>
+											  </button>
+											  <ul class="dropdown-menu" role="menu">
+											    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>Editar</a></li>
+											    <li><a href="#"> <i class="fa fa-minus-square"></i>Eliminar</a></li>
+											  </ul>
+											</div>
+                                    	</td>    
                                     </tr>
                                 </tbody>
                             </table>
