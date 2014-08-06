@@ -16,42 +16,65 @@
  function controller($scope, $modal, $log , $http)
  {
     $scope.rol = [];
-    $scope.initialRoles =[] 
+    $scope.initialRoles =[]
+    $scope.action = 0; 
 
     angular.element(document).ready(function () {
     	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
-            console.log(data);
             $scope.initialRoles = data ;
          });
     });
+    $scope.showUpdateDialog = function (data,size){
+    	var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: ModalInstanceCtrl,
+            size: size,
+            resolve: {
+                rol: function () {
+              		return data;
+          		},
+  				action: function(){
+					return 1;
+  	  	  		}
+          	}
+          });
+    } 
     $scope.open = function (size) {
-
         var modalInstance = $modal.open({
           templateUrl: 'myModalContent.html',
           controller: ModalInstanceCtrl,
-          size: size//,
-          //resolve: {
-            //items: function () {
-            //  return $scope.items;
-        //    }
-        //  }
+          size: size,
+          resolve: { 
+          	rol: function () {
+            		return [];
+        		},
+		        action: function(){
+					return 0;
+			  	}
+        	}
         });
 
-        modalInstance.result.then(function (rol) {
-             $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
-                console.log(data);
-                $scope.initialRoles.push(data[0]);
-             });
+        modalInstance.result.then(function (rol,action) {
+            alert(action);
+            
+            if(action == 0){
+            	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
+                    $scope.initialRoles.push(data[0]);
+                 });
+            }else{
+            	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
+                    console.log(data);
+                 });
+            }
+             
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
         });
     };
  }
- var ModalInstanceCtrl = function ($scope, $modalInstance) {
-    $scope.rol = [];
+ var ModalInstanceCtrl = function ($scope, $modalInstance,rol,action) {
+    $scope.rol = rol;
     $scope.ok = function (rol) {
-        $scope.rol.nombre = rol.nombre;
-        $modalInstance.close(rol);
+        $modalInstance.close(rol,action);
     };
 
     $scope.cancel = function () {
@@ -89,11 +112,11 @@
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-											    <i class="fa fa-cog"></i>Acciones <span class="caret"></span>
+											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
 											  </button>
 											  <ul class="dropdown-menu" role="menu">
-											    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>Editar</a></li>
-											    <li><a href="#"> <i class="fa fa-minus-square"></i>Eliminar</a></li>
+											    <li><a href="#" ng-click="showUpdateDialog(data)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+											    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
 											  </ul>
 											</div>
                                     	</td>    
