@@ -1,15 +1,6 @@
 
 <?php  include("../header.php");
-	   require_once '../../models/Rol.php';	
-
-		$objRol = new Rol();
-		$objRol =  $objRol->getRoles();
-                $json_rol = json_encode($objRol);
-
  ?>
-
-
-
  <script>
  var app = angular.module('rol', ['ngRoute']);
  angular.module('rol', ['ui.bootstrap']);
@@ -17,64 +8,75 @@
  {
     $scope.rol = [];
     $scope.initialRoles =[]
-    $scope.action = 0; 
-
     angular.element(document).ready(function () {
     	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialRoles = data ;
          });
     });
     $scope.showUpdateDialog = function (data,size){
-    	var modalInstance = $modal.open({
+    	var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
-            controller: ModalInstanceCtrl,
+            controller: ModalInstanceUpdateCtrl,
             size: size,
             resolve: {
+                action: function(){
+                return "Modificar"
+            }, 
                 rol: function () {
               		return data;
-          		},
-  				action: function(){
-					return 1;
-  	  	  		}
+          		}
           	}
-          });
-    } 
-    $scope.open = function (size) {
-        var modalInstance = $modal.open({
-          templateUrl: 'myModalContent.html',
-          controller: ModalInstanceCtrl,
-          size: size,
-          resolve: { 
-          	rol: function () {
-            		return [];
-        		},
-		        action: function(){
-					return 0;
-			  	}
-        	}
         });
-
-        modalInstance.result.then(function (rol,action) {
-            alert(action);
-            
-            if(action == 0){
-            	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
-                    $scope.initialRoles.push(data[0]);
-                 });
-            }else{
-            	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
-                    console.log(data);
-                 });
-            }
+        modalInstanceUpdate.result.then(function (rol) {
+            $http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
+                
+             });
              
         }, function () {
         });
+    } 
+    $scope.open = function (size) {
+        var modalInstanceOpen = $modal.open({
+          templateUrl: 'myModalContent.html',
+          controller: ModalInstanceAddCtrl,
+          size: size,
+          resolve: {
+            action: function(){
+                return "Insertar"
+            }, 
+          	rol: function () {
+            		return [];
+        		}
+        	}
+        });
+
+        modalInstanceOpen.result.then(function (rol) {
+           $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
+                $scope.initialRoles.push(data[0]);
+             });             
+        }, function () {});
     };
+        
+
  }
- var ModalInstanceCtrl = function ($scope, $modalInstance,rol,action) {
+ var ModalInstanceAddCtrl = function ($scope, $modalInstance,rol,action) {
     $scope.rol = rol;
+    $scope.action = action;
+    console.log(action);
     $scope.ok = function (rol) {
-        $modalInstance.close(rol,action);
+        $modalInstance.close(rol);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
+var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
+    $scope.rol = rol;
+    $scope.action = action;
+    console.log(action);
+    $scope.ok = function (rol) {
+        $modalInstance.close(rol);
     };
 
     $scope.cancel = function () {
@@ -130,7 +132,7 @@
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title">Agregar  nuevo Rol</h3>
+                <h3 class="modal-title"¨>{{action}} Rol</h3>
             </div>
             <div class="modal-body">
                 <form role="form">
