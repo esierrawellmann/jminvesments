@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 CLASE PARA LA CONEXION Y LA GESTION DE LA BASE DE DATOS Y LA PAGINA WEB
 */
@@ -6,17 +7,30 @@ class database {
 
  private $conexion;
 
+ 
+ public function CrearConexion($user,$pass){
+
+            $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
+            mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
+        
+            if(isset($this->conexion)){
+                if(!$this->conexion=NULL){
+                    return "true";
+                }else{return "false";}
+            }else{return "false";}
+                
+ }
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
  {
-
-
-  if(!isset($this->conexion))
-  {
-      $this ->conexion = (mysql_connect("localhost","root","")) or die(mysql_error()); 
-        mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
- } 
-}
+     
+     $user=$_SESSION["user"];
+     $pass=$_SESSION["pass"];
+     
+     $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
+            mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
+            
+    }
   /* METODO PARA REALIZAR UNA CONSULTA 
  INPUT:
  $sql | codigo sql para ejecutar la consulta
