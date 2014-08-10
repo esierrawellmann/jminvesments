@@ -295,8 +295,11 @@
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/permiso/index.php"><i class="fa  fa-check fa-fw"></i> Permisos</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
                     </ul>
                 </div>

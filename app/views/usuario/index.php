@@ -1,37 +1,32 @@
-
 <?php  include("../header.php");
  ?>
- <script>
- var app = angular.module('rol', ['ngRoute']);
- angular.module('rol', ['ui.bootstrap']);
+<script>
+ var app = angular.module('usuario', ['ngRoute']);
+ angular.module('usuario', ['ui.bootstrap']);
  function controller($scope, $modal, $log , $http)
  {
-    $scope.rol = [];
-    $scope.initialRoles =[]
+    $scope.usuario = [];
+    $scope.initialUsers =[]
     angular.element(document).ready(function () {
-    	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
-            $scope.initialRoles = data;
+
+    	$http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"query"}').success(function(data){
+            $scope.initialUsers = data;
          });
     });
 
     $scope.alerts = [
       ];
-
-      $scope.addAlert = function() {
-        $scope.alerts.push({msg: 'Another alert!'});
-      };
-
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
       };
 
-    $scope.deleteRol = function (rol){
-        var index = $scope.initialRoles.indexOf(rol);
-         $scope.initialRoles.splice(index,1);
+    $scope.deleteUser = function (rol){
+        // var index = $scope.initialRoles.indexOf(rol);
+        //  $scope.initialRoles.splice(rol,1);
          
-         $http.post('../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
-            $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
-         });
+        //  $http.post('../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
+        //     $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
+        //  });
     }
     $scope.showUpdateDialog = function (data,size){
     	var modalInstanceUpdate = $modal.open({
@@ -64,9 +59,14 @@
             action: function(){
                 return "Insertar"
             }, 
-          	rol: function () {
+          	usuario: function () {
             		return [];
-        		}
+        		},
+    		rol:function(){
+    			$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
+	                return data;
+	             });
+    			}
         	}
         });
 
@@ -103,18 +103,18 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
     };
 };
  </script>
-<div ng-app="rol">
+<div ng-app="usuario">
 	<div ng-controller="controller">
 		<div class="row">
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		    <div class="col-lg-12">
-		        <h1 class="page-header">Roles</h1>
+		        <h1 class="page-header">Usuarios</h1>
             </div>
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Roles actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Rol</button>
+                        Usuarios actuales
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Usuario</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -123,14 +123,16 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Role</th>
-                                        <th>Actions</th>
+                                        <th>Nombre</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-show="initialRoles.length > 0">
-                                    <tr ng-repeat="data in initialRoles" class="odd gradeX"> 
-                                        <td>{{data.id_role}}</td>
-                                        <td>{{data.nombre}}</td>
+                                <tbody ng-show="initialUsers.length > 0">
+                                    <tr ng-repeat="user in initialUsers" class="odd gradeX"> 
+                                        <td>{{user.id_usuario}}</td>
+                                        <td>{{user.nombre}}</td>
+                                        <td>{{user.role_name}}</td>
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -152,13 +154,14 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Rol</h3>
+                <h3 class="modal-title"¨>{{action}} Usuario</h3>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
                         <input type="text" class="form-control" ng-model="rol.nombre" id="exampleInputEmail1" placeholder="Nombre del Rol"/>
+                    	
                     </div>
                 </form>
             </div>
@@ -169,4 +172,5 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
         </script>
 	</div>
 </div>
-<?php  include("../footer.php"); ?>
+
+ <?php  include("../footer.php"); ?>

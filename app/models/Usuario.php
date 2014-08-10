@@ -1,12 +1,12 @@
 <?php
 require_once "Conexion.php";
 
-class Rol extends database {
+class Usuario extends database {
 
-  function getRoles()
+  function getUsers()
   {
     $this->conectar();
-    $query = $this->consulta("SELECT * FROM role");
+    $query = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -26,7 +26,7 @@ class Rol extends database {
         $data[] = $tsArray;   
         return $data;
     }else{
-      return array();
+      return '{ }';
     }
   }
 	function updateRole($id,$name){
@@ -40,7 +40,7 @@ class Rol extends database {
 				$data[] = $tsArray;
 			return $data;
 		}else{
-			return array();
+			return '{ }';
 		}
 	}
 
@@ -49,7 +49,7 @@ function deleteRole($id){
     $query = $this -> consulta("delete from role where id_role = ".$id);
     $this ->disconnect();
 
-    return array();
+    return '{ }';
   }
 
 }
