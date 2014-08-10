@@ -16,17 +16,20 @@ class Usuario extends database {
       return array();
     }
   }
-  function newRole($rolName){
+  function newUser($user){
+    $userName = $user['nombre'];
+    $userRole = $user['rol'];
+
     $this -> conectar();
-    $query = $this->consulta("insert into role(nombre) values ('".$rolName."');");
-    $queryObject = $this->consulta("SELECT * from role ORDER BY id_role DESC LIMIT 1 ");
+    $query = $this->consulta("insert into usuario(id_role,nombre) values (".$userRole['id_role'].",'".$userName."');");
+    $queryObject = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role ORDER BY u.id_usuario DESC LIMIT 1 ");
     $this->disconnect();
     if($this->numero_de_filas($queryObject) > 0){
       while ( $tsArray = $this->fetch_assoc($queryObject) )
         $data[] = $tsArray;   
         return $data;
     }else{
-      return '{ }';
+      return array();
     }
   }
 	function updateRole($id,$name){

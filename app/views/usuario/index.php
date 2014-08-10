@@ -7,6 +7,7 @@
  {
     $scope.usuario = [];
     $scope.initialUsers =[]
+    $scope.roles = [];
     angular.element(document).ready(function () {
 
     	$http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"query"}').success(function(data){
@@ -14,8 +15,7 @@
          });
     });
 
-    $scope.alerts = [
-      ];
+    $scope.alerts = [];
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
       };
@@ -62,29 +62,29 @@
           	usuario: function () {
             		return [];
         		},
-    		rol:function(){
-    			$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
-	                return data;
-	             });
-    			}
+    		roles:function(){
+				return $scope.initialUsers.roles;
+    		}
         	}
         });
 
-        modalInstanceOpen.result.then(function (rol) {
-           $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
-                $scope.initialRoles.push(data[0]);
-                $scope.alerts.push({type: 'success', msg: 'Rol Agregado Exitosamente' });
-             });             
+        modalInstanceOpen.result.then(function (user) {
+           $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
+                 console.log(data);
+                 $scope.initialUsers.usuarios.push(data);
+                 $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
+            });             
         }, function () {});
     };
         
 
  }
- var ModalInstanceAddCtrl = function ($scope, $modalInstance,rol,action) {
-    $scope.rol = rol;
+ var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,usuario,action,roles) {
+    $scope.roles = roles;
+    console.log($scope.roles);
     $scope.action = action;
-    $scope.ok = function (rol) {
-        $modalInstance.close(rol);
+    $scope.ok = function (user) {
+        $modalInstance.close(user);
     };
 
     $scope.cancel = function () {
@@ -92,7 +92,6 @@
     };
 };
 var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
-    $scope.rol = rol;
     $scope.action = action;
     $scope.ok = function (rol) {
         $modalInstance.close(rol);
@@ -128,8 +127,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-show="initialUsers.length > 0">
-                                    <tr ng-repeat="user in initialUsers" class="odd gradeX"> 
+                                <tbody ng-show="initialUsers.usuarios.length > 0">
+                                    <tr ng-repeat="user in initialUsers.usuarios" class="odd gradeX"> 
                                         <td>{{user.id_usuario}}</td>
                                         <td>{{user.nombre}}</td>
                                         <td>{{user.role_name}}</td>
@@ -160,13 +159,17 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
                 <form role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" ng-model="rol.nombre" id="exampleInputEmail1" placeholder="Nombre del Rol"/>
-                    	
+                        <input type="text" class="form-control" ng-model="user.nombre" id="exampleInputEmail1" placeholder="Nombre del Rol"/>
                     </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Seleccionar Rol</label>
+                        <select id="user-rol-option" ng-model="user.rol" class="form-control" ng-options="rol.nombre for rol in roles"></select>
+                    </div>
+                    {{user.nombre}}{{user.rol}}
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok(rol)">OK</button>
+                <button class="btn btn-primary" ng-click="ok(user)">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>

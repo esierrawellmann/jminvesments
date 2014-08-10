@@ -1,20 +1,27 @@
 <?php
-	require_once '../../models/Usuario.php';	 
+	require_once '../../models/Usuario.php';	
+	require_once '../../models/Rol.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
 	switch ($data['action']) {
+
 	    case "insert":
-	    	$rol = new Rol();
-	    	if(isset($data['rolName'])){
-		    	$objRol = $rol -> newRole($data['rolName']);
+	    	$usuario = new Usuario();
+	    	echo var_dump($data);
+	    	if(isset($data['user'])){
+		     	$objUsuario = $usuario -> newUser($data['user']);
 		        echo json_encode($objRol);
-	        }
+	     	}
 	        break;
 	    case "query":
 		        $user = new Usuario();
 		        $objUsuario = $user -> getUsers();
-		        echo json_encode($objUsuario);
+
+		       	$rol = new Rol();
+		       	$objRol = $rol -> getRoles();
+
+		        echo '{"usuarios":'.json_encode($objUsuario).',"roles":'.json_encode($objRol).'}';
 	    	break;
 	    case "update":
 	        $rol = new Rol();
