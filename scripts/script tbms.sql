@@ -61,9 +61,10 @@ id_detalle_venta int auto_increment,
 id_venta int not null,
 id_producto int not null,
 cantidad int not null,
-primary key(id_detalle_venta),
 precio decimal not null,
-foreign key(id_venta) references venta(id_venta)
+primary key(id_detalle_venta),
+foreign key(id_venta) references venta(id_venta),
+foreign key(id_producto) references producto(id_producto)
 ) engine=InnoDB;
 
 create table compra(
@@ -76,12 +77,13 @@ foreign key(id_usuario) references usuario(id_usuario)
 
 create table detalle_compra(
 id_detalle_compra int auto_increment,
-id_venta int not null,
+id_compra int not null,
 id_producto int not null,
 cantidad int not null,
-primary key(id_detalle_compra),
 precio decimal not null,
-foreign key(id_venta) references venta(id_venta)
+primary key(id_detalle_compra),
+foreign key(id_compra) references compra(id_compra),
+foreign key(id_producto) references producto(id_producto)
 ) engine=InnoDB;
 
 create table gasto(
