@@ -10,9 +10,29 @@
     $scope.initialRoles =[]
     angular.element(document).ready(function () {
     	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
-            $scope.initialRoles = data ;
+            $scope.initialRoles = data;
          });
     });
+
+    $scope.alerts = [
+      ];
+
+      $scope.addAlert = function() {
+        $scope.alerts.push({msg: 'Another alert!'});
+      };
+
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+
+    $scope.deleteRol = function (rol){
+        var index = $scope.initialRoles.indexOf(rol);
+         $scope.initialRoles.splice(rol,1);
+         
+         $http.post('../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
+            $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
+         });
+    }
     $scope.showUpdateDialog = function (data,size){
     	var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
@@ -20,7 +40,7 @@
             size: size,
             resolve: {
                 action: function(){
-                return "Modificar"
+                return "Modificar";
             }, 
                 rol: function () {
               		return data;
@@ -29,7 +49,7 @@
         });
         modalInstanceUpdate.result.then(function (rol) {
             $http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
-                
+                $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
         }, function () {
@@ -53,6 +73,7 @@
         modalInstanceOpen.result.then(function (rol) {
            $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
                 $scope.initialRoles.push(data[0]);
+                $scope.alerts.push({type: 'success', msg: 'Rol Agregado Exitosamente' });
              });             
         }, function () {});
     };
@@ -62,7 +83,6 @@
  var ModalInstanceAddCtrl = function ($scope, $modalInstance,rol,action) {
     $scope.rol = rol;
     $scope.action = action;
-    console.log(action);
     $scope.ok = function (rol) {
         $modalInstance.close(rol);
     };
@@ -74,7 +94,6 @@
 var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
     $scope.rol = rol;
     $scope.action = action;
-    console.log(action);
     $scope.ok = function (rol) {
         $modalInstance.close(rol);
     };
@@ -87,6 +106,7 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
 <div ng-app="rol">
 	<div ng-controller="controller">
 		<div class="row">
+              <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		    <div class="col-lg-12">
 		        <h1 class="page-header">Roles</h1>
             </div>
@@ -118,7 +138,7 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
 											  </button>
 											  <ul class="dropdown-menu" role="menu">
 											    <li><a href="#" ng-click="showUpdateDialog(data)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-											    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+											    <li><a href="#" ng-click="deleteRol(data)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
 											  </ul>
 											</div>
                                     	</td>    

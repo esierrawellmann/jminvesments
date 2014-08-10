@@ -19,9 +19,20 @@
 	    case "update":
 	        $rol = new Rol();
 	        if(isset($data['rol'])){
-	        	//$objRol = $rol -> updateRole($data['rolId'],$data['rolName']);
-	        	echo json_encode($data['rol']);
+	        	$updatedRol = $data['rol'];
+	        	$modifiedRol = get_object_vars($updatedRol);
+	        	$objRol = $rol -> updateRole($modifiedRol['id_role'],$modifiedRol['nombre']);
+	        	echo json_encode($objRol);
 	        }
 	        break;
+	    case "delete":
+		    $rol = new Rol();
+		    if(isset($data['rol'])){
+		    	$deleteRol = $data['rol'];
+	        	$deletedRol = get_object_vars($deleteRol);
+	        	$objRol = $rol -> deleteRole($deletedRol['id_role']);
+	        	echo json_encode($objRol);
+		    }
+		        break;
 	}
 ?>

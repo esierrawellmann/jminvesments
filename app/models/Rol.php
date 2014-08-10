@@ -29,6 +29,28 @@ class Rol extends database {
       return '{ }';
     }
   }
+	function updateRole($id,$name){
+		$this -> conectar();
+		$query = $this -> consulta("update role set nombre ='".$name."' where id_role = ".$id);
+
+		$queryObject = $this -> consulta("select * from role where id_role = ".$id);
+		$this ->disconnect();
+		if($this->numero_de_filas($queryObject) > 0){
+			while ( $tsArray = $this->fetch_assoc($queryObject) )
+				$data[] = $tsArray;
+			return $data;
+		}else{
+			return '{ }';
+		}
+	}
+
+function deleteRole($id){
+    $this -> conectar();
+    $query = $this -> consulta("delete from role where id_role = ".$id);
+    $this ->disconnect();
+
+    return '{ }';
+  }
 
 }
 
