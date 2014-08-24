@@ -17,11 +17,13 @@ class Usuario extends database {
     }
   }
   function newUser($user){
-    $userName = $user['nombre'];
-    $userRole = $user['rol'];
+    $userVars = get_object_vars($user);
+    $userName = $userVars['nombre'];
+    $userRole = get_object_vars($userVars['rol']);
 
+    $q = "insert into usuario(id_role,nombre) values (".$userRole['id_role'].",'".$userName."');";
     $this -> conectar();
-    $query = $this->consulta("insert into usuario(id_role,nombre) values (".$userRole['id_role'].",'".$userName."');");
+    $query = $this->consulta($q);
     $queryObject = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role ORDER BY u.id_usuario DESC LIMIT 1 ");
     $this->disconnect();
     if($this->numero_de_filas($queryObject) > 0){

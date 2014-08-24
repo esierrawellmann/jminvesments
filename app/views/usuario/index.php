@@ -70,7 +70,6 @@
 
         modalInstanceOpen.result.then(function (user) {
            $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
-                 console.log(data);
                  $scope.initialUsers.usuarios.push(data);
                  $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
             });             
@@ -81,7 +80,6 @@
  }
  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,usuario,action,roles) {
     $scope.roles = roles;
-    console.log($scope.roles);
     $scope.action = action;
     $scope.ok = function (user) {
         $modalInstance.close(user);
@@ -159,13 +157,12 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
                 <form role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" ng-model="user.nombre" id="exampleInputEmail1" placeholder="Nombre del Rol"/>
+                        <input type="text" class="form-control" ng-model="user.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario"/>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Seleccionar Rol</label>
                         <select id="user-rol-option" ng-model="user.rol" class="form-control" ng-options="rol.nombre for rol in roles"></select>
                     </div>
-                    {{user.nombre}}{{user.rol}}
                 </form>
             </div>
             <div class="modal-footer">
