@@ -10,15 +10,17 @@ class database {
  
  public function CrearConexion($user,$pass){
 
-            $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
-            mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
+     try{
+            $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(""); 
+            mysql_select_db("tmbs",$this->conexion);
         
             if(isset($this->conexion)){
                 if(!$this->conexion=NULL){
                     return "true";
                 }else{return "false";}
             }else{return "false";}
-                
+ }catch(Exception $ER){}
+ 
  }
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
