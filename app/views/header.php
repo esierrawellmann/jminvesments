@@ -302,7 +302,7 @@
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/tipo_producto/index.php"><i class="fa fa-cogs fa-fw"></i> Tipo de Producto</a>
+                            <a class="active" href="<?php echo $pp; ?>/tipoproducto/index.php"><i class="fa fa-cogs fa-fw"></i> Tipo de Producto</a>
                         </li>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/producto/index.php"><i class="fa fa-tasks fa-fw"></i> Producto</a>
