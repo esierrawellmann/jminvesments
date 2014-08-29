@@ -1,8 +1,5 @@
-<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
-
-/**
- * calendarDemoApp - 0.8.0
- */
+<?php  include("../header.php");?>
+<script>
 angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap']);
 
 function CalendarCtrl($scope) {
@@ -122,3 +119,13 @@ function CalendarCtrl($scope) {
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 }
+
+</script>
+
+<div ng-app="calendarDemoApp">
+ <div ng-controller="CalendarCtrl">
+<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+ </div>
+</div>
+
+<?php  include("../footer.php"); ?>
