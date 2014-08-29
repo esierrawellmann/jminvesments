@@ -3,11 +3,11 @@
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
-        $tipoProducto = new Permiso();
+        $tipoProducto = new TipoProducto();
 	switch ($data['action']) {
 	    case "insert":
-	    	if(isset($data['tipoProducto'])){
-		    	$objtipoProducto = $tipoProducto ->newTipoProducto($data['tipoProducto']);
+	    	if(isset($data['tipoProductoName'])){
+		    	$objtipoProducto = $tipoProducto ->newTipoProducto($data['tipoProductoName']);
 		        echo json_encode($objtipoProducto);
 	        }
 	        break;
@@ -15,7 +15,7 @@
 		$objtipoProducto = $tipoProducto ->getTiposProducto();
 		        echo json_encode($objtipoProducto);
 	    case "update":
-	        if(isset($data['permiso'])){
+	        if(isset($data['tipoProducto'])){
 	        	$updatedtipoProducto = $data['tipoProducto'];
 	        	$modifiedtipoProducto = get_object_vars($updatedtipoProducto);
 	        	$objtipoProducto = $tipoProducto ->updateTipoProducto($modifiedtipoProducto['id_tipo_producto'],$modifiedtipoProducto['nombre']);
@@ -23,7 +23,7 @@
 	        }
 	        break;
 	    case "delete":
-		    if(isset($data['permiso'])){
+		    if(isset($data['tipoProducto'])){
 		    	$deletetipoProducto = $data['tipoProducto'];
 	        	$deletedtipoProducto = get_object_vars($deletetipoProducto);
 	        	$objtipoProducto = $tipoProducto ->deleteTipoProducto($deletedtipoProducto['id_tipo_producto']);
