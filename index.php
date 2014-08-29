@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php if(isset($_GET["error"])){ ?>
+<div class="alert alert-danger">
+  <a href="#" class="alert-link">No se pudo conectar a la base de datos. Usuario o Contraseña incorrectas.</a>
+</div>
+<?php } ?>
 <html lang="en">
 
 <head>

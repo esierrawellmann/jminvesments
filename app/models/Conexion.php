@@ -11,14 +11,12 @@ class database {
  public function CrearConexion($user,$pass){
 
      try{
-            $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(""); 
-            mysql_select_db("tmbs",$this->conexion);
+            $conexion = mysql_connect("localhost",$user,$pass); 
+            $conecto = mysql_select_db("tmbs",$conexion);
         
-            if(isset($this->conexion)){
-                if(!$this->conexion=NULL){
-                    return "true";
-                }else{return "false";}
-            }else{return "false";}
+                if(!$conecto){
+                    return "false";
+                }else{return "true";}
  }catch(Exception $ER){}
  
  }

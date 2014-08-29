@@ -1,5 +1,8 @@
 <?php  include("header.php"); ?>
-
-<?php phpinfo(); ?>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<center><img src="portada.jpg"></center>
 <?php  include("footer.php"); ?>

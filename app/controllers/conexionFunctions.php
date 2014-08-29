@@ -10,7 +10,7 @@ try{
             $_SESSION["pass"]=$_POST["pass"];
             header( 'Location: /app/views/main.php' ) ;
         }else{
-            header('Location: index.php');
+            header('Location: /index.php?error');
         }
 }
  catch (Exception $er){
