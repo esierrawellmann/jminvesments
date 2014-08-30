@@ -26,19 +26,18 @@
 		        echo '{"productos":'.json_encode($objProducto).',"tipo_productos":'.json_encode($objtipoProducto).'}';
 	    	break;
 	    case "update":
-	        $usuario = new Producto();
 	        if(isset($data['producto'])){
 	        	$producto = new Producto();
 	        	$updatedProducto = get_object_vars($data['producto']);
-	        	$objproducto = $producto -> updateUser($updatedProducto);
+	        	$objproducto = $producto ->updateProducto($updatedProducto);
 	        	echo json_encode($objproducto);
 	        }
 	        break;
 	    case "delete":
-		    $usuario = new Producto();
+		    $producto = new Producto();
 		    if(isset($data['producto'])){
-		    	$deleteProducto = get_object_vars($data['usuario']);
-	        	$objProducto = $usuario -> deleteUser($deleteProducto['id_producto']);
+		    	$deleteProducto = get_object_vars($data['producto']);
+	        	$objProducto = $producto ->deleteProducto($deleteProducto['id_producto']);
 	        	echo json_encode($objProducto);
 		    }
 		        break;
