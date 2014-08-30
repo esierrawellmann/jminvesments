@@ -1,6 +1,6 @@
 <?php  include("../header.php");
  ?>
-<script>
+<script>    
  var app = angular.module('usuario', ['ngRoute']);
  angular.module('usuario', ['ui.bootstrap']);
  function controller($scope, $modal, $log , $http)
