@@ -92,6 +92,7 @@ id_usuario int not null,
 asunto varchar(512) not null,
 comentario varchar(1024) not null,
 fecha date not null,
+monto decimal(10,2),
 primary key(id_gasto),
 foreign key(id_usuario) references usuario(id_usuario)
 ) engine=InnoDB;
