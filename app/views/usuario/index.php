@@ -6,7 +6,7 @@
  function controller($scope, $modal, $log , $http)
  {
     $scope.usuario = [];
-    $scope.initialUsers =[]
+    $scope.initialUsers =[];
     $scope.roles = [];
     angular.element(document).ready(function () {
 
@@ -20,13 +20,15 @@
         $scope.alerts.splice(index, 1);
       };
 
-    $scope.deleteUser = function (rol){
-        // var index = $scope.initialRoles.indexOf(rol);
-        //  $scope.initialRoles.splice(rol,1);
+    $scope.deleteUser = function (user){
+        console.log(user);
+        var index = $scope.initialUsers.usuarios.indexOf(user);
          
-        //  $http.post('../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
-        //     $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
-        //  });
+        $http.post('../../controllers/usuario/usuarioFunctions.php','{"action":"delete","usuario":'+JSON.stringify(user)+'}').success(function(data){
+           $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
+            $scope.initialUsers.usuarios.splice(index,1);
+        
+      });
     }
     $scope.showUpdateDialog = function (data,size){
     	var modalInstanceUpdate = $modal.open({
@@ -35,15 +37,18 @@
             size: size,
             resolve: {
                 action: function(){
-                return "Modificar";
-            }, 
-                rol: function () {
-              		return data;
-          		}
+                return "Modificar"
+                }, 
+                user: function () {
+                        return data;
+                    },
+                roles:function(){
+                    return $scope.initialUsers.roles;
+                }
           	}
         });
-        modalInstanceUpdate.result.then(function (rol) {
-            $http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
+        modalInstanceUpdate.result.then(function (user) {
+            $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"update","usuario":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
@@ -58,10 +63,7 @@
           resolve: {
             action: function(){
                 return "Insertar"
-            }, 
-          	usuario: function () {
-            		return [];
-        		},
+            },
     		roles:function(){
 				return $scope.initialUsers.roles;
     		}
@@ -72,36 +74,51 @@
            $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialUsers.usuarios.push(data);
                  $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
+                
             });             
         }, function () {});
     };
         
 
  }
- var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,usuario,action,roles) {
+ var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
     $scope.roles = roles;
     $scope.action = action;
-    $scope.ok = function (user) {
-        $modalInstance.close(user);
+    $scope.new = {};
+    $scope.ok = function () {
+        $modalInstance.close($scope.new);
     };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 };
-var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
+var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action) {
     $scope.action = action;
-    $scope.ok = function (rol) {
-        $modalInstance.close(rol);
+    $scope.new = user;
+    $scope.roles = roles;
+    $scope.ok = function (user) {
+        var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
+        $scope.new.role_name = roles[index].nombre;
+        $modalInstance.close($scope.new);
     };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 };
+function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+  for (var i = 0; i < arraytosearch.length; i++) {
+    if (arraytosearch[i][key] == valuetosearch) {
+      return i;
+    }
+  }
+  return null;
+}
+
  </script>
-<div ng-app="usuario">
-	<div ng-controller="controller">
+ <div ng-app="usuario">
+     <div ng-controller="controller">
 		<div class="row">
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		    <div class="col-lg-12">
@@ -136,8 +153,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
 											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
 											  </button>
 											  <ul class="dropdown-menu" role="menu">
-											    <li><a href="#" ng-click="showUpdateDialog(data)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-											    <li><a href="#" ng-click="deleteRol(data)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+											    <li><a href="#" ng-click="showUpdateDialog(user)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+											    <li><a href="#" ng-click="deleteUser(user)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
 											  </ul>
 											</div>
                                     	</td>    
@@ -157,16 +174,16 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,rol,action) {
                 <form role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" ng-model="user.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario"/>
+                        <input type="text" class="form-control" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario"/>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Seleccionar Rol</label>
-                        <select id="user-rol-option" ng-model="user.rol" class="form-control" ng-options="rol.nombre for rol in roles"></select>
+                        <select id="user-rol-option" ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok(user)">OK</button>
+                <button class="btn btn-primary" ng-click="ok()">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>

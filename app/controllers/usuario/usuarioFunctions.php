@@ -26,20 +26,19 @@
 		        echo '{"usuarios":'.json_encode($objUsuario).',"roles":'.json_encode($objRol).'}';
 	    	break;
 	    case "update":
-	        $rol = new Rol();
-	        if(isset($data['rol'])){
-	        	$updatedRol = $data['rol'];
-	        	$modifiedRol = get_object_vars($updatedRol);
-	        	$objRol = $rol -> updateRole($modifiedRol['id_role'],$modifiedRol['nombre']);
-	        	echo json_encode($objRol);
+	        $usuario = new Usuario();
+	        if(isset($data['usuario'])){
+	        	$user = new Usuario();
+	        	$updatedUser = get_object_vars($data['usuario']);
+	        	$objUser = $user -> updateUser($updatedUser);
+	        	echo json_encode($objUser);
 	        }
 	        break;
 	    case "delete":
-		    $rol = new Rol();
-		    if(isset($data['rol'])){
-		    	$deleteRol = $data['rol'];
-	        	$deletedRol = get_object_vars($deleteRol);
-	        	$objRol = $rol -> deleteRole($deletedRol['id_role']);
+		    $usuario = new Usuario();
+		    if(isset($data['usuario'])){
+		    	$deleteUser = get_object_vars($data['usuario']);
+	        	$objRol = $usuario -> deleteUser($deleteUser['id_usuario']);
 	        	echo json_encode($objRol);
 		    }
 		        break;
