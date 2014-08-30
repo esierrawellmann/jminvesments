@@ -85,8 +85,10 @@
     $scope.roles = roles;
     $scope.action = action;
     $scope.new = {};
-    $scope.ok = function () {
-        $modalInstance.close($scope.new);
+    $scope.ok = function (valid) {
+        if(valid){
+            $modalInstance.close($scope.new);
+        } 
     };
 
     $scope.cancel = function () {
@@ -97,10 +99,12 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.roles = roles;
-    $scope.ok = function (user) {
-        var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
-        $scope.new.role_name = roles[index].nombre;
-        $modalInstance.close($scope.new);
+    $scope.ok = function (valid) {
+        if(valid){
+            var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
+            $scope.new.role_name = roles[index].nombre;
+            $modalInstance.close($scope.new);
+        }
     };
 
     $scope.cancel = function () {
@@ -171,19 +175,21 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                 <h3 class="modal-title"¨>{{action}} Usuario</h3>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form role="form" name="userForm">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario"/>
+                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Seleccionar Rol</label>
-                        <select id="user-rol-option" ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
+                        <select id="user-rol-option" name="selectRol" required ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
+                        <div class="alert-danger" role="alert" ng-show="userForm.selectRol.$error.required">Este campo es requerido</div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button class="btn btn-primary" ng-click="ok(userForm.$valid)">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>
