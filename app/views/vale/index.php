@@ -157,7 +157,6 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
   $scope.initDate = new Date();
   $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
-
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_usuario", $scope.new.id_usuario);
@@ -167,6 +166,7 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     };
 
     $scope.cancel = function () {
+        $scope.new.fecha= $scope.new.fecha.toMysqlFormat();
         $modalInstance.dismiss('cancel');
     };
 };
