@@ -50,9 +50,6 @@
         modalInstanceUpdate.result.then(function (user) {
             console.log(user);
             user.fecha = user.fecha.toMysqlFormat();
-            console.log('hola');
-            console.log(user.fecha);
-            console.log(user);
             $http.post('../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Vale Modificado Exitosamente' });
              });
