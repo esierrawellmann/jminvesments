@@ -8,8 +8,8 @@
 
 	    case "insert":
 	    	if(isset($data['user'])){
-	    		$usuario = new Usuario();
-		     	$objUsuario = $usuario -> newUser($data['user']);
+	    		$gasto = new Gasto();
+		     	$objGasto = $gasto -> newGasto($data['gasto']);
 		     	$result = $objUsuario[0];
 		     	$resultUser = array('id_usuario'=> $result['id_usuario'],'nombre'=>$result['nombre'], 'id_role'=>$result['id_role'],'role_name'=>$result['role_name']); 
 		     	echo json_encode($resultUser);
@@ -19,9 +19,8 @@
 	    case "query":
 		        $gasto = new Gasto();
 		        $objGasto = $gasto -> getGastos();
-
 		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario -> getUsuarios();
+		       	$objUsuario = $usuario -> getUsers();
 
 		        echo '{"usuarios":'.json_encode($objUsuario).',"gastos":'.json_encode($objGasto).'}';
 	    	break;

@@ -1,12 +1,12 @@
 <?php
 require_once "Conexion.php";
 
-class Usuario extends database {
+class Gasto extends database {
 
   function getGastos()
   {
     $this->conectar();
-    $query = $this->consulta("SELECT g.id_gasto,g.asunto,g.comentario,g.fecha,u.id_usuario,u.nombre AS 'user_name',g.monto FROM gasto g INNER JOIN usuario u ON g.id_usuario = u.id_usuario ORDER BY g.id_gasto");
+    $query = $this->consulta("SELECT g.id_gasto,g.asunto,g.comentario,g.fecha,u.id_usuario,u.nombre AS 'user_name',g.monto FROM gasto g INNER JOIN usuario u ON g.id_usuario = u.id_usuario ORDER BY g.id_gasto;");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -16,7 +16,7 @@ class Usuario extends database {
       return array();
     }
   }
-  function newUser($user){
+  function newGasto($gasto){
     $userVars = get_object_vars($user);
     $userName = $userVars['nombre'];
     $userRole = get_object_vars($userVars['rol']);

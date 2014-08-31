@@ -178,12 +178,12 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                 <form role="form" name="userForm">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario" required="true"/>
+                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario" ng-required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Seleccionar Rol</label>
-                        <select id="user-rol-option" name="selectRol" required ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
+                        <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
                         <div class="alert-danger" role="alert" ng-show="userForm.selectRol.$error.required">Este campo es requerido</div>
                     </div>
                 </form>
