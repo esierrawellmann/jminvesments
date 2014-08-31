@@ -1,16 +1,107 @@
 <?php  include("../header.php");
  ?>
+ <script>
+var app = angular.module('moduloVentas', ['ngRoute']);
+angular.module('moduloVentas', ['ui.bootstrap']);
+function controller($scope, $modal, $log , $http)
+ {
+    $scope.alerts = [];
+    $scope.venta = [];
+    $scope.ventasIniciales =[];
+    $scope.users = [];
+    angular.element(document).ready(function () {
+        $http.post('../../controllers/venta/ventaFunctions.php', '{"action":"query"}').success(function(data){
+            $scope.ventasIniciales = data;
+         });
+    });
+
+    $scope.alerts = [];
+      $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
+    $scope.openVentas = function (size) {
+        var modalInstanceOpen = $modal.open({
+          templateUrl: 'myModalContent.html',
+          controller: ModalInstanceAddCtrl,
+          size: size,
+          resolve: {
+            action: function(){
+                return "Insertar"
+            },
+            users:function(){
+                return $scope.ventasIniciales.usuarios;
+            }
+            }
+        });
+
+        modalInstanceOpen.result.then(function (gasto) {
+           gasto.fecha = gasto.fecha.toMysqlFormat();
+            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
+                  $scope.initialSpends.gastos.push(data);
+                  $scope.alerts.push({type: 'success', msg: 'Gasto Agregado Exitosamente' });
+                
+            });             
+        }, function () {});
+    };
+     
+ }
+  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
+    $scope.users = users;
+    $scope.action = action;
+    $scope.new = {};
+
+
+    $scope.today = function() {
+    $scope.new.fecha = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.new.fecha = null;
+  };
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
+
+    $scope.ok = function (valid) {
+        if(valid){
+            $modalInstance.close($scope.new);
+        } 
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
+ 
+
+ </script>
  <div ng-app="moduloVentas">
      <div ng-controller="controller">
 		<div class="row">
+             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="col-lg-12">
 		        <h1 class="page-header">Modulo de Ventas</h1>
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Usuarios actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="">Nueva Venta</button>
+                        Ventas
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas()">Nueva Venta</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -18,17 +109,19 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>Nombre</th>
-                                        <th>Rol</th>
+                                        <th>Nit</th>
+                                        <th>Fecha</th>
+                                        <th>Usuario</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr  class="odd gradeX"> 
-                                        <td>val</td>
-                                        <td>val</td>
-                                        <td>val</td>
+                                <tbody ng-show="ventasIniciales.ventas.length > 0">
+                                    <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas"> 
+                                        <td>{{ventas.nombre}}</td>
+                                        <td>{{ventas.nit}}</td>
+                                        <td>{{ventas.fecha}}</td>
+                                        <td>{{ventas.user_name}}</td>
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -50,8 +143,8 @@
              <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Usuarios actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="">Productos</button>
+                        Detalle Productos
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="">Agregar Productos</button>
                     </div>
 	                <div class="panel-body">
 	                    <div class="table-responsive">
@@ -86,6 +179,38 @@
 	                    </div>
 	                </div>
                 </div>
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title"¨>{{action}} Venta</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" name="spendForm">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nombre</label>
+                                <input type="text" class="form-control" name="asuntoNameField" ng-model="new.asunto" id="asuntoID" placeholder="Factura a nombre de..."  ng-required="true"/>
+                                <div class="alert-danger" role="alert" ng-show="spendForm.asuntoNameField.$error.required">Este campo es requerido</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-rol-option">Nit</label>
+                                <input type="text" class="form-control" name="comentNameField" ng-model="new.comentario" id="comentarioID" placeholder="Numero de Nit"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-rol-option">Fecha</label>
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
+                                <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-rol-option">Usuario</label>
+                                <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_usuario" class="form-control" ng-options="usuario.id_usuario as usuario.nombre for usuario in users"></select>
+                                <div class="alert-danger" role="alert" ng-show="spendForm.selectRol.$error.required">Este campo es requerido</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="ok(spendForm.$valid)">OK</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
             </div>      
         </div>
 <?php  include("../footer.php"); ?>

@@ -58,7 +58,7 @@
         }, function () {
         });
     } 
-    $scope.open = function (size) {
+    $scope.openGasto = function (size) {
         var modalInstanceOpen = $modal.open({
           templateUrl: 'myModalContent.html',
           controller: ModalInstanceAddCtrl,
@@ -205,7 +205,7 @@ Date.prototype.toMysqlFormat = function() {
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Gastos actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Gasto</button>
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="openGasto()">Agregar Gasto</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -233,14 +233,14 @@ Date.prototype.toMysqlFormat = function() {
                                         
                                         <td>
                                         	<div class="btn-group">
-                    											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-                    											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
-                    											  </button>
-                    											  <ul class="dropdown-menu" role="menu">
-                    											    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-                    											    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-                    											  </ul>
-                    											</div>
+										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
+										  </button>
+										  <ul class="dropdown-menu" role="menu">
+										    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+										    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+										  </ul>
+										</div>
                                     	</td>    
                                     </tr>
                                 </tbody>
