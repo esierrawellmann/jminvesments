@@ -9,7 +9,7 @@
 	    case "insert":
 	    	if(isset($data['vale'])){
 	    		$vale = new Vale();
-		     	$objVale = $vale ->newProducto($data['vale']);
+		     	$objVale = $vale ->newVale($data['vale']);
 		     	$result = $objVale[0];
 		     	echo json_encode($result);
 
@@ -33,7 +33,7 @@
 	        }
 	        break;
 	    case "delete":
-		    if(isset($data['producto'])){
+		    if(isset($data['vale'])){
 		    	$vale = new Vale();
 	        	$updatedVale = get_object_vars($data['vale']);
 	        	$objvale = $vale ->deleteVale($updatedVale['id_vale']);

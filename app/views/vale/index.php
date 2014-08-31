@@ -21,7 +21,7 @@
       };
 
     $scope.deleteUser = function (user){
-        var index = $scope.initialVales.productos.indexOf(user);
+        var index = $scope.initialVales.vales.indexOf(user);
         console.log(user);
         $http.post('../../controllers/vale/valeFunctions.php','{"action":"delete","vale":'+JSON.stringify(user)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Vale  Exitosamente Eliminado' });
@@ -49,6 +49,10 @@
         });
         modalInstanceUpdate.result.then(function (user) {
             console.log(user);
+            user.fecha = user.fecha.toMysqlFormat();
+            console.log('hola');
+            console.log(user.fecha);
+            console.log(user);
             $http.post('../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Vale Modificado Exitosamente' });
              });
@@ -74,6 +78,8 @@
         modalInstanceOpen.result.then(function (user) {
             console.log(user);
             console.log('----');
+           user.fecha = user.fecha.toMysqlFormat();
+           console.log(user.fecha);
            $http.post('../../controllers/vale/valeFunctions.php', '{"action":"insert","vale":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialVales.vales.push(data);
                  console.log(data);
@@ -86,6 +92,32 @@
 
  }
  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
+     $scope.new = {};
+      $scope.today = function() {
+    $scope.new.fecha = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.new.fecha = null;
+  };
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+     
     $scope.usuarios = roles;
     $scope.action = action;
     $scope.new = {};
@@ -100,9 +132,36 @@
     };
 };
 var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action) {
+
     $scope.action = action;
     $scope.new = user;
     $scope.usuarios = roles;
+    
+         $scope.today = function() {
+    $scope.new.fecha = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.new.fecha = null;
+  };
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_usuario", $scope.new.id_usuario);
@@ -123,6 +182,16 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
   }
   return null;
 }
+
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+
+Date.prototype.toMysqlFormat = function() {
+    return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
+};
 
  </script>
  <div ng-app="vale">
@@ -155,7 +224,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                 </thead>
                                 <tbody ng-show="initialVales.vales.length > 0">
                                     <tr ng-repeat="user in initialVales.vales" class="odd gradeX"> 
-                                        <td>{{user.id_producto}}</td>
+                                        <td>{{user.id_vale}}</td>
                                         <td>{{user.usuario_name}}</td>
                                         <td>{{user.motivo}}</td>
                                         <td>{{user.monto}}</td>
@@ -182,36 +251,36 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Producto</h3>
+                <h3 class="modal-title"¨>{{action}} Vale</h3>
             </div>
             <div class="modal-body">
-                <form role="form" name="userForm">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Producto" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
-                    </div>
+
             <div class="form-group">
-                        <label for="user-rol-option">Seleccionar Tipo De Producto</label>
-                        <select id="user-rol-option" name="selectRol" required ng-model="new.id_tipo_producto" class="form-control" ng-options="rol.id_tipo_producto as rol.nombre for rol in usuarios"></select>
+                        <label for="user-rol-option">Seleccionar Usuario</label>
+                        <select id="user-rol-option" name="selectRol" required ng-model="new.id_usuario" class="form-control" ng-options="rol.id_usuario as rol.nombre for rol in usuarios"></select>
                         <div class="alert-danger" role="alert" ng-show="userForm.selectRol.$error.required">Este campo es requerido</div>
                     </div>
+            <div class="form-group">
+                        <label for="user-rol-option">Fecha</label>
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
+                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
+                    </div>
+            <form role="form" name="userForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Motivo</label>
+                        <input type="text" class="form-control" name="userNameField" ng-model="new.motivo" id="exampleInputEmail1" placeholder="Motivo" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
+                    </div>
               <div class="form-group">
-                        <label for="exampleInputEmail1">Precio Compra</label>
-                        <input type="text" class="form-control" name="userNameField2" ng-model="new.precio_compra" id="exampleInputEmail1" placeholder="Precio Compra" required="true"/>
+                        <label for="exampleInputEmail1">Monto</label>
+                        <input type="text" class="form-control" name="userNameField2" ng-model="new.monto" id="exampleInputEmail1" placeholder="Monto" required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required">Este campo es requerido</div>
                     </div>
                           <div class="form-group">
-                        <label for="exampleInputEmail1">Precio Venta</label>
-                        <input type="text" class="form-control" name="userNameField3" ng-model="new.precio_venta" id="exampleInputEmail1" placeholder="Precio Venta" required="true"/>
+                        <label for="exampleInputEmail1">Estado</label>
+                        <input type="text" class="form-control" name="userNameField3" ng-model="new.estado" id="exampleInputEmail1" placeholder="Estado" required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
-                    </div>
-              <div class="form-group">
-                        <label for="exampleInputEmail1">Cantidad</label>
-                        <input type="text" class="form-control" name="userNameField4" ng-model="new.cantidad" id="exampleInputEmail1" placeholder="Cantidad" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField4.$error.required">Este campo es requerido</div>
-                    </div>
-                    
+                    </div>      
                 </form>
             </div>
             <div class="modal-footer">
