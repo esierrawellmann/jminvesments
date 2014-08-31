@@ -18,7 +18,6 @@ class Gasto extends database {
   }
   function newGasto($gastoObj){
     $gasto = get_object_vars($gastoObj);
-    echo var_dump($gasto);
     $q = "INSERT INTO gasto (id_usuario,asunto,comentario,fecha,monto) VALUES (".$gasto['id_usuario'].",'".$gasto['asunto']."','".$gasto['comentario']."','".$gasto['fecha']."',".$gasto['monto'].");";
     $this -> conectar();
     $query = $this->consulta($q);
@@ -32,9 +31,9 @@ class Gasto extends database {
       return array();
     }
   }
-	function updateUser($user){
+	function updateGasto($gasto){
 		$this -> conectar();
-		$query = $this -> consulta("update usuario set nombre ='".$user['nombre']."', id_role = ".$user['id_role']." where id_usuario = ".$user['id_usuario'].";");
+		$query = $this -> consulta("update gasto  set  id_usuario=".$gasto['id_usuario']." ,asunto= '".$gasto['asunto']."',comentario = '".$gasto['comentario']."', fecha = '".$gasto['fecha']."', monto =".$gasto['monto'].";");
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
 			while ( $tsArray = $this->fetch_assoc($queryObject) )

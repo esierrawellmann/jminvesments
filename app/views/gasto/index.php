@@ -41,11 +41,11 @@
                 action: function(){
                 return "Modificar"
                 }, 
-                user: function () {
+                gasto: function () {
                         return data;
                     },
-                roles:function(){
-                    return $scope.initialUsers.roles;
+                users:function(){
+                    return $scope.initialSpends.usuarios;
                 }
           	}
         });
@@ -127,10 +127,14 @@
         $modalInstance.dismiss('cancel');
     };
 };
-var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action) {
+var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,action) {
     $scope.action = action;
-    $scope.new = user;
-    $scope.roles = roles;
+    $scope.new = gasto;
+    $scope.users = users;
+
+    $scope.$watch('new.monto',function(val,old){
+       $scope.new.monto = parseFloat(val); 
+    });
 
     $scope.today = function() {
         $scope.new.fecha = new Date();
@@ -159,8 +163,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
 
     $scope.ok = function (valid) {
         if(valid){
-            var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
-            $scope.new.role_name = roles[index].nombre;
+            var index = functiontofindIndexByKeyValue(users, "id_usuario", $scope.new.id_usuario);
+            $scope.new.user_name = users[index].nombre;
             $modalInstance.close($scope.new);
         }
     };
@@ -222,16 +226,17 @@ Date.prototype.toMysqlFormat = function() {
                                         <td>{{spend.asunto}}</td>
                                         <td>{{spend.comentario}}</td>
                                         <td>{{spend.fecha}}</td>
-                                        <td>{{spend.user_name}}</td>
                                         <td>{{spend.monto}}</td>
+                                        <td>{{spend.user_name}}</td>
+                                        
                                         <td>
                                         	<div class="btn-group">
                     											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
                     											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
                     											  </button>
                     											  <ul class="dropdown-menu" role="menu">
-                    											    <li><a href="#" ng-click="showUpdateDialog(user)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-                    											    <li><a href="#" ng-click="deleteUser(user)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+                    											    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                    											    <li><a href="#" ng-click="deleteUser(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                     											  </ul>
                     											</div>
                                     	</td>    
