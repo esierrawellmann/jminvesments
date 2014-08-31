@@ -1,15 +1,17 @@
 <?php  include("../header.php");
  ?>
 <script>    
- var app = angular.module('usuario', ['ngRoute']);
- angular.module('usuario', ['ui.bootstrap']);
+ var app = angular.module('gasto', ['ngRoute']);
+ angular.module('gasto', ['ui.bootstrap']);
  function controller($scope, $modal, $log , $http)
  {
+
     $scope.gasto = [];
     $scope.initialSpends =[];
     $scope.users = [];
     angular.element(document).ready(function () {
     	$http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"query"}').success(function(data){
+            console.log(data);
             $scope.initialSpends = data;
          });
     });
@@ -29,6 +31,7 @@
         
       });
     }
+
     $scope.showUpdateDialog = function (data,size){
     	var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
@@ -63,27 +66,56 @@
             action: function(){
                 return "Insertar"
             },
-    		roles:function(){
-				return $scope.initialUsers.roles;
+    		users:function(){
+				return $scope.initialSpends.usuarios;
     		}
         	}
         });
 
-        modalInstanceOpen.result.then(function (user) {
-           $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
-                 $scope.initialUsers.usuarios.push(data);
-                 $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
+        modalInstanceOpen.result.then(function (gasto) {
+            console.log(gasto);
+           // $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
+           //       $scope.initialUsers.usuarios.push(data);
+           //       $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
                 
-            });             
+           //  });             
         }, function () {});
     };
         
 
  }
- var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
-    $scope.roles = roles;
+ var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
+    $scope.users = users;
     $scope.action = action;
     $scope.new = {};
+
+
+    $scope.today = function() {
+    $scope.new.fecha = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.new.fecha = null;
+  };
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
+
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.new);
@@ -98,6 +130,32 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.roles = roles;
+
+    $scope.today = function() {
+        $scope.new.fecha = new Date();
+      };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.new.fecha = null;
+  };
+  $scope.open = function($event) {
+
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
@@ -177,24 +235,39 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Usuario</h3>
+                <h3 class="modal-title"¨>{{action}} Gasto</h3>
             </div>
             <div class="modal-body">
-                <form role="form" name="userForm">
+                <form role="form" name="spendForm">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
+                        <label for="exampleInputEmail1">Asunto</label>
+                        <input type="text" class="form-control" name="asuntoNameField" ng-model="new.asunto" id="asuntoID" placeholder="Motivo del Gasto"  ng-required="true"/>
+                        <div class="alert-danger" role="alert" ng-show="spendForm.asuntoNameField.$error.required">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
-                        <label for="user-rol-option">Seleccionar Rol</label>
-                        <select id="user-rol-option" name="selectRol" required ng-model="new.id_role" class="form-control" ng-options="rol.id_role as rol.nombre for rol in roles"></select>
-                        <div class="alert-danger" role="alert" ng-show="userForm.selectRol.$error.required">Este campo es requerido</div>
+                        <label for="user-rol-option">Comentario</label>
+                        <input type="text" class="form-control" name="comentNameField" ng-model="new.comentario" id="comentarioID" placeholder="Comentario"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Fecha</label>
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
+                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Monto</label>
+                        <input type="number" class="form-control" name="montoNameField" ng-model="new.monto" id="montoID" placeholder="Monto del gasto"  ng-required="true"/>
+                        <div class="alert-danger" role="alert" ng-show="spendForm.montoNameField.$error.required ||  spendForm.montoNameField.$error.number">Este campo es requerido o invalido</div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Usuario</label>
+                        <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_usuario" class="form-control" ng-options="usuario.id_usuario as usuario.nombre for usuario in users"></select>
+                        <div class="alert-danger" role="alert" ng-show="spendForm.selectRol.$error.required">Este campo es requerido</div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok(userForm.$valid)">OK</button>
+                <button class="btn btn-primary" ng-click="ok(spendForm.$valid)">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>
