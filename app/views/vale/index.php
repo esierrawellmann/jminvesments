@@ -30,6 +30,7 @@
       });
     }
     $scope.showUpdateDialog = function (data,size){
+        
     	var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
             controller: ModalInstanceUpdateCtrl,
@@ -39,7 +40,6 @@
                 return "Modificar"
                 }, 
                 user: function () {
-                    console.log(data);
                         return data;
                     },
                 roles:function(){
@@ -48,9 +48,7 @@
           	}
         });
         modalInstanceUpdate.result.then(function (user) {
-            console.log(user);
             user.fecha = user.fecha.toMysqlFormat();
-            console.log(user.fecha);
             $http.post('../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Vale Modificado Exitosamente' });
              });
@@ -74,10 +72,7 @@
         });
 
         modalInstanceOpen.result.then(function (user) {
-            console.log(user);
-            console.log('----');
            user.fecha = user.fecha.toMysqlFormat();
-           console.log(user.fecha);
            $http.post('../../controllers/vale/valeFunctions.php', '{"action":"insert","vale":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialVales.vales.push(data);
                  console.log(data);
@@ -118,7 +113,7 @@
      
     $scope.usuarios = roles;
     $scope.action = action;
-    $scope.new = {};
+    $scope.status =["Aprobado","Denegado","Solicitado"];
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.new);
@@ -134,10 +129,13 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.usuarios = roles;
+    $scope.status =["Aprobado","Denegado","Solicitado"];
     
-         $scope.today = function() {
+    
+    $scope.today = function() {
     $scope.new.fecha = new Date();
   };
+  
   $scope.today();
 
   $scope.clear = function () {
@@ -273,12 +271,12 @@ Date.prototype.toMysqlFormat = function() {
                         <label for="exampleInputEmail1">Monto</label>
                         <input type="text" class="form-control" name="userNameField2" ng-model="new.monto" id="exampleInputEmail1" placeholder="Monto" required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required">Este campo es requerido</div>
+                    </div>  
+                    <div class="form-group">
+                        <label for="userStatus">Estado</label>
+                        <select id="user-status-option" name="userNameField3" ng-model="new.estado" id="exampleInputEmail1" placeholder="Estado" required="true" class="form-control" ng-options="stat for stat in status"></select>
+                        <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
                     </div>
-                          <div class="form-group">
-                        <label for="exampleInputEmail1">Estado</label>
-                        <input type="text" class="form-control" name="userNameField3" ng-model="new.estado" id="exampleInputEmail1" placeholder="Estado" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
-                    </div>      
                 </form>
             </div>
             <div class="modal-footer">
