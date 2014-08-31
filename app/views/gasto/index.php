@@ -73,12 +73,13 @@
         });
 
         modalInstanceOpen.result.then(function (gasto) {
-            console.log(gasto);
-           // $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
-           //       $scope.initialUsers.usuarios.push(data);
-           //       $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
+           gasto.fecha = gasto.fecha.toMysqlFormat();
+           console.log(gasto);
+            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
+                  $scope.initialSpends.gastos.push(data);
+                  $scope.alerts.push({type: 'success', msg: 'Gasto Agregado Exitosamente' });
                 
-           //  });             
+            });             
         }, function () {});
     };
         
@@ -177,6 +178,15 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
   return null;
 }
 
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+
+Date.prototype.toMysqlFormat = function() {
+    return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
+};
  </script>
  <div ng-app="gasto">
      <div ng-controller="controller">
@@ -216,14 +226,14 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                         <td>{{spend.monto}}</td>
                                         <td>
                                         	<div class="btn-group">
-											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
-											  </button>
-											  <ul class="dropdown-menu" role="menu">
-											    <li><a href="#" ng-click="showUpdateDialog(user)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-											    <li><a href="#" ng-click="deleteUser(user)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-											  </ul>
-											</div>
+                    											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                    											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
+                    											  </button>
+                    											  <ul class="dropdown-menu" role="menu">
+                    											    <li><a href="#" ng-click="showUpdateDialog(user)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                    											    <li><a href="#" ng-click="deleteUser(user)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+                    											  </ul>
+                    											</div>
                                     	</td>    
                                     </tr>
                                 </tbody>

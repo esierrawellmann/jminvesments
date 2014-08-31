@@ -7,12 +7,11 @@
 	switch ($data['action']) {
 
 	    case "insert":
-	    	if(isset($data['user'])){
+	    	if(isset($data['gasto'])){
 	    		$gasto = new Gasto();
 		     	$objGasto = $gasto -> newGasto($data['gasto']);
-		     	$result = $objUsuario[0];
-		     	$resultUser = array('id_usuario'=> $result['id_usuario'],'nombre'=>$result['nombre'], 'id_role'=>$result['id_role'],'role_name'=>$result['role_name']); 
-		     	echo json_encode($resultUser);
+		     	$result = $objGasto[0];
+		     	echo json_encode($result);
 
 		     }
 	        break;
