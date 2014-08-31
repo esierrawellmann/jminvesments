@@ -27,15 +27,15 @@
 	        $gasto = new Gasto();
 	        if(isset($data['gasto'])){
 	        	$updatedGasto = get_object_vars($data['gasto']);
-	        	$objUser = $user -> updateGasto($updatedUser);
+	        	$objUser = $gasto -> updateGasto($updatedGasto);
 	        	echo json_encode($objUser);
 	        }
 	        break;
 	    case "delete":
-		    $usuario = new Usuario();
-		    if(isset($data['usuario'])){
-		    	$deleteUser = get_object_vars($data['usuario']);
-	        	$objRol = $usuario -> deleteUser($deleteUser['id_usuario']);
+		    $gasto = new Gasto();
+		    if(isset($data['gasto'])){
+		    	$deleteSpend = get_object_vars($data['gasto']);
+	        	$objGasto = $gasto -> deleteSpend($deleteSpend['id_gasto']);
 	        	echo json_encode($objRol);
 		    }
 		        break;

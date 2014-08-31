@@ -33,7 +33,8 @@ class Gasto extends database {
   }
 	function updateGasto($gasto){
 		$this -> conectar();
-		$query = $this -> consulta("update gasto  set  id_usuario=".$gasto['id_usuario']." ,asunto= '".$gasto['asunto']."',comentario = '".$gasto['comentario']."', fecha = '".$gasto['fecha']."', monto =".$gasto['monto'].";");
+    $q = "update gasto  set  id_usuario=".$gasto['id_usuario']." ,asunto= '".$gasto['asunto']."',comentario = '".$gasto['comentario']."', fecha = '".$gasto['fecha']."', monto =".$gasto['monto']." where id_gasto = ".$gasto['id_gasto'].";"; 
+    $query = $this -> consulta($q);
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
 			while ( $tsArray = $this->fetch_assoc($queryObject) )
@@ -44,9 +45,9 @@ class Gasto extends database {
 		}
 	}
 
-function deleteUser($id){
+function deleteSpend($id){
     $this -> conectar();
-    $query = $this -> consulta("delete from usuario where id_usuario = ".$id);
+    $query = $this -> consulta("delete from gasto where id_gasto = ".$id);
     $this ->disconnect();
 
     return '{"success":true}';

@@ -11,7 +11,6 @@
     $scope.users = [];
     angular.element(document).ready(function () {
     	$http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"query"}').success(function(data){
-            console.log(data);
             $scope.initialSpends = data;
          });
     });
@@ -21,19 +20,18 @@
         $scope.alerts.splice(index, 1);
       };
 
-    $scope.deleteUser = function (user){
-        console.log(user);
-        var index = $scope.initialUsers.usuarios.indexOf(user);
+    $scope.deleteSpend = function (spend){
+        var index = $scope.initialSpends.gastos.indexOf(spend);
          
-        $http.post('../../controllers/usuario/usuarioFunctions.php','{"action":"delete","usuario":'+JSON.stringify(user)+'}').success(function(data){
-           $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
-            $scope.initialUsers.usuarios.splice(index,1);
+        $http.post('../../controllers/gasto/gastoFunctions.php','{"action":"delete","gasto":'+JSON.stringify(spend)+'}').success(function(data){
+           $scope.alerts.push({type: 'success', msg: 'Gasto  Exitosamente Eliminado' });
+            $scope.initialSpends.gastos.splice(index,1);
         
       });
     }
 
     $scope.showUpdateDialog = function (data,size){
-    	var modalInstanceUpdate = $modal.open({
+        var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
             controller: ModalInstanceUpdateCtrl,
             size: size,
@@ -42,6 +40,7 @@
                 return "Modificar"
                 }, 
                 gasto: function () {
+                        
                         return data;
                     },
                 users:function(){
@@ -49,8 +48,10 @@
                 }
           	}
         });
-        modalInstanceUpdate.result.then(function (user) {
-            $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"update","usuario":'+JSON.stringify(user)+'}').success(function(data){
+        modalInstanceUpdate.result.then(function (gasto) {
+
+           gasto.fecha = gasto.fecha.toMysqlFormat();
+            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"update","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
@@ -74,7 +75,6 @@
 
         modalInstanceOpen.result.then(function (gasto) {
            gasto.fecha = gasto.fecha.toMysqlFormat();
-           console.log(gasto);
             $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.initialSpends.gastos.push(data);
                   $scope.alerts.push({type: 'success', msg: 'Gasto Agregado Exitosamente' });
@@ -131,7 +131,6 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
     $scope.action = action;
     $scope.new = gasto;
     $scope.users = users;
-
     $scope.$watch('new.monto',function(val,old){
        $scope.new.monto = parseFloat(val); 
     });
@@ -170,6 +169,7 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
     };
 
     $scope.cancel = function () {
+        $scope.new.fecha = toMysqlFormat1($scope.new.fecha);
         $modalInstance.dismiss('cancel');
     };
 };
@@ -187,7 +187,9 @@ function twoDigits(d) {
     if(-10 < d && d < 0) return "-0" + (-1*d).toString();
     return d.toString();
 }
-
+function toMysqlFormat1(date) {
+    return date.getFullYear() + "-" + twoDigits(1 + date.getMonth()) + "-" + twoDigits(date.getDate());
+}
 Date.prototype.toMysqlFormat = function() {
     return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
 };
@@ -236,7 +238,7 @@ Date.prototype.toMysqlFormat = function() {
                     											  </button>
                     											  <ul class="dropdown-menu" role="menu">
                     											    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-                    											    <li><a href="#" ng-click="deleteUser(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+                    											    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                     											  </ul>
                     											</div>
                                     	</td>    
