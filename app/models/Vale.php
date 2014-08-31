@@ -38,7 +38,7 @@ class Vale extends database {
 
   function updateVale($vale){
 		$this -> conectar();
-		$query = $this -> consulta("update vale set id_usuario=".$vale['id_usuario'].",motivo='".$vale['motivo']."',monto=".$vale['monto'].",estado='".$vale['id_usuario']."',fecha='".$vale['id_usuario']."' where id_vale=".$vale['id_vale'].";");
+		$query = $this -> consulta("update vale set id_usuario=".$vale['id_usuario'].",motivo='".$vale['motivo']."',monto=".$vale['monto'].",estado='".$vale['estado']."',fecha='".$vale['fecha']."' where id_vale=".$vale['id_vale'].";");
                 $this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
 			while ( $tsArray = $this->fetch_assoc($queryObject) )
