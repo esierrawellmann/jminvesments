@@ -131,6 +131,9 @@
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/venta/index.php"><i class="fa fa-usd fa-fw"></i> Ventas</a>
                         </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/compra/index.php"><i class="fa fa-clipboard fa-fw"></i> Compras</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

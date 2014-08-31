@@ -31,7 +31,7 @@
 	        	$objproducto = $producto ->updateProducto($updatedProducto);
 	        	echo json_encode($objproducto);
 	        }
-	        break;
+	        break;  
 	    case "delete":
 		    $producto = new Producto();
 		    if(isset($data['producto'])){
