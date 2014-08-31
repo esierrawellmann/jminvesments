@@ -76,7 +76,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">The Man's Barbershop Admin</a>
+                <div>
+                <div style='float:left'><img src="/mustache1.png"></div>  
+                <div style='float:right'><a class="navbar-brand" href="/app/views/main.php">The Man's Barbershop Admin </a></div>
+                </div>
             </div>
             <!-- /.navbar-header -->
 
@@ -98,6 +101,7 @@
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
+                <br>
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>

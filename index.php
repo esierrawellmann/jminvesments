@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<div class="alert alert-success" role="alert"><h3>The Man's Barbershop</h3></div>
-<?php if(isset($_GET["error"])){ ?>
+<div class="alert alert-success" role="alert"><h3>The Man's Barbershop &nbsp; <img src="mustache1.png"> </h3></div>
+    <?php if(isset($_GET["error"])){ ?>
 <div class="alert alert-danger">
   <a href="#" class="alert-link">No se pudo conectar a la base de datos. Usuario o Contraseña incorrectas.</a>
 </div>
