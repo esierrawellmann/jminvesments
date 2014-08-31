@@ -197,4 +197,3 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 </div>
 
  <?php  include("../footer.php"); ?>
- 
