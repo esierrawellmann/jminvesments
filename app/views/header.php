@@ -122,7 +122,10 @@
                             <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-money fa-fw"></i> Gastos</a>
+                            <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-credit-card fa-fw"></i> Gastos</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/venta/index.php"><i class="fa fa-usd fa-fw"></i> Ventas</a>
                         </li>
                     </ul>
                 </div>
