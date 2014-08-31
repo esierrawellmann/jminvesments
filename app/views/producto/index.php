@@ -72,8 +72,11 @@
         });
 
         modalInstanceOpen.result.then(function (user) {
+            console.log(user);
+            console.log('----');
            $http.post('../../controllers/producto/productoFunctions.php', '{"action":"insert","producto":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialProductos.productos.push(data);
+                 console.log(data);
                  $scope.alerts.push({type: 'success', msg: 'Producto Agregado Exitosamente' });
                 
             });             

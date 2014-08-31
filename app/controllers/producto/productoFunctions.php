@@ -11,8 +11,7 @@
 	    		$producto = new Producto();
 		     	$objProducto = $producto ->newProducto($data['producto']);
 		     	$result = $objProducto[0];
-		     	$resultProducto = array('id_producto'=> $result['id_producto'],'nombre'=>$result['nombre'],'precio_compra'=>$result['precio_compra'],'precio_venta'=>$result['precio_venta'], 'id_tipo_producto'=>$result['id_tipo_producto'],'tipo_producto'=>$result['tipo_producto']); 
-		     	echo json_encode($resultProducto);
+		     	echo json_encode($result);
 
 		     }
 	        break;
