@@ -1,6 +1,6 @@
 <?php
-	require_once '../../models/Venta.php';	
-	require_once '../../models/Usuario.php';	 
+	require_once '../../models/DetalleVenta.php';	
+	require_once '../../models/Producto.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
@@ -16,12 +16,13 @@
 		     }
 	        break;
 	    case "query":
-		        $venta = new Venta();
-		        $objVenta = $venta -> getVentas();
-		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario -> getUsers();
+	    		$ventaData = get_object_vars($data['venta']);
+		        $detalleVenta = new DetalleVenta();
+		        $objVenta = $detalleVenta -> getDetalleVentas($ventaData['id_venta']);
+		       	$producto = new Producto();
+		        $objProducto= $producto ->getProductos();
 
-		        echo '{"usuarios":'.json_encode($objUsuario).',"ventas":'.json_encode($objVenta).'}';
+		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).'}';
 	    	break;
 	    case "update":
 	        $gasto = new Gasto();
