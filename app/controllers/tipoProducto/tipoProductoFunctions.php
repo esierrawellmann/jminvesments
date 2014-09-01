@@ -1,5 +1,5 @@
 <?php
-        require_once '../../models/TipoProducto.php';	 
+        require_once './../../models/TipoProducto.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);

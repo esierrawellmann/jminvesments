@@ -9,7 +9,7 @@ function controller($scope, $modal, $log , $http)
     $scope.comprasIniciales =[];
     $scope.users = [];
     angular.element(document).ready(function () {
-        $http.post('../../controllers/compra/compraFunctions.php', '{"action":"query"}').success(function(data){
+        $http.post('./../../controllers/compra/compraFunctions.php', '{"action":"query"}').success(function(data){
             $scope.comprasIniciales = data;
          });
     });
@@ -22,7 +22,7 @@ function controller($scope, $modal, $log , $http)
           $scope.deleteCompra = function (user){
         var index = $scope.comprasIniciales.compras.indexOf(user);
         console.log(user);
-        $http.post('../../controllers/compra/compraFunctions.php','{"action":"delete","compra":'+JSON.stringify(user)+'}').success(function(data){
+        $http.post('./../../controllers/compra/compraFunctions.php','{"action":"delete","compra":'+JSON.stringify(user)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Compra  Exitosamente Eliminada' });
             $scope.comprasIniciales.compras.splice(index,1);
         
@@ -49,7 +49,7 @@ function controller($scope, $modal, $log , $http)
         });
         modalInstanceUpdate.result.then(function (user) {
             user.fecha = user.fecha.toMysqlFormat();
-            $http.post('../../controllers/compra/compraFunctions.php', '{"action":"update","compra":'+JSON.stringify(user)+'}').success(function(data){
+            $http.post('./../../controllers/compra/compraFunctions.php', '{"action":"update","compra":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Compra Modificada Exitosamente' });
              });
              
@@ -75,7 +75,7 @@ function controller($scope, $modal, $log , $http)
         modalInstanceOpen.result.then(function (gasto) {
             gasto.fecha = gasto.fecha.toMysqlFormat();
             console.log(gasto);
-            $http.post('../../controllers/compra/compraFunctions.php', '{"action":"insert","compra":'+JSON.stringify(gasto)+'}').success(function(data){
+            $http.post('./../../controllers/compra/compraFunctions.php', '{"action":"insert","compra":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.comprasIniciales.compras.push(data);
                   $scope.alerts.push({type: 'success', msg: 'Compra Agregada Exitosamente' });
                 

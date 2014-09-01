@@ -9,7 +9,7 @@
     $scope.rol = [];
     $scope.initialRoles =[]
     angular.element(document).ready(function () {
-    	$http.post('../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/rol/rolFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialRoles = data;
          });
     });
@@ -29,7 +29,7 @@
         var index = $scope.initialRoles.indexOf(rol);
          $scope.initialRoles.splice(index,1);
          
-         $http.post('../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
+         $http.post('./../../controllers/rol/rolFunctions.php','{"action":"delete","rol":'+JSON.stringify(rol)+'}').success(function(data){
             $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
          });
     }
@@ -48,7 +48,7 @@
           	}
         });
         modalInstanceUpdate.result.then(function (rol) {
-            $http.post('../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
+            $http.post('./../../controllers/rol/rolFunctions.php', '{"action":"update","rol":'+JSON.stringify(rol)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
@@ -71,7 +71,7 @@
         });
 
         modalInstanceOpen.result.then(function (rol) {
-           $http.post('../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
+           $http.post('./../../controllers/rol/rolFunctions.php', '{"action":"insert","rolName":"'+rol.nombre+'"}').success(function(data){
                 $scope.initialRoles.push(data[0]);
                 $scope.alerts.push({type: 'success', msg: 'Rol Agregado Exitosamente' });
              });             

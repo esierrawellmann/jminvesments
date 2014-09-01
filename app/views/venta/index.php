@@ -11,13 +11,13 @@ function controller($scope, $modal, $log , $http)
     $scope.detailVentasInit = [];
     $scope.users = [];
     angular.element(document).ready(function () {
-        $http.post('../../controllers/venta/ventaFunctions.php', '{"action":"query"}').success(function(data){
+        $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"query"}').success(function(data){
             $scope.ventasIniciales = data;
          });
     });
 
     $scope.viewDetail = function (venta){
-        $http.post('../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
+        $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailVentasInit = data;
          });
     };
@@ -43,7 +43,7 @@ function controller($scope, $modal, $log , $http)
 
         modalInstanceOpen.result.then(function (venta) {
            venta.fecha = venta.fecha.toMysqlFormat();
-            $http.post('../../controllers/venta/ventaFunctions.php', '{"action":"insert","venta":'+JSON.stringify(venta)+'}').success(function(data){
+            $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"insert","venta":'+JSON.stringify(venta)+'}').success(function(data){
                   $scope.ventasIniciales.ventas.push(data);
                   console.log(data);
                   $scope.alerts.push({type: 'success', msg: 'Venta Agregada Exitosamente' });

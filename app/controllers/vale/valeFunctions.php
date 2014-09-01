@@ -1,6 +1,6 @@
 <?php
-	require_once '../../models/Vale.php';	
-	require_once '../../models/Usuario.php';	 
+	require_once './../../models/Vale.php';	
+	require_once './../../models/Usuario.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
