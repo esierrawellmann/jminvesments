@@ -7,9 +7,9 @@
 	switch ($data['action']) {
 
 	    case "insert":
-	    	if(isset($data['venta'])){
-	    		$venta = new Venta();
-		     	$objVenta = $venta -> newVenta($data['venta']);
+	    	if(isset($data['detalleVenta'])){
+	    		$dventa = new DetalleVenta();
+		     	$objVenta = $dventa -> newDetalleVenta($data['detalleVenta'],$data['venta']);
 		     	$result = $objVenta[0];
 		     	echo json_encode($result);
 
@@ -22,7 +22,7 @@
 		       	$producto = new Producto();
 		        $objProducto= $producto ->getProductos();
 
-		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).'}';
+		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).',"venta":'.json_encode($ventaData).'}';
 	    	break;
 	    case "update":
 	        $gasto = new Gasto();

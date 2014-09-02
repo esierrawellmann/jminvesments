@@ -1,5 +1,6 @@
 <?php
 	require_once './../../models/Rol.php';	 
+
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);

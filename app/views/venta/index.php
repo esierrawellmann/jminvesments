@@ -5,6 +5,7 @@ var app = angular.module('moduloVentas', ['ngRoute']);
 angular.module('moduloVentas', ['ui.bootstrap']);
 function controller($scope, $modal, $log , $http)
  {
+    $scope.showDetail = false;
     $scope.alerts = [];
     $scope.venta = [];
     $scope.ventasIniciales =[];
@@ -17,11 +18,35 @@ function controller($scope, $modal, $log , $http)
     });
 
     $scope.viewDetail = function (venta){
+        $scope.showDetail = true;
         $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailVentasInit = data;
          });
     };
+    $scope.addProductsToDetail = function(size)
+    {
 
+        var modalProductsOpen = $modal.open({
+            templateUrl:'myProductosModal.html',
+            controller: productsModalController,
+            size:size,
+            resolve:{
+                action:function(){
+                    return "Insertar"
+                },
+                products:function(){
+                    return $scope.detailVentasInit.productos;
+                }
+
+            }
+        });
+
+        modalProductsOpen.result.then(function (detalleVenta) {            
+            $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"insert","detalleVenta":'+JSON.stringify(detalleVenta)+',"venta":'+JSON.stringify($scope.detailVentasInit.venta)+'}').success(function(data){
+                  $scope.detailVentasInit.detalleVentas.push(data);
+            });             
+        }, function () {});
+    }
     $scope.alerts = [];
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
@@ -53,6 +78,21 @@ function controller($scope, $modal, $log , $http)
     };
      
  }
+ var productsModalController = function ($scope,$http, $modalInstance,action,products) {
+    $scope.products = products;
+    $scope.detail ={};
+
+
+    $scope.ok = function (valid) {
+        if(valid){
+            $modalInstance.close($scope.detail);
+        } 
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+ };
   var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
     $scope.users = users;
     $scope.action = action;
@@ -161,10 +201,10 @@ Date.prototype.toMysqlFormat = function() {
                 </div >  
              </div>   
              <div class="col-lg-6">
-                <div class="panel panel-default">
+                <div class="panel panel-default" ng-show="showDetail">
                     <div class="panel-heading">
                         Detalle Productos
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="">Agregar Productos</button>
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="addProductsToDetail(ventas)">Agregar Productos</button>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -181,7 +221,7 @@ Date.prototype.toMysqlFormat = function() {
                                     <tbody>
                                         <tr ng-repeat="detalle in detailVentasInit.detalleVentas" class="odd gradeX"> 
                                             <td>{{detalle.id_venta}}</td>
-                                            <td>{{detalle.nombre}}}</td>
+                                            <td>{{detalle.nombre}}</td>
                                             <td>{{detalle.cantidad}}</td>
                                             <td>{{detalle.precio}}</td>
                                             <td>
@@ -232,6 +272,41 @@ Date.prototype.toMysqlFormat = function() {
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" ng-click="ok(spendForm.$valid)">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+        <script type="text/ng-template" id="myProductosModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title"¨>{{action}} Venta</h3>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="detailSales">
+                    <div class="form-group">
+                        <label for="exampleInputEmail12">Producto</label>
+                        <div class="row" id="exampleInputEmail12">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="asuntoNameField" ng-model="productFilter" id="asuntoID" placeholder="Filtrar Producto..." />
+                            </div>
+                            <div class="col-md-6">
+                                <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_producto" class="form-control"  ng-options="product.id_producto as product.nombre for product in products"></select>
+                            </div>
+                        </div>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.selectProduct.$error.required">Este campo es requerido</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Precio</label>
+                        <input type="number" class="form-control" name="precio" ng-model="detail.precio" id="asuntoID" placeholder="Precio"  ng-required="true"/>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.precio.$error.required || detailSales.precio.$error.number">Este campo es requerido o incorrecto</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad" ng-model="detail.cantidad" id="comentarioID" placeholder="cantidad" ng-required="true"/>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number">Este campo es requerido o incorrecto</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok(detailSales.$valid)">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>

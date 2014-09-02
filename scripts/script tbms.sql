@@ -111,6 +111,22 @@ foreign key(id_usuario) references usuario(id_usuario)
 
 
 
+DROP PROCEDURE IF EXISTS ins_users;
+DELIMITER $$
+CREATE PROCEDURE ins_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16),IN pass VARCHAR(16))
+BEGIN
+INSERT INTO mysql.user (HOST,USER,PASSWORD,select_priv,Insert_priv,Update_priv,Delete_priv, EXECUTE_priv,MAX_USER_CONNECTIONS,ssl_cipher, x509_issuer, x509_subject)
+VALUES ( cliente, usuario, PASSWORD(pass), 'Y', 'Y', 'Y', 'Y', 'Y',1, '', '', '');
+FLUSH PRIVILEGES;
+END$$
+
+DROP PROCEDURE IF EXISTS eli_users;
+DELIMITER $$
+CREATE PROCEDURE eli_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16))
+BEGIN
+DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente;
+FLUSH PRIVILEGES;
+END$$
 
 
 
