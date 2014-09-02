@@ -7,7 +7,7 @@
     $scope.tipoProducto = [];
     $scope.initialTipoProducto =[]
     angular.element(document).ready(function () {
-    	$http.post('../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialTipoProducto = data;
          });
     });
@@ -28,7 +28,7 @@
         var index = $scope.initialTipoProducto.indexOf(tipoProducto);
          $scope.initialTipoProducto.splice(index,1);
          
-         $http.post('../../controllers/tipoProducto/tipoProductoFunctions.php','{"action":"delete","tipoProducto":'+JSON.stringify(tipoProducto)+'}').success(function(data){
+         $http.post('./../../controllers/tipoProducto/tipoProductoFunctions.php','{"action":"delete","tipoProducto":'+JSON.stringify(tipoProducto)+'}').success(function(data){
             $scope.alerts.push({type: 'success', msg: 'Tipo De Producto  Exitosamente Eliminado' });
          });
     }
@@ -48,7 +48,7 @@
         });
         modalInstanceUpdate.result.then(function (tipoProducto) {
             $scope.alerts = [];
-            $http.post('../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"update","tipoProducto":'+JSON.stringify(tipoProducto)+'}').success(function(data){
+            $http.post('./../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"update","tipoProducto":'+JSON.stringify(tipoProducto)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Tipo de Producto Modificado Exitosamente' });
              });
              
@@ -72,7 +72,7 @@
 
         modalInstanceOpen.result.then(function (tipoProducto) {
                 $scope.alerts = [];
-                $http.post('../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"insert","tipoProductoName":"'+tipoProducto.nombre+'"}').success(function(data){
+                $http.post('./../../controllers/tipoProducto/tipoProductoFunctions.php', '{"action":"insert","tipoProductoName":"'+tipoProducto.nombre+'"}').success(function(data){
                 $scope.initialTipoProducto.push(data[0]);
                 $scope.alerts.push({type: 'success', msg: 'Tipo de Producto Agregado Exitosamente' });
              });             

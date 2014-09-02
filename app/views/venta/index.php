@@ -8,12 +8,19 @@ function controller($scope, $modal, $log , $http)
     $scope.alerts = [];
     $scope.venta = [];
     $scope.ventasIniciales =[];
+    $scope.detailVentasInit = [];
     $scope.users = [];
     angular.element(document).ready(function () {
-        $http.post('../../controllers/venta/ventaFunctions.php', '{"action":"query"}').success(function(data){
+        $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"query"}').success(function(data){
             $scope.ventasIniciales = data;
          });
     });
+
+    $scope.viewDetail = function (venta){
+        $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
+            $scope.detailVentasInit = data;
+         });
+    };
 
     $scope.alerts = [];
       $scope.closeAlert = function(index) {
@@ -34,11 +41,12 @@ function controller($scope, $modal, $log , $http)
             }
         });
 
-        modalInstanceOpen.result.then(function (gasto) {
-           gasto.fecha = gasto.fecha.toMysqlFormat();
-            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
-                  $scope.initialSpends.gastos.push(data);
-                  $scope.alerts.push({type: 'success', msg: 'Gasto Agregado Exitosamente' });
+        modalInstanceOpen.result.then(function (venta) {
+           venta.fecha = venta.fecha.toMysqlFormat();
+            $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"insert","venta":'+JSON.stringify(venta)+'}').success(function(data){
+                  $scope.ventasIniciales.ventas.push(data);
+                  console.log(data);
+                  $scope.alerts.push({type: 'success', msg: 'Venta Agregada Exitosamente' });
                 
             });             
         }, function () {});
@@ -88,129 +96,145 @@ function controller($scope, $modal, $log , $http)
     };
 };
  
-
- </script>
- <div ng-app="moduloVentas">
-     <div ng-controller="controller">
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
+Date.prototype.toMysqlFormat = function() {
+    return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
+};
+</script>
+<div ng-app="moduloVentas">
+    <div ng-controller="controller">
 		<div class="row">
-             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="col-lg-12">
 		        <h1 class="page-header">Modulo de Ventas</h1>
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Ventas
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas()">Nueva Venta</button>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Nit</th>
-                                        <th>Fecha</th>
-                                        <th>Usuario</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody ng-show="ventasIniciales.ventas.length > 0">
-                                    <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas"> 
-                                        <td>{{ventas.nombre}}</td>
-                                        <td>{{ventas.nit}}</td>
-                                        <td>{{ventas.fecha}}</td>
-                                        <td>{{ventas.user_name}}</td>
-                                        <td>
-                                        	<div class="btn-group">
-											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
-											  </button>
-											  <ul class="dropdown-menu" role="menu">
-											    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-											    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-											  </ul>
-											</div>
-                                    	</td>    
-                                    </tr>
-                                </tbody>
-                            </table>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Ventas
+                                <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas()">Nueva Venta</button>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive" style="overflow-x:auto ; height:600px; overflow-y:autp">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Nit</th>
+                                                <th>Fecha</th>
+                                                <th>Usuario</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-show="ventasIniciales.ventas.length > 0">
+                                            <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas"> 
+                                                <td>{{ventas.nombre}}</td>
+                                                <td>{{ventas.nit}}</td>
+                                                <td>{{ventas.fecha}}</td>
+                                                <td>{{ventas.user_name}}</td>
+                                                <td>
+                                                	<div class="btn-group">
+        											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+        											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
+        											  </button>
+        											  <ul class="dropdown-menu" role="menu">
+        											    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+        											    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+                                                        <li><a href="#" ng-click="viewDetail(ventas)"> <i class="fa fa-list-alt"></i>  Ver Detalle</a></li>
+        											  </ul>
+        											</div>
+                                            	</td>    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>   
-            </div>
-             <div class="col-lg-8">
+                </div >  
+             </div>   
+             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Detalle Productos
                         <button class="btn btn-default pull-right btn-xs"  ng-click="">Agregar Productos</button>
                     </div>
-	                <div class="panel-body">
-	                    <div class="table-responsive">
-	                    	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-	                                <thead>
-	                                    <tr>
-	                                        <th>Id</th>
-	                                        <th>Nombre</th>
-	                                        <th>Rol</th>
-	                                        <th>Acciones</th>
-	                                    </tr>
-	                                </thead>
-	                                <tbody>
-	                                    <tr  class="odd gradeX"> 
-	                                        <td>val</td>
-	                                        <td>val</td>
-	                                        <td>val</td>
-	                                        <td>
-	                                        	<div class="btn-group">
-												  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-												    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
-												  </button>
-												  <ul class="dropdown-menu" role="menu">
-												    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-												    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-												  </ul>
-												</div>
-	                                    	</td>    
-	                                    </tr>
-	                                </tbody>
-	                            </table>
-	                    </div>
-	                </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                        	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Venta</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="detalle in detailVentasInit.detalleVentas" class="odd gradeX"> 
+                                            <td>{{detalle.id_venta}}</td>
+                                            <td>{{detalle.nombre}}}</td>
+                                            <td>{{detalle.cantidad}}</td>
+                                            <td>{{detalle.precio}}</td>
+                                            <td>
+                                            	<div class="btn-group">
+        										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+        										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
+        										  </button>
+        										  <ul class="dropdown-menu" role="menu">
+        										    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+        										    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+        										  </ul>
+        										</div>
+                                        	</td>    
+                                        </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <script type="text/ng-template" id="myModalContent.html">
-                    <div class="modal-header">
-                        <h3 class="modal-title"¨>{{action}} Venta</h3>
-                    </div>
-                    <div class="modal-body">
-                        <form role="form" name="spendForm">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nombre</label>
-                                <input type="text" class="form-control" name="asuntoNameField" ng-model="new.asunto" id="asuntoID" placeholder="Factura a nombre de..."  ng-required="true"/>
-                                <div class="alert-danger" role="alert" ng-show="spendForm.asuntoNameField.$error.required">Este campo es requerido</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="user-rol-option">Nit</label>
-                                <input type="text" class="form-control" name="comentNameField" ng-model="new.comentario" id="comentarioID" placeholder="Numero de Nit"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="user-rol-option">Fecha</label>
-                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
-                                <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="user-rol-option">Usuario</label>
-                                <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_usuario" class="form-control" ng-options="usuario.id_usuario as usuario.nombre for usuario in users"></select>
-                                <div class="alert-danger" role="alert" ng-show="spendForm.selectRol.$error.required">Este campo es requerido</div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" ng-click="ok(spendForm.$valid)">OK</button>
-                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                    </div>
-                </script>
-            </div>      
+            </div> 
         </div>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title"¨>{{action}} Venta</h3>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="spendForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" class="form-control" name="asuntoNameField" ng-model="new.nombre" id="asuntoID" placeholder="Factura a nombre de..."  ng-required="true"/>
+                        <div class="alert-danger" role="alert" ng-show="spendForm.asuntoNameField.$error.required">Este campo es requerido</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Nit</label>
+                        <input type="text" class="form-control" name="comentNameField" ng-model="new.nit" id="comentarioID" placeholder="Numero de Nit"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Fecha</label>
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
+                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-rol-option">Usuario</label>
+                        <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_usuario" class="form-control" ng-options="usuario.id_usuario as usuario.nombre for usuario in users"></select>
+                        <div class="alert-danger" role="alert" ng-show="spendForm.selectRol.$error.required">Este campo es requerido</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok(spendForm.$valid)">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>      
+</div>
 <?php  include("../footer.php"); ?>

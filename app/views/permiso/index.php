@@ -9,7 +9,7 @@
     $scope.permiso = [];
     $scope.initialPermisos =[]
     angular.element(document).ready(function () {
-    	$http.post('../../controllers/permiso/permisoFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/permiso/permisoFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialPermisos = data;
          });
     });
@@ -30,7 +30,7 @@
         var index = $scope.initialPermisos.indexOf(permiso);
          $scope.initialPermisos.splice(index,1);
          
-         $http.post('../../controllers/permiso/permisoFunctions.php','{"action":"delete","permiso":'+JSON.stringify(permiso)+'}').success(function(data){
+         $http.post('./../../controllers/permiso/permisoFunctions.php','{"action":"delete","permiso":'+JSON.stringify(permiso)+'}').success(function(data){
             $scope.alerts.push({type: 'success', msg: 'Permiso  Exitosamente Eliminado' });
          });
     }
@@ -50,7 +50,7 @@
         });
         modalInstanceUpdate.result.then(function (permiso) {
             $scope.alerts = [];
-            $http.post('../../controllers/permiso/permisoFunctions.php', '{"action":"update","permiso":'+JSON.stringify(permiso)+'}').success(function(data){
+            $http.post('./../../controllers/permiso/permisoFunctions.php', '{"action":"update","permiso":'+JSON.stringify(permiso)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Permiso Modificado Exitosamente' });
              });
              
@@ -74,7 +74,7 @@
 
         modalInstanceOpen.result.then(function (permiso) {
            $scope.alerts = [];
-           $http.post('../../controllers/permiso/permisoFunctions.php', '{"action":"insert","permiso":"'+permiso.nombre+'"}').success(function(data){
+           $http.post('./../../controllers/permiso/permisoFunctions.php', '{"action":"insert","permiso":"'+permiso.nombre+'"}').success(function(data){
                 $scope.initialPermisos.push(data[0]);
                 $scope.alerts.push({type: 'success', msg: 'Permiso Agregado Exitosamente' });
              });             

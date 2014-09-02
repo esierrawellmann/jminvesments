@@ -10,7 +10,7 @@
     $scope.tipo_productos = [];
     angular.element(document).ready(function () {
 
-    	$http.post('../../controllers/producto/productoFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/producto/productoFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialProductos = data;
          });
     });
@@ -23,7 +23,7 @@
     $scope.deleteUser = function (user){
         var index = $scope.initialProductos.productos.indexOf(user);
         console.log(user);
-        $http.post('../../controllers/producto/productoFunctions.php','{"action":"delete","producto":'+JSON.stringify(user)+'}').success(function(data){
+        $http.post('./../../controllers/producto/productoFunctions.php','{"action":"delete","producto":'+JSON.stringify(user)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Producto  Exitosamente Eliminado' });
             $scope.initialProductos.productos.splice(index,1);
         
@@ -49,7 +49,7 @@
         });
         modalInstanceUpdate.result.then(function (user) {
             console.log(user);
-            $http.post('../../controllers/producto/productoFunctions.php', '{"action":"update","producto":'+JSON.stringify(user)+'}').success(function(data){
+            $http.post('./../../controllers/producto/productoFunctions.php', '{"action":"update","producto":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Producto Modificado Exitosamente' });
              });
              
@@ -74,7 +74,7 @@
         modalInstanceOpen.result.then(function (user) {
             console.log(user);
             console.log('----');
-           $http.post('../../controllers/producto/productoFunctions.php', '{"action":"insert","producto":'+JSON.stringify(user)+'}').success(function(data){
+           $http.post('./../../controllers/producto/productoFunctions.php', '{"action":"insert","producto":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialProductos.productos.push(data);
                  console.log(data);
                  $scope.alerts.push({type: 'success', msg: 'Producto Agregado Exitosamente' });

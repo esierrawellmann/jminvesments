@@ -1,27 +1,28 @@
 <?php
-	require_once './../../models/Gasto.php';	
-	require_once './../../models/Usuario.php';	 
+	require_once './../../models/DetalleVenta.php';	
+	require_once './../../models/Producto.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
 	switch ($data['action']) {
 
 	    case "insert":
-	    	if(isset($data['gasto'])){
-	    		$gasto = new Gasto();
-		     	$objGasto = $gasto -> newGasto($data['gasto']);
-		     	$result = $objGasto[0];
+	    	if(isset($data['venta'])){
+	    		$venta = new Venta();
+		     	$objVenta = $venta -> newVenta($data['venta']);
+		     	$result = $objVenta[0];
 		     	echo json_encode($result);
 
 		     }
 	        break;
 	    case "query":
-		        $gasto = new Gasto();
-		        $objGasto = $gasto -> getGastos();
-		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario -> getUsers();
+	    		$ventaData = get_object_vars($data['venta']);
+		        $detalleVenta = new DetalleVenta();
+		        $objVenta = $detalleVenta -> getDetalleVentas($ventaData['id_venta']);
+		       	$producto = new Producto();
+		        $objProducto= $producto ->getProductos();
 
-		        echo '{"usuarios":'.json_encode($objUsuario).',"gastos":'.json_encode($objGasto).'}';
+		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).'}';
 	    	break;
 	    case "update":
 	        $gasto = new Gasto();

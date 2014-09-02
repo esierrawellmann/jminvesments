@@ -49,7 +49,7 @@
     <script src="/public/js/plugins/morris/raphael.min.js"></script>
     <script src="/public/js/plugins/morris/morris.min.js"></script>
     <script src="/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
-    <!--<script src="../../public/js/plugins/morris/morris-data.js"></script> -->
+    <!--<script src="./../../public/js/plugins/morris/morris-data.js"></script> -->
     <link href="/public/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom Theme JavaScript -->
     <script src="/public/js/sb-admin-2.js"></script>

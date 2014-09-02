@@ -10,7 +10,7 @@
     $scope.initialSpends =[];
     $scope.users = [];
     angular.element(document).ready(function () {
-    	$http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/gasto/gastoFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialSpends = data;
          });
     });
@@ -23,7 +23,7 @@
     $scope.deleteSpend = function (spend){
         var index = $scope.initialSpends.gastos.indexOf(spend);
          
-        $http.post('../../controllers/gasto/gastoFunctions.php','{"action":"delete","gasto":'+JSON.stringify(spend)+'}').success(function(data){
+        $http.post('./../../controllers/gasto/gastoFunctions.php','{"action":"delete","gasto":'+JSON.stringify(spend)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Gasto  Exitosamente Eliminado' });
             $scope.initialSpends.gastos.splice(index,1);
         
@@ -51,7 +51,7 @@
         modalInstanceUpdate.result.then(function (gasto) {
 
            gasto.fecha = gasto.fecha.toMysqlFormat();
-            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"update","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
+            $http.post('./../../controllers/gasto/gastoFunctions.php', '{"action":"update","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
@@ -75,7 +75,7 @@
 
         modalInstanceOpen.result.then(function (gasto) {
            gasto.fecha = gasto.fecha.toMysqlFormat();
-            $http.post('../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
+            $http.post('./../../controllers/gasto/gastoFunctions.php', '{"action":"insert","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.initialSpends.gastos.push(data);
                   $scope.alerts.push({type: 'success', msg: 'Gasto Agregado Exitosamente' });
                 

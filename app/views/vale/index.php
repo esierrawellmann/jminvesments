@@ -9,7 +9,7 @@
     $scope.usuarios = [];
     angular.element(document).ready(function () {
 
-    	$http.post('../../controllers/vale/valeFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/vale/valeFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialVales = data;
             console.log(data);
          });
@@ -23,7 +23,7 @@
     $scope.deleteUser = function (user){
         var index = $scope.initialVales.vales.indexOf(user);
         console.log(user);
-        $http.post('../../controllers/vale/valeFunctions.php','{"action":"delete","vale":'+JSON.stringify(user)+'}').success(function(data){
+        $http.post('./../../controllers/vale/valeFunctions.php','{"action":"delete","vale":'+JSON.stringify(user)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Vale  Exitosamente Eliminado' });
             $scope.initialVales.vales.splice(index,1);
         
@@ -49,7 +49,7 @@
         });
         modalInstanceUpdate.result.then(function (user) {
             user.fecha = user.fecha.toMysqlFormat();
-            $http.post('../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
+            $http.post('./../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Vale Modificado Exitosamente' });
              });
              
@@ -73,7 +73,7 @@
 
         modalInstanceOpen.result.then(function (user) {
            user.fecha = user.fecha.toMysqlFormat();
-           $http.post('../../controllers/vale/valeFunctions.php', '{"action":"insert","vale":'+JSON.stringify(user)+'}').success(function(data){
+           $http.post('./../../controllers/vale/valeFunctions.php', '{"action":"insert","vale":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialVales.vales.push(data);
                  console.log(data);
                  $scope.alerts.push({type: 'success', msg: 'Vale Agregado Exitosamente' });

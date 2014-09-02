@@ -1,16 +1,16 @@
 <?php
-	require_once '../../models/Venta.php';	
-	require_once '../../models/Usuario.php';	 
+	require_once './../../models/Venta.php';	
+	require_once './../../models/Usuario.php';	 
 	$request_body = file_get_contents('php://input');
 	$request = json_decode($request_body);
 	$data = get_object_vars($request);
 	switch ($data['action']) {
 
 	    case "insert":
-	    	if(isset($data['gasto'])){
-	    		$gasto = new Gasto();
-		     	$objGasto = $gasto -> newGasto($data['gasto']);
-		     	$result = $objGasto[0];
+	    	if(isset($data['venta'])){
+	    		$venta = new Venta();
+		     	$objVenta = $venta -> newVenta($data['venta']);
+		     	$result = $objVenta[0];
 		     	echo json_encode($result);
 
 		     }

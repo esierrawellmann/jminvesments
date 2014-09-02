@@ -10,7 +10,7 @@
     $scope.roles = [];
     angular.element(document).ready(function () {
 
-    	$http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"query"}').success(function(data){
+    	$http.post('./../../controllers/usuario/usuarioFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialUsers = data;
          });
     });
@@ -24,7 +24,7 @@
         console.log(user);
         var index = $scope.initialUsers.usuarios.indexOf(user);
          
-        $http.post('../../controllers/usuario/usuarioFunctions.php','{"action":"delete","usuario":'+JSON.stringify(user)+'}').success(function(data){
+        $http.post('./../../controllers/usuario/usuarioFunctions.php','{"action":"delete","usuario":'+JSON.stringify(user)+'}').success(function(data){
            $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
             $scope.initialUsers.usuarios.splice(index,1);
         
@@ -48,7 +48,7 @@
           	}
         });
         modalInstanceUpdate.result.then(function (user) {
-            $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"update","usuario":'+JSON.stringify(user)+'}').success(function(data){
+            $http.post('./../../controllers/usuario/usuarioFunctions.php', '{"action":"update","usuario":'+JSON.stringify(user)+'}').success(function(data){
                 $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
              });
              
@@ -71,7 +71,7 @@
         });
 
         modalInstanceOpen.result.then(function (user) {
-           $http.post('../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
+           $http.post('./../../controllers/usuario/usuarioFunctions.php', '{"action":"insert","user":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialUsers.usuarios.push(data);
                  $scope.alerts.push({type: 'success', msg: 'Usuario Agregado Exitosamente' });
                 
