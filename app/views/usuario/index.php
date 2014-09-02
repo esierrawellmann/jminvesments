@@ -84,9 +84,11 @@
  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
     $scope.roles = roles;
     $scope.action = action;
+    $scope.variableb=true;
     $scope.new = {};
     $scope.ok = function (valid) {
         if(valid){
+            console.log($scope.new);
             $modalInstance.close($scope.new);
         } 
     };
@@ -99,6 +101,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.roles = roles;
+    $scope.variableb=false;
+    
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_role", $scope.new.id_role);
@@ -180,6 +184,11 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                         <label for="exampleInputEmail1">Nombre</label>
                         <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Nombre del Usuario" ng-required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
+                    </div>
+                        <div class="form-group">
+                        <label for="exampleInputEmail1" ng-show="variableb" >Pass</label>
+                        <input type="text" class="form-control" name="userNameField3" ng-show="variableb" ng-model="new.pass" id="exampleInputEmail1" placeholder="Nombre del Usuario" ng-required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Seleccionar Rol</label>

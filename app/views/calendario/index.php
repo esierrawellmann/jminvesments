@@ -122,9 +122,21 @@ function CalendarCtrl($scope) {
 
 </script>
 
+
+<br>
+<br>
 <div ng-app="calendarDemoApp">
  <div ng-controller="CalendarCtrl">
-<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+<div class="btn-toolbar">
+                                <p class="pull-right lead">Agenda de Citas</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar1)">AgendaDay</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar1)">AgendaWeek</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', myCalendar1)">Month</button>
+                                </div>
+                              </div>
+                            <div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+                          
  </div>
 </div>
 
