@@ -43,6 +43,7 @@ function controller($scope, $modal, $log , $http)
 
         modalProductsOpen.result.then(function (detalleVenta) {            
             $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"insert","detalleVenta":'+JSON.stringify(detalleVenta)+',"venta":'+JSON.stringify($scope.detailVentasInit.venta)+'}').success(function(data){
+                  console.log(data);
                   $scope.detailVentasInit.detalleVentas.push(data);
             });             
         }, function () {});
