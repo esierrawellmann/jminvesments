@@ -139,7 +139,6 @@ DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente
 FLUSH PRIVILEGES;
 END$$
 
-DELIMITER $$
 CREATE TRIGGER insert_detalle after insert
  ON detalle_venta
  FOR EACH ROW
