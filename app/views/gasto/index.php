@@ -56,6 +56,7 @@
              });
              
         }, function () {
+            data.fecha = toMysqlFormat1(data.fecha);
         });
     } 
     $scope.openGasto = function (size) {

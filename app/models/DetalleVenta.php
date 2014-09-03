@@ -34,9 +34,9 @@ class DetalleVenta extends database {
     }
   }
 	function updateDetalleVenta($gasto){
-    
+    echo var_dump($gasto);
 		$this -> conectar();
-    $q = "update detalle_venta  set  id_producto=".$gasto['id_producto']." ,precio= ".$gasto['precio'].",cantidad = ".$gasto['comentario']."  where id_detalle_venta = ".$gasto['id_detalle_venta'].";"; 
+    $q = "update detalle_venta  set  id_producto=".$gasto['id_producto']." ,precio= ".$gasto['precio'].",cantidad = ".$gasto['cantidad']."  where id_detalle_venta = ".$gasto['id_detalle_venta'].";"; 
     $query = $this -> consulta($q);
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
@@ -48,9 +48,9 @@ class DetalleVenta extends database {
 		}
 	}
 
-function deleteSpend($id){
+function deleteDetailSpend($id){
     $this -> conectar();
-    $query = $this -> consulta("delete from gasto where id_gasto = ".$id);
+    $query = $this -> consulta("delete from detalle_venta where id_detalle_venta = ".$id);
     $this ->disconnect();
 
     return '{"success":true}';

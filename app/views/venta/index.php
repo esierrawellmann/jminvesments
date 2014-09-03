@@ -111,6 +111,15 @@ function controller($scope, $modal, $log , $http)
         }, function () {
         });
     }
+    $scope.deleteDetail = function (detalle){
+        if(confirm("Esta apunto de eliminar Desea continuar?")){
+            $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php','{"action":"delete","detalleVenta":'+JSON.stringify(detalle)+'}').success(function(data){
+                var index = $scope.detailVentasInit.detalleVentas.indexOf(detalle);
+                $scope.alerts.push({type: 'success', msg: 'Detalle de Venta Exitosamente Eliminado' });
+                $scope.detailVentasInit.detalleVentas.splice(index,1);
+          });    
+        }
+    }
     $scope.showUpdateDialog = function (data,size){
         var modalInstanceUpdate = $modal.open({
             templateUrl: 'myModalContent.html',
@@ -135,6 +144,7 @@ function controller($scope, $modal, $log , $http)
              });
              
         }, function () {
+            data.fecha = toMysqlFormat1(data.fecha);
         });
     } 
      
@@ -158,7 +168,6 @@ function controller($scope, $modal, $log , $http)
     $scope.products = products;
     $scope.action = action;
     $scope.detail = detalleVenta;
-    console.log(detalleVenta);
     $scope.$watch('detail.cantidad',function(val,old){
        $scope.detail.cantidad = parseFloat(val); 
     });
@@ -167,7 +176,7 @@ function controller($scope, $modal, $log , $http)
     });
     $scope.ok = function (valid) {
         if(valid){
-            $modalInstance.close($scope.detalle);
+            $modalInstance.close($scope.detail);
         } 
     };
 
@@ -221,8 +230,8 @@ function controller($scope, $modal, $log , $http)
 
     $scope.cancel = function () {
         $scope.new.fecha = toMysqlFormat1($scope.new.fecha);
-        $modalInstance.dismiss('cancel');
     };
+
 
  }
   var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
@@ -376,7 +385,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
         										  </button>
         										  <ul class="dropdown-menu" role="menu">
         										    <li><a href="#" ng-click="showDetailUpdateDialog(detalle)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-        										    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+        										    <li><a href="#" ng-click="deleteDetail(detalle)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
         										  </ul>
         										</div>
                                         	</td>    

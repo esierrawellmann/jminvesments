@@ -115,7 +115,7 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,tipoProducto,acti
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Tipos De Producto actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Tipo de Producto</button>
+                        <button class="btn btn-default pull-right btn-xs" ng-disabled="true"  ng-click="open()">Agregar Tipo de Producto</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -134,12 +134,12 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,tipoProducto,acti
                                         <td>{{data.nombre}}</td>
                                         <td>
                                         	<div class="btn-group">
-											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+											  <button ng-disabled="true" type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
 											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
 											  </button>
 											  <ul class="dropdown-menu" tipoProducto="menu">
-											    <li><a href="#" ng-click="showUpdateDialog(data)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-											    <li><a href="#" ng-click="deleteRol(data)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+											    <li><a   href="#" ng-click="showUpdateDialog(data)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+											    <li><a   href="#" ng-click="deleteRol(data)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
 											  </ul>
 											</div>
                                     	</td>    

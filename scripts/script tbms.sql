@@ -35,6 +35,9 @@ nombre varchar(512) not null,
 primary key(id_tipo_producto)
 ) engine=InnoDB; 
 
+insert into tipo_producto(nombre) values ('Producto');
+insert into tipo_producto(nombre) values ('Servicio');
+
 create table producto(
 id_producto int auto_increment,
 id_tipo_producto int not null,
@@ -136,36 +139,81 @@ DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente
 FLUSH PRIVILEGES;
 END$$
 
-
-
 DELIMITER $$
-CREATE TRIGGER trigger_name after insert
+CREATE TRIGGER insert_detalle after insert
  ON detalle_venta
  FOR EACH ROW
  BEGIN
  declare cant int; 
  set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
 
- update producto set cantidad = (cant - NEW.cantidad) where id_producto=NEW.id_producto;
+ update producto set cantidad = (cant - NEW.cantidad) where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
 
 END$$
-DELIMITER ;
 
-DELIMITER $$
-CREATE TRIGGER trigger_name after insert
+CREATE TRIGGER update_detalle after update
+ ON detalle_venta
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ declare nueva_cant int;
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set nueva_cant = cant + OLD.cantidad;
+
+ update producto set cantidad = (nueva_cant - NEW.cantidad) where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+
+END$$
+
+CREATE TRIGGER delete_detalle after delete
+ ON detalle_venta
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ declare nueva_cant int;
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set nueva_cant = cant + OLD.cantidad;
+
+ update producto set cantidad = nueva_cant where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+
+END$$
+
+CREATE TRIGGER insert_compra after insert
  ON detalle_compra
  FOR EACH ROW
  BEGIN
  declare cant int; 
  set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
 
- update producto set cantidad = (cant + NEW.cantidad) where id_producto=NEW.id_producto;
+ update producto set cantidad = (cant + NEW.cantidad) where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+
+END$$
+
+CREATE TRIGGER update_compra after update
+ ON detalle_compra
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ declare nueva_cant int;
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set nueva_cant = cant - OLD.cantidad;
+
+ update producto set cantidad = (nueva_cant + NEW.cantidad) where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+
+END$$
+
+CREATE TRIGGER delete_detalle after delete
+ ON detalle_venta
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ declare nueva_cant int;
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set nueva_cant = cant - OLD.cantidad;
+
+ update producto set cantidad = nueva_cant where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
 
 END$$
 DELIMITER ;
-
-
-
 
 
 

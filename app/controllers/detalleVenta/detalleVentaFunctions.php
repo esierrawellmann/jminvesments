@@ -25,21 +25,22 @@
 		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).',"venta":'.json_encode($ventaData).'}';
 	    	break;
 	    case "update":
-	    	echo var_dump($data);
 	        if(isset($data['detalleVenta'])){
 	        	$ventaData = new DetalleVenta();
 				$updatedGasto = get_object_vars($data['detalleVenta']);
-	        	echo var_dump($updatedGasto);
 	        	$objUser = $ventaData -> updateDetalleVenta($updatedGasto);
 	        	echo json_encode($objUser);
 	        }
 	        break;
 	    case "delete":
-		    $gasto = new Gasto();
-		    if(isset($data['gasto'])){
-		    	$deleteSpend = get_object_vars($data['gasto']);
-	        	$objGasto = $gasto -> deleteSpend($deleteSpend['id_gasto']);
-	        	echo json_encode($objRol);
+		    
+		    if(isset($data['detalleVenta'])){
+		    	$detalle = new DetalleVenta();
+		    	$deleteDetail = get_object_vars($data['detalleVenta']);
+		    	//echo var_dump($deleteDetail);
+
+	        	$objGasto = $detalle -> deleteDetailSpend($deleteDetail['id_detalle_venta']);
+	        	echo json_encode($objGasto);
 		    }
 		        break;
 	}
