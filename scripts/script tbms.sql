@@ -199,7 +199,7 @@ CREATE TRIGGER update_compra after update
 
 END$$
 
-CREATE TRIGGER delete_detalle after delete
+CREATE TRIGGER delete_compra after delete
  ON detalle_compra
  FOR EACH ROW
  BEGIN
