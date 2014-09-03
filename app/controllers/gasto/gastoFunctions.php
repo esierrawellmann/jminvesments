@@ -36,7 +36,7 @@
 		    if(isset($data['gasto'])){
 		    	$deleteSpend = get_object_vars($data['gasto']);
 	        	$objGasto = $gasto -> deleteSpend($deleteSpend['id_gasto']);
-	        	echo json_encode($objRol);
+	        	echo json_encode($objGasto);
 		    }
 		        break;
 	}

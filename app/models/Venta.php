@@ -6,7 +6,7 @@ class Venta extends database {
   function getVentas()
   {
     $this->conectar();
-    $query = $this->consulta("SELECT v.id_venta,v.nombre,v.nit,v.fecha,u.id_usuario,u.nombre AS 'user_name' FROM venta v INNER JOIN usuario u ON v.id_usuario = u.id_usuario ORDER BY v.id_venta;");
+    $query = $this->consulta("SELECT v.id_venta,v.nombre,v.nit,v.fecha,u.id_usuario,u.nombre AS 'user_name' FROM venta v INNER JOIN usuario u ON v.id_usuario = u.id_usuario ORDER BY fecha  desc, v.id_venta desc;");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -31,9 +31,10 @@ class Venta extends database {
       return array();
     }
   }
-	function updateGasto($gasto){
+	function updateVenta($venta){
+    echo var_dump($venta);
 		$this -> conectar();
-    $q = "update gasto  set  id_usuario=".$gasto['id_usuario']." ,asunto= '".$gasto['asunto']."',comentario = '".$gasto['comentario']."', fecha = '".$gasto['fecha']."', monto =".$gasto['monto']." where id_gasto = ".$gasto['id_gasto'].";"; 
+    $q = "update venta  set  id_usuario=".$venta['id_usuario']." ,nombre= '".$venta['nombre']."',nit = '".$venta['nit']."', fecha = '".$venta['fecha']."' where id_venta = ".$venta['id_venta'].";"; 
     $query = $this -> consulta($q);
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
@@ -45,11 +46,10 @@ class Venta extends database {
 		}
 	}
 
-function deleteSpend($id){
+function deleteVenta($id){
     $this -> conectar();
-    $query = $this -> consulta("delete from gasto where id_gasto = ".$id);
+    $query = $this -> consulta("delete from venta where id_venta = ".$id);
     $this ->disconnect();
-
     return '{"success":true}';
   }
 

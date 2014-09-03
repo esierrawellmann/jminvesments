@@ -108,7 +108,15 @@ primary key(id_vale),
 foreign key(id_usuario) references usuario(id_usuario)
 ) engine=InnoDB; 
 
-
+create table agenda(
+id_agenda int auto_increment,
+id_usuario int not null,
+comentario varchar(512) not null,
+fecha_inicio datetime not null,
+fecha_fin datetime not null,
+primary key(id_agenda),
+foreign key(id_usuario) references usuario(id_usuario)
+)engine=innoDb;
 
 
 DROP PROCEDURE IF EXISTS ins_users;
@@ -129,6 +137,32 @@ FLUSH PRIVILEGES;
 END$$
 
 
+
+DELIMITER $$
+CREATE TRIGGER trigger_name after insert
+ ON detalle_venta
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+
+ update producto set cantidad = (cant - NEW.cantidad) where id_producto=NEW.id_producto;
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trigger_name after insert
+ ON detalle_compra
+ FOR EACH ROW
+ BEGIN
+ declare cant int; 
+ set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+
+ update producto set cantidad = (cant + NEW.cantidad) where id_producto=NEW.id_producto;
+
+END$$
+DELIMITER ;
 
 
 

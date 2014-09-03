@@ -23,9 +23,9 @@ function controller($scope, $modal, $log , $http)
             $scope.detailVentasInit = data;
          });
     };
+
     $scope.addProductsToDetail = function(size)
     {
-
         var modalProductsOpen = $modal.open({
             templateUrl:'myProductosModal.html',
             controller: productsModalController,
@@ -43,7 +43,6 @@ function controller($scope, $modal, $log , $http)
 
         modalProductsOpen.result.then(function (detalleVenta) {            
             $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"insert","detalleVenta":'+JSON.stringify(detalleVenta)+',"venta":'+JSON.stringify($scope.detailVentasInit.venta)+'}').success(function(data){
-                  console.log(data);
                   $scope.detailVentasInit.detalleVentas.push(data);
             });             
         }, function () {});
@@ -52,6 +51,17 @@ function controller($scope, $modal, $log , $http)
       $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
       };
+    $scope.deleteVenta = function (venta){
+        if(confirm("Esta apunto de eliminar una venta \n Esto eliminara todas los detalles de venta asignados a esta \n Desea continuar?")){
+            $scope.showDetail = false;
+            $http.post('./../../controllers/venta/ventaFunctions.php','{"action":"delete","venta":'+JSON.stringify(venta)+'}').success(function(data){
+                var index = $scope.ventasIniciales.ventas.indexOf(venta);
+                $scope.alerts.push({type: 'success', msg: 'Venta  Exitosamente Eliminada' });
+                $scope.ventasIniciales.ventas.splice(index,1);
+          });    
+        }
+        
+    }
     $scope.openVentas = function (size) {
         var modalInstanceOpen = $modal.open({
           templateUrl: 'myModalContent.html',
@@ -70,13 +80,63 @@ function controller($scope, $modal, $log , $http)
         modalInstanceOpen.result.then(function (venta) {
            venta.fecha = venta.fecha.toMysqlFormat();
             $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"insert","venta":'+JSON.stringify(venta)+'}').success(function(data){
-                  $scope.ventasIniciales.ventas.push(data);
-                  console.log(data);
+                  $scope.ventasIniciales.ventas.unshift(data);
                   $scope.alerts.push({type: 'success', msg: 'Venta Agregada Exitosamente' });
                 
             });             
         }, function () {});
     };
+    $scope.showDetailUpdateDialog = function (data,size){
+        var modalInstanceDetailUpdate = $modal.open({
+            templateUrl: 'myProductosModal.html',
+            controller: ModalInstanceDetailUpdateCtrl,
+            size: size,
+            resolve: {
+                action: function(){
+                return "Modificar"
+                }, 
+                detalleVenta: function () {
+                        return data;
+                    },
+                products:function(){
+                    return $scope.detailVentasInit.productos;
+                }
+            }
+        });
+        modalInstanceDetailUpdate.result.then(function (detalle) {
+            $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"update","detalleVenta":'+JSON.stringify(detalle)+',"venta":'+JSON.stringify($scope.detailVentasInit.venta)+'}').success(function(data){
+                $scope.alerts.push({type: 'success', msg: 'Detalle de Venta Modificado Exitosamente' });
+             });
+             
+        }, function () {
+        });
+    }
+    $scope.showUpdateDialog = function (data,size){
+        var modalInstanceUpdate = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: ModalInstanceUpdateCtrl,
+            size: size,
+            resolve: {
+                action: function(){
+                return "Modificar"
+                }, 
+                venta: function () {
+                        return data;
+                    },
+                users:function(){
+                    return $scope.ventasIniciales.usuarios;
+                }
+            }
+        });
+        modalInstanceUpdate.result.then(function (venta) {
+            venta.fecha = venta.fecha.toMysqlFormat();
+            $http.post('./../../controllers/venta/ventaFunctions.php', '{"action":"update","venta":'+JSON.stringify(venta)+'}').success(function(data){
+                $scope.alerts.push({type: 'success', msg: 'Venta Modificado Exitosamente' });
+             });
+             
+        }, function () {
+        });
+    } 
      
  }
  var productsModalController = function ($scope,$http, $modalInstance,action,products) {
@@ -94,6 +154,77 @@ function controller($scope, $modal, $log , $http)
         $modalInstance.dismiss('cancel');
     };
  };
+ var ModalInstanceDetailUpdateCtrl = function($scope,$http, $modalInstance,action,detalleVenta,products){
+    $scope.products = products;
+    $scope.action = action;
+    $scope.detail = detalleVenta;
+    console.log(detalleVenta);
+    $scope.$watch('detail.cantidad',function(val,old){
+       $scope.detail.cantidad = parseFloat(val); 
+    });
+    $scope.$watch('detail.precio',function(val,old){
+       $scope.detail.precio = parseFloat(val); 
+    });
+    $scope.ok = function (valid) {
+        if(valid){
+            $modalInstance.close($scope.detalle);
+        } 
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+ }
+ var ModalInstanceUpdateCtrl = function($scope,$http, $modalInstance,action,venta,users){
+    $scope.users = users;
+    $scope.action = action;
+    $scope.new = venta;
+
+
+    $scope.today = function() {
+        $scope.new.fecha = new Date();
+    };
+
+    $scope.setDate = function(){
+        var dateParts = $scope.new.fecha.split("-");
+        $scope.new.fecha = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
+    }
+    $scope.setDate();
+
+    $scope.clear = function () {
+    $scope.new.fecha = null;
+    };
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.initDate = new Date();
+    $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+
+
+    $scope.ok = function (valid) {
+        if(valid){
+            var index = functiontofindIndexByKeyValue(users, "id_usuario", $scope.new.id_usuario);
+            $scope.new.user_name = users[index].nombre;
+            $modalInstance.close($scope.new);
+        } 
+    };
+
+    $scope.cancel = function () {
+        $scope.new.fecha = toMysqlFormat1($scope.new.fecha);
+        $modalInstance.dismiss('cancel');
+    };
+
+ }
   var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
     $scope.users = users;
     $scope.action = action;
@@ -102,28 +233,28 @@ function controller($scope, $modal, $log , $http)
 
     $scope.today = function() {
     $scope.new.fecha = new Date();
-  };
-  $scope.today();
+    };
+    $scope.today();
 
-  $scope.clear = function () {
+    $scope.clear = function () {
     $scope.new.fecha = null;
-  };
+    };
 
-  $scope.open = function($event) {
+    $scope.open = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
 
     $scope.opened = true;
-  };
+    };
 
-  $scope.dateOptions = {
+    $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
-  };
+    };
 
-  $scope.initDate = new Date();
-  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
+    $scope.initDate = new Date();
+    $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
 
 
     $scope.ok = function (valid) {
@@ -145,6 +276,19 @@ function twoDigits(d) {
 Date.prototype.toMysqlFormat = function() {
     return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
 };
+
+function toMysqlFormat1(date) {
+    return date.getFullYear() + "-" + twoDigits(1 + date.getMonth()) + "-" + twoDigits(date.getDate());
+}
+
+function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+  for (var i = 0; i < arraytosearch.length; i++) {
+    if (arraytosearch[i][key] == valuetosearch) {
+      return i;
+    }
+  }
+  return null;
+}
 </script>
 <div ng-app="moduloVentas">
     <div ng-controller="controller">
@@ -176,18 +320,18 @@ Date.prototype.toMysqlFormat = function() {
                                         </thead>
                                         <tbody ng-show="ventasIniciales.ventas.length > 0">
                                             <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas"> 
-                                                <td>{{ventas.nombre}}</td>
-                                                <td>{{ventas.nit}}</td>
-                                                <td>{{ventas.fecha}}</td>
-                                                <td>{{ventas.user_name}}</td>
+                                                <td ng-click="viewDetail(ventas)" >{{ventas.nombre}}</td>
+                                                <td ng-click="viewDetail(ventas)" >{{ventas.nit}}</td>
+                                                <td ng-click="viewDetail(ventas)" >{{ventas.fecha}}</td>
+                                                <td ng-click="viewDetail(ventas)">{{ventas.user_name}}</td>
                                                 <td>
                                                 	<div class="btn-group">
         											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
         											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
         											  </button>
         											  <ul class="dropdown-menu" role="menu">
-        											    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-        											    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+        											    <li><a href="#" ng-click="showUpdateDialog(ventas)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+        											    <li><a href="#" ng-click="deleteVenta(ventas)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                                                         <li><a href="#" ng-click="viewDetail(ventas)"> <i class="fa fa-list-alt"></i>  Ver Detalle</a></li>
         											  </ul>
         											</div>
@@ -231,7 +375,7 @@ Date.prototype.toMysqlFormat = function() {
         										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
         										  </button>
         										  <ul class="dropdown-menu" role="menu">
-        										    <li><a href="#"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+        										    <li><a href="#" ng-click="showDetailUpdateDialog(detalle)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
         										    <li><a href="#"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
         										  </ul>
         										</div>
@@ -301,6 +445,7 @@ Date.prototype.toMysqlFormat = function() {
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Cantidad</label>
+                        
                         <input type="number" class="form-control" name="cantidad" ng-model="detail.cantidad" id="comentarioID" placeholder="cantidad" ng-required="true"/>
                         <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number">Este campo es requerido o incorrecto</div>
                     </div>

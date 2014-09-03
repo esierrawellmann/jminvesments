@@ -25,10 +25,12 @@
 		        echo '{"detalleVentas":'.json_encode($objVenta).',"productos":'.json_encode($objProducto).',"venta":'.json_encode($ventaData).'}';
 	    	break;
 	    case "update":
-	        $gasto = new Gasto();
-	        if(isset($data['gasto'])){
-	        	$updatedGasto = get_object_vars($data['gasto']);
-	        	$objUser = $gasto -> updateGasto($updatedGasto);
+	    	echo var_dump($data);
+	        if(isset($data['detalleVenta'])){
+	        	$ventaData = new DetalleVenta();
+				$updatedGasto = get_object_vars($data['detalleVenta']);
+	        	echo var_dump($updatedGasto);
+	        	$objUser = $ventaData -> updateDetalleVenta($updatedGasto);
 	        	echo json_encode($objUser);
 	        }
 	        break;

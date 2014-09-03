@@ -33,9 +33,10 @@ class DetalleVenta extends database {
       return array();
     }
   }
-	function updateGasto($gasto){
+	function updateDetalleVenta($gasto){
+    
 		$this -> conectar();
-    $q = "update gasto  set  id_usuario=".$gasto['id_usuario']." ,asunto= '".$gasto['asunto']."',comentario = '".$gasto['comentario']."', fecha = '".$gasto['fecha']."', monto =".$gasto['monto']." where id_gasto = ".$gasto['id_gasto'].";"; 
+    $q = "update detalle_venta  set  id_producto=".$gasto['id_producto']." ,precio= ".$gasto['precio'].",cantidad = ".$gasto['comentario']."  where id_detalle_venta = ".$gasto['id_detalle_venta'].";"; 
     $query = $this -> consulta($q);
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
