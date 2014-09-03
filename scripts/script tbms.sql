@@ -131,8 +131,7 @@ VALUES ( cliente, usuario, PASSWORD(pass), 'Y', 'Y', 'Y', 'Y', 'Y',1, '', '', ''
 FLUSH PRIVILEGES;
 END$$
 
-DROP PROCEDURE IF EXISTS eli_users;
-DELIMITER $$
+DROP PROCEDURE IF EXISTS eli_users$$
 CREATE PROCEDURE eli_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16))
 BEGIN
 DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente;
