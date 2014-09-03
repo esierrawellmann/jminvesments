@@ -200,7 +200,7 @@ CREATE TRIGGER update_compra after update
 END$$
 
 CREATE TRIGGER delete_detalle after delete
- ON detalle_venta
+ ON detalle_compra
  FOR EACH ROW
  BEGIN
  declare cant int; 
