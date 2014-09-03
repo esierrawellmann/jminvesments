@@ -38,6 +38,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/funcionPagineo.js"></script>
     
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/public/js/plugins/metisMenu/metisMenu.min.js"></script>

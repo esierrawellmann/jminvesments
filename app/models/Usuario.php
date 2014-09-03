@@ -17,10 +17,9 @@ class Usuario extends database {
     }
   }
   
-  function getCajaxUser($id){
+  function getCajaxUser($id,$fecha){
       $this->conectar();
-      date_default_timezone_set("America/Guatemala");
-      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor', (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.id_usuario=".$id." and v.fecha='".date('Y-m-d')."' order by v.id_venta ";
+      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor', (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.id_usuario=".$id." and v.fecha='".$fecha."' order by v.id_venta ";
   
       $query = $this->consulta($consulta);
       $this->disconnect();
@@ -33,10 +32,9 @@ class Usuario extends database {
     }
   }
   
-    function getCaja(){
+    function getCaja($fecha){
       $this->conectar();
-      date_default_timezone_set("America/Guatemala");
-      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor', (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha='".date('Y-m-d')."' order by v.id_venta ";
+      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor', (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha='".$fecha."' order by v.id_venta ";
   
       $query = $this->consulta($consulta);
       $this->disconnect();
