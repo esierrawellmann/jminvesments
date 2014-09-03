@@ -62,16 +62,7 @@
     
     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Cliente</th>
-                                        <th>Vendedor</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            
                                    
                                    <?php 
                                    date_default_timezone_set("America/Guatemala");
@@ -92,6 +83,22 @@
                                    if(isset($_POST['todos']) || isset($_POST['id_usuario'])){
                                        
                                                    $contador = count($ventas);
+                                        
+                                         if($contador===0){
+                                             echo "<div class='alert alert-info' role='alert'>No hay ventas.</div>";
+                                         }else{
+                                             echo "<table class='table table-striped table-bordered table-hover' id='dataTables-example'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Cliente</th>
+                                                    <th>Vendedor</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>";
+                                         }
+                                         
                                          for($c=0;$c<$contador;$c++){
                                                 echo " <tr class='odd gradeX'>";
                                                echo "<td>".$ventas[$c]['id_venta']."</td>";
@@ -101,9 +108,7 @@
                                                echo " </tr>";
                                          }
                                          
-                                         if($contador===0){
-                                             echo "<div class='alert alert-info' role='alert'>No hay ventas.</div>";
-                                         }
+                                         
                                    }
                                    else {
                                    echo "<div class='alert alert-info' role='alert'>No hay ventas.</div>";
