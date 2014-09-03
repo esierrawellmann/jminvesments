@@ -54,6 +54,7 @@ function controller($scope, $modal, $log , $http)
              });
              
         }, function () {
+            data.fecha = data.fecha.toMysqlFormat();
         });
     } 
       

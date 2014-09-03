@@ -54,6 +54,7 @@
              });
              
         }, function () {
+            data.fecha = data.fecha.toMysqlFormat();
         });
     } 
     $scope.open = function (size) {
