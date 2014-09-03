@@ -187,7 +187,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                     </div>
                         <div class="form-group">
                         <label for="exampleInputEmail1" ng-show="variableb" >Pass</label>
-                        <input type="text" class="form-control" name="userNameField3" ng-show="variableb" ng-model="new.pass" id="exampleInputEmail1" placeholder="Nombre del Usuario" ng-required="true"/>
+                        <input type="password" class="form-control" name="userNameField3" ng-show="variableb" ng-model="new.pass" id="exampleInputEmail1" placeholder="Nombre del Usuario" ng-required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required && !variableb">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
