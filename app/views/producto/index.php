@@ -103,6 +103,17 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.tipo_productos = roles;
+    
+    $scope.$watch('new.cantidad',function(val,old){
+       $scope.new.cantidad = parseFloat(val); 
+    });
+    $scope.$watch('new.precio_venta',function(val,old){
+       $scope.new.precio_venta = parseFloat(val); 
+    });
+    $scope.$watch('new.precio_compra',function(val,old){
+       $scope.new.precio_compra = parseFloat(val); 
+    });
+    
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_tipo_producto", $scope.new.id_tipo_producto);
