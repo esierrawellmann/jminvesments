@@ -198,18 +198,18 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                     </div>
               <div class="form-group">
                         <label for="exampleInputEmail1">Precio Compra</label>
-                        <input type="text" class="form-control" name="userNameField2" ng-model="new.precio_compra" id="exampleInputEmail1" placeholder="Precio Compra" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required">Este campo es requerido</div>
+                        <input type="number" class="form-control" name="userNameField2" ng-model="new.precio_compra" id="exampleInputEmail1" placeholder="Precio Compra" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required || userForm.userNameField3.$error.number">Este campo es requerido</div>
                     </div>
                           <div class="form-group">
                         <label for="exampleInputEmail1">Precio Venta</label>
-                        <input type="text" class="form-control" name="userNameField3" ng-model="new.precio_venta" id="exampleInputEmail1" placeholder="Precio Venta" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
+                        <input type="number" class="form-control" name="userNameField3" ng-model="new.precio_venta" id="exampleInputEmail1" placeholder="Precio Venta" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required || userForm.userNameField3.$error.number">Este campo es requerido</div>
                     </div>
               <div class="form-group">
                         <label for="exampleInputEmail1">Cantidad</label>
-                        <input type="text" class="form-control" name="userNameField4" ng-model="new.cantidad" id="exampleInputEmail1" placeholder="Cantidad" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField4.$error.required">Este campo es requerido</div>
+                        <input type="number" class="form-control" name="userNameField4" ng-model="new.cantidad" id="exampleInputEmail1" placeholder="Cantidad" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField4.$error.required || userForm.userNameField3.$error.number">Este campo es requerido</div>
                     </div>
                     
                 </form>
