@@ -168,10 +168,10 @@ CREATE TRIGGER delete_detalle after delete
  BEGIN
  declare cant int; 
  declare nueva_cant int;
- set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set cant = (select cantidad from producto where id_producto=OLD.id_producto AND producto.id_tipo_producto=1);
  set nueva_cant = cant + OLD.cantidad;
 
- update producto set cantidad = nueva_cant where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+ update producto set cantidad = nueva_cant where id_producto=OLD.id_producto AND producto.id_tipo_producto=1;
 
 END$$
 
@@ -205,10 +205,10 @@ CREATE TRIGGER delete_detalle after delete
  BEGIN
  declare cant int; 
  declare nueva_cant int;
- set cant = (select cantidad from producto where id_producto=NEW.id_producto AND producto.id_tipo_producto=1);
+ set cant = (select cantidad from producto where id_producto=OLD.id_producto AND producto.id_tipo_producto=1);
  set nueva_cant = cant - OLD.cantidad;
 
- update producto set cantidad = nueva_cant where id_producto=NEW.id_producto AND producto.id_tipo_producto=1;
+ update producto set cantidad = nueva_cant where id_producto=OLD.id_producto AND producto.id_tipo_producto=1;
 
 END$$
 DELIMITER ;
