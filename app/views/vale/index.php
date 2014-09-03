@@ -131,6 +131,9 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.usuarios = roles;
     $scope.status =["Aprobado","Denegado","Solicitado"];
     
+    $scope.$watch('new.monto',function(val,old){
+       $scope.new.monto = parseFloat(val); 
+    });
     
     $scope.today = function() {
     $scope.new.fecha = new Date();
@@ -269,8 +272,8 @@ Date.prototype.toMysqlFormat = function() {
                     </div>
               <div class="form-group">
                         <label for="exampleInputEmail1">Monto</label>
-                        <input type="text" class="form-control" name="userNameField2" ng-model="new.monto" id="exampleInputEmail1" placeholder="Monto" required="true"/>
-                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required">Este campo es requerido</div>
+                        <input type="number" class="form-control" name="userNameField2" ng-model="new.monto" id="exampleInputEmail1" placeholder="Monto" required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required || userForm.userNameField2.$error.number">Este campo es requerido</div>
                     </div>  
                     <div class="form-group">
                         <label for="userStatus">Estado</label>
