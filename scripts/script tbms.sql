@@ -66,7 +66,7 @@ id_producto int not null,
 cantidad int not null,
 precio decimal not null,
 primary key(id_detalle_venta),
-foreign key(id_venta) references venta(id_venta),
+foreign key(id_venta) references venta(id_venta) ON DELETE CASCADE,
 foreign key(id_producto) references producto(id_producto)
 ) engine=InnoDB;
 
@@ -85,7 +85,7 @@ id_producto int not null,
 cantidad int not null,
 precio decimal not null,
 primary key(id_detalle_compra),
-foreign key(id_compra) references compra(id_compra),
+foreign key(id_compra) references compra(id_compra) ON DELETE CASCADE,
 foreign key(id_producto) references producto(id_producto)
 ) engine=InnoDB;
 
