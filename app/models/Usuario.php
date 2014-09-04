@@ -19,7 +19,7 @@ class Usuario extends database {
   
   function getCajaxUser($id,$fecha){
       $this->conectar();
-      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.id_usuario=".$id." and v.fecha='".$fecha."' order by v.id_venta ";
+      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.id_usuario=".$id." and v.fecha='".$fecha."' order by v.id_usuario ";
   
       $query = $this->consulta($consulta);
       $this->disconnect();
@@ -34,7 +34,7 @@ class Usuario extends database {
   
     function getCaja($fecha){
       $this->conectar();
-      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha='".$fecha."' order by v.id_venta ";
+      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha='".$fecha."' order by v.id_usuario ";
   
       $query = $this->consulta($consulta);
       $this->disconnect();

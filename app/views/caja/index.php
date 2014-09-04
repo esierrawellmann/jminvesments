@@ -138,10 +138,8 @@
                     </div>
         <label>
                                     <?php 
-                            echo "<div class='list-group' ><span class='list-group-item active'>Total: Q.". $total."</span>";
-                            echo "<br>";
+                            echo "<div style='font-weight:normal;' class='list-group' ><span class='list-group-item active'>Total: Q.". $total."</span>";
                             echo "<span class='list-group-item active'>Total Efectivo: Q.". $total_efectivo."</span>";
-                            echo "<br>";
                             echo "<span class='list-group-item active'>Total Tarjeta: Q.". $total_tarjeta."</span></div>";
                             
                             ?>
