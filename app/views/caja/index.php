@@ -65,11 +65,17 @@
                             
                                    
                                    <?php 
+                                   
+                                   $fecha="";
                                    date_default_timezone_set("America/Guatemala");
                                    if(isset($_POST['fecha'])){
-                                       $fecha = $_POST['fecha'];
+                                       if($_POST['fecha']==""){
+                                           $fecha = date('Y-m-d');
+                                       }else{
+                                         $fecha = $_POST['fecha'];
+                                       }
                                    }else{
-                                       $fecha = date('Y-m-d');
+                                     $fecha = date('Y-m-d');
                                    }
                                    
                                    if(isset($_POST['todos'])){
