@@ -4,5 +4,5 @@
 <br>
 <br>
 <br>
-<center><img src="portada.jpg"></center>
+<center><img  class="img-responsive" src="portada.jpg"></center>
 <?php  include("footer.php"); ?>
