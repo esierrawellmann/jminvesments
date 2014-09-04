@@ -55,9 +55,12 @@ id_usuario int not null,
 nit varchar(124) not null,
 nombre varchar(512) not null,
 fecha date not null,
+tarjeta decimal(10,2) default 0,
+efectivo decimal(10,2) default 0,
 primary key(id_venta),
 foreign key(id_usuario) references usuario(id_usuario)
 ) engine=InnoDB;
+
 
 create table detalle_venta(
 id_detalle_venta int auto_increment,

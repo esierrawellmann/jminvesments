@@ -174,6 +174,7 @@ function controller($scope, $modal, $log , $http)
     $scope.$watch('detail.precio',function(val,old){
        $scope.detail.precio = parseFloat(val); 
     });
+
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.detail);
@@ -188,6 +189,13 @@ function controller($scope, $modal, $log , $http)
     $scope.users = users;
     $scope.action = action;
     $scope.new = venta;
+
+    $scope.$watch('new.tarjeta',function(val,old){
+       $scope.new.tarjeta = parseFloat(val); 
+    });
+    $scope.$watch('new.efectivo',function(val,old){
+       $scope.new.efectivo = parseFloat(val); 
+    });
 
 
     $scope.today = function() {
@@ -230,6 +238,7 @@ function controller($scope, $modal, $log , $http)
 
     $scope.cancel = function () {
         $scope.new.fecha = toMysqlFormat1($scope.new.fecha);
+        $modalInstance.dismiss('cancel');
     };
 
 
@@ -418,6 +427,20 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                         <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
                     </div>
                     <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="efectivo">Efectivo</label>
+                            <input type="number" class="form-control" name="efectivo" ng-model="new.efectivo" id="efectivo" placeholder="Efectivo" ng-required="true"/>
+                            <div class="alert-danger" role="alert" ng-show="spendForm.efectivo.$error.required  || spendForm.efectivo.$error.number">Este campo es requerido o incorrecto</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="tarjeta">Tarjeta</label>
+                            <input type="number" class="form-control" name="tarjeta" ng-model="new.tarjeta" id="tarjeta" placeholder="Tarjeta" ng-required="true"/>
+                            <div class="alert-danger" role="alert" ng-show="spendForm.tarjeta.$error.required  || spendForm.tarjeta.$error.number">Este campo es requerido o incorrecto</div>
+                        </div>
+                    </div>    
+                    </div>
+                    <div class="form-group">
                         <label for="user-rol-option">Usuario</label>
                         <select id="user-rol-option" name="selectRol"  ng-required="true" ng-model="new.id_usuario" class="form-control" ng-options="usuario.id_usuario as usuario.nombre for usuario in users"></select>
                         <div class="alert-danger" role="alert" ng-show="spendForm.selectRol.$error.required">Este campo es requerido</div>
@@ -454,7 +477,6 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Cantidad</label>
-                        
                         <input type="number" class="form-control" name="cantidad" ng-model="detail.cantidad" id="comentarioID" placeholder="cantidad" ng-required="true"/>
                         <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number">Este campo es requerido o incorrecto</div>
                     </div>
