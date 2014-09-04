@@ -66,6 +66,9 @@
                                    
                                    <?php 
                                    
+                                   $total = 0;
+                                   $total_efectivo =0;
+                                   $total_tarjeta=0;
                                    $fecha="";
                                    date_default_timezone_set("America/Guatemala");
                                    if(isset($_POST['fecha'])){
@@ -99,6 +102,8 @@
                                                     <th>Id</th>
                                                     <th>Cliente</th>
                                                     <th>Vendedor</th>
+                                                    <th>Efectivo</th>
+                                                    <th>Tarjeta</th>
                                                     <th>Total</th>
                                                 </tr>
                                             </thead>
@@ -110,8 +115,13 @@
                                                echo "<td>".$ventas[$c]['id_venta']."</td>";
                                                echo "<td>".$ventas[$c]['cliente']."</td>";
                                                echo "<td>".$ventas[$c]['vendedor']."</td>";
+                                               echo "<td>".$ventas[$c]['tarjeta']."</td>";
+                                               echo "<td>".$ventas[$c]['efectivo']."</td>";
                                                echo "<td>".$ventas[$c]['suma']."</td>";
                                                echo " </tr>";
+                                               $total = $total + $ventas[$c]['suma'];
+                                               $total_efectivo = $total_efectivo + $ventas[$c]['efectivo'];
+                                               $total_tarjeta = $total_tarjeta + $ventas[$c]['tarjeta']; 
                                          }
                                          
                                          
@@ -123,9 +133,19 @@
                                    ?>
                                    
                                 </tbody>
-                            </table>
+                            </table
                         </div>
                     </div>
+        <label>
+                                    <?php 
+                            echo "<div class='list-group' ><span class='list-group-item active'>Total: Q.". $total."</span>";
+                            echo "<br>";
+                            echo "<span class='list-group-item active'>Total Efectivo: Q.". $total_efectivo."</span>";
+                            echo "<br>";
+                            echo "<span class='list-group-item active'>Total Tarjeta: Q.". $total_tarjeta."</span></div>";
+                            
+                            ?>
+        </label>
 
 <?php  include("../footer.php"); ?>
 
