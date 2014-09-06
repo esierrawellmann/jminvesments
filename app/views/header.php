@@ -124,10 +124,10 @@
                             <a class="active" href="<?php echo $pp; ?>/producto/index.php"><i class="fa fa-tasks fa-fw"></i> Producto</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-truck fa-fw"></i> Mobiliario</a>
+                            <a class="active" href="<?php echo $pp; ?>/mobiliario/index.php"><i class="fa fa-truck fa-fw"></i> Mobiliario</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-archive fa-fw"></i> Caja Chica</a>
+                            <a class="active" href="<?php echo $pp; ?>/cajaChica/index.php"><i class="fa fa-archive fa-fw"></i> Caja Chica</a>
                         </li>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/vale/index.php"><i class="fa fa-money fa-fw"></i> Vale</a>
