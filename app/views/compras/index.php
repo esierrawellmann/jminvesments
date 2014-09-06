@@ -313,12 +313,12 @@ Date.prototype.toMysqlFormat = function() {
 		<div class="row">
              <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
             <div class="col-lg-12">
-		        <h1 class="page-header">Modulo de Compras</h1>
+		        <h1 class="page-header">Catálogo de Compras</h1>
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Compras
+                        Todas las Compras
                         <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas()">Nueva Compra</button>
                     </div>
                     <!-- /.panel-heading -->

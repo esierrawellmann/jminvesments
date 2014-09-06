@@ -124,6 +124,12 @@
                             <a class="active" href="<?php echo $pp; ?>/producto/index.php"><i class="fa fa-tasks fa-fw"></i> Producto</a>
                         </li>
                         <li>
+                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-truck fa-fw"></i> Mobiliario</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-archive fa-fw"></i> Caja Chica</a>
+                        </li>
+                        <li>
                             <a class="active" href="<?php echo $pp; ?>/vale/index.php"><i class="fa fa-money fa-fw"></i> Vale</a>
                         </li>
                         <li>
@@ -136,7 +142,16 @@
                             <a class="active" href="<?php echo $pp; ?>/venta/index.php"><i class="fa fa-usd fa-fw"></i> Ventas</a>
                         </li>
                         <li>
+                            <a class="active" href="<?php echo $pp; ?>/ventas/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Ventas</a>
+                        </li>
+                        <li>
                             <a class="active" href="<?php echo $pp; ?>/compra/index.php"><i class="fa fa-clipboard fa-fw"></i> Compras</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/compras/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Compras</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
                         </li>
                     </ul>
                 </div>
