@@ -6,6 +6,15 @@ nombre varchar(512) not null,
 primary key(id_role)
 ) engine = InnoDB; 
 
+create table caja_chica(
+id_caja int auto_increment,
+cantidad decimal(10,2) not null,
+primary key(id_caja)
+)engine=InnoDB; 
+
+
+insert into caja_chica(cantidad) values (0);
+
 create table permiso (
 id_permiso int auto_increment,
 nombre varchar(512) not null,
