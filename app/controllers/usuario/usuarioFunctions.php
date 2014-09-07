@@ -38,7 +38,7 @@
 		    $usuario = new Usuario();
 		    if(isset($data['usuario'])){
 		    	$deleteUser = get_object_vars($data['usuario']);
-	        	$objRol = $usuario -> deleteUser($deleteUser['id_usuario']);
+	        	$objRol = $usuario -> deleteUser($deleteUser['id_usuario'],$deleteUser['nombre']);
 	        	echo json_encode($objRol);
 		    }
 		        break;

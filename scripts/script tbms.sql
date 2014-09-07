@@ -38,6 +38,15 @@ primary key(id_usuario),
 foreign key(id_role) references role(id_role)
 ) engine=InnoDB;
 
+create table mobiliario(
+id_mobiliario int auto_increment,
+id_usuario int not null,
+nombre varchar(512),
+cantidad int not null,
+primary key (id_mobiliario),
+foreign key(id_usuario) references usuario(id_usuario)
+)engine=InnoDB;
+
 create table tipo_producto(
 id_tipo_producto int auto_increment,
 nombre varchar(512) not null,
@@ -147,6 +156,13 @@ DROP PROCEDURE IF EXISTS eli_users$$
 CREATE PROCEDURE eli_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16))
 BEGIN
 DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente;
+FLUSH PRIVILEGES;
+END$$
+
+DROP PROCEDURE IF EXISTS update_users$$
+CREATE PROCEDURE update_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16),IN pass varchar(16),in oldusuario VARCHAR(16))
+BEGIN
+update mysql.user set mysql.user.User=usuario, mysql.user.Password=PASSWORD(pass) where mysql.user.User=oldusuario AND mysql.user.Host=cliente;
 FLUSH PRIVILEGES;
 END$$
 

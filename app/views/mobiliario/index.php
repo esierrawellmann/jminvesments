@@ -1,17 +1,16 @@
 <?php  include("../header.php");?>
 <script>    
- var app = angular.module('vale', ['ngRoute']);
- angular.module('vale', ['ui.bootstrap']);
+ var app = angular.module('mobiliario', ['ngRoute']);
+ angular.module('mobiliario', ['ui.bootstrap']);
  function controller($scope, $modal, $log , $http)
  {
-    $scope.vale = [];
-    $scope.initialVales =[];
+    $scope.mobiliario = [];
+    $scope.initialMobiliarios =[];
     $scope.usuarios = [];
     angular.element(document).ready(function () {
 
-    	$http.post('./../../controllers/vale/valeFunctions.php', '{"action":"query"}').success(function(data){
-            $scope.initialVales = data;
-            console.log(data);
+    	$http.post('./../../controllers/mobiliario/mobiliarioFunctions.php', '{"action":"query"}').success(function(data){
+            $scope.initialMobiliarios = data;
          });
     });
 
@@ -21,11 +20,11 @@
       };
 
     $scope.deleteUser = function (user){
-        var index = $scope.initialVales.vales.indexOf(user);
+        var index = $scope.initialMobiliarios.mobiliarios.indexOf(user);
         console.log(user);
-        $http.post('./../../controllers/vale/valeFunctions.php','{"action":"delete","vale":'+JSON.stringify(user)+'}').success(function(data){
-           $scope.alerts.push({type: 'success', msg: 'Vale  Exitosamente Eliminado' });
-            $scope.initialVales.vales.splice(index,1);
+        $http.post('./../../controllers/mobiliario/mobiliarioFunctions.php','{"action":"delete","mobiliario":'+JSON.stringify(user)+'}').success(function(data){
+           $scope.alerts.push({type: 'success', msg: 'Mobiliario  Exitosamente Eliminado' });
+            $scope.initialMobiliarios.mobiliarios.splice(index,1);
         
       });
     }
@@ -43,18 +42,16 @@
                         return data;
                     },
                 roles:function(){
-                    return $scope.initialVales.usuarios;
+                    return $scope.initialMobiliarios.usuarios;
                 }
           	}
         });
         modalInstanceUpdate.result.then(function (user) {
-            user.fecha = user.fecha.toMysqlFormat();
-            $http.post('./../../controllers/vale/valeFunctions.php', '{"action":"update","vale":'+JSON.stringify(user)+'}').success(function(data){
-                $scope.alerts.push({type: 'success', msg: 'Vale Modificado Exitosamente' });
+            $http.post('./../../controllers/mobiliario/mobiliarioFunctions.php', '{"action":"update","mobiliario":'+JSON.stringify(user)+'}').success(function(data){
+                $scope.alerts.push({type: 'success', msg: 'Mobiliario Modificado Exitosamente' });
              });
              
         }, function () {
-            data.fecha = data.fecha.toMysqlFormat();
         });
     } 
     $scope.open = function (size) {
@@ -67,17 +64,15 @@
                 return "Insertar"
             },
     		roles:function(){
-				return $scope.initialVales.usuarios;
+                    return $scope.initialMobiliarios.usuarios;
     		}
         	}
         });
 
         modalInstanceOpen.result.then(function (user) {
-           user.fecha = user.fecha.toMysqlFormat();
-           $http.post('./../../controllers/vale/valeFunctions.php', '{"action":"insert","vale":'+JSON.stringify(user)+'}').success(function(data){
-                 $scope.initialVales.vales.push(data);
-                 console.log(data);
-                 $scope.alerts.push({type: 'success', msg: 'Vale Agregado Exitosamente' });
+           $http.post('./../../controllers/mobiliario/mobiliarioFunctions.php', '{"action":"insert","mobiliario":'+JSON.stringify(user)+'}').success(function(data){
+                 $scope.initialMobiliarios.mobiliarios.push(data);
+                 $scope.alerts.push({type: 'success', msg: 'Mobiliario Agregado Exitosamente' });
                 
             });             
         }, function () {});
@@ -87,34 +82,19 @@
  }
  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
      $scope.new = {};
-      $scope.today = function() {
-    $scope.new.fecha = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.new.fecha = null;
-  };
-
+    
+    
   $scope.open = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
 
     $scope.opened = true;
   };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date();
-  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
      
     $scope.usuarios = roles;
     $scope.action = action;
-    $scope.status =["Aprobado","Denegado","Solicitado"];
+    console.log($scope.new);
+    
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.new);
@@ -130,37 +110,11 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     $scope.action = action;
     $scope.new = user;
     $scope.usuarios = roles;
-    $scope.status =["Aprobado","Denegado","Solicitado"];
-    
-    $scope.$watch('new.monto',function(val,old){
-       $scope.new.monto = parseFloat(val); 
+
+    $scope.$watch('new.cantidad',function(val,old){
+       $scope.new.cantidad = parseFloat(val); 
     });
     
-    $scope.today = function() {
-    $scope.new.fecha = new Date();
-  };
-  
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.new.fecha = null;
-  };
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date();
-  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
     $scope.ok = function (valid) {
         if(valid){
             var index = functiontofindIndexByKeyValue(roles, "id_usuario", $scope.new.id_usuario);
@@ -170,7 +124,6 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,user,roles,action
     };
 
     $scope.cancel = function () {
-        $scope.new.fecha= $scope.new.fecha.toMysqlFormat();
         $modalInstance.dismiss('cancel');
     };
 };
@@ -194,18 +147,18 @@ Date.prototype.toMysqlFormat = function() {
 };
 
  </script>
- <div ng-app="vale">
+ <div ng-app="mobiliario">
      <div ng-controller="controller">
 		<div class="row">
               <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		    <div class="col-lg-12">
-		        <h1 class="page-header">Vales</h1>
+		        <h1 class="page-header">Mobiliario</h1>
             </div>
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Vales actuales
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Vale</button>
+                        Mobiliarios actuales
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="open()">Agregar Mobiliario</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -215,21 +168,17 @@ Date.prototype.toMysqlFormat = function() {
                                     <tr>
                                         <th>Id</th>
                                         <th>Usuario</th>
-                                        <th>Motivo</th>
-                                        <th>Monto</th>
-                                        <th>Estado</th>
-                                        <th>Fecha</th>
+                                        <th>Nombre Mobiliario</th>
+                                        <th>Cantidad</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-show="initialVales.vales.length > 0">
-                                    <tr ng-repeat="user in initialVales.vales" class="odd gradeX"> 
-                                        <td>{{user.id_vale}}</td>
+                                <tbody ng-show="initialMobiliarios.mobiliarios.length > 0">
+                                    <tr ng-repeat="user in initialMobiliarios.mobiliarios" class="odd gradeX"> 
+                                        <td>{{user.id_mobiliario}}</td>
                                         <td>{{user.usuario_name}}</td>
-                                        <td>{{user.motivo}}</td>
-                                        <td>{{user.monto}}</td>
-                                        <td>{{user.estado}}</td>
-                                        <td>{{user.fecha}}</td>
+                                        <td>{{user.nombre}}</td>
+                                        <td>{{user.cantidad}}</td>
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -251,7 +200,7 @@ Date.prototype.toMysqlFormat = function() {
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Vale</h3>
+                <h3 class="modal-title"¨>{{action}} Mobiliario</h3>
             </div>
             <div class="modal-body">
             <form role="form" name="userForm">
@@ -260,27 +209,16 @@ Date.prototype.toMysqlFormat = function() {
                         <select id="user-rol-option" name="selectRol" required ng-model="new.id_usuario" class="form-control" ng-options="rol.id_usuario as rol.nombre for rol in usuarios"></select>
                         <div class="alert-danger" role="alert" ng-show="userForm.selectRol.$error.required">Este campo es requerido</div>
                     </div>
-            <div class="form-group">
-                        <label for="user-rol-option">Fecha</label>
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha" is-open="opened"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
-                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
-                    </div>
-            <form role="form" name="userForm">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Motivo</label>
-                        <input type="text" class="form-control" name="userNameField" ng-model="new.motivo" id="exampleInputEmail1" placeholder="Motivo" required="true"/>
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" class="form-control" name="userNameField" ng-model="new.nombre" id="exampleInputEmail1" placeholder="Motivo" required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
                     </div>
               <div class="form-group">
-                        <label for="exampleInputEmail1">Monto</label>
-                        <input type="number" class="form-control" name="userNameField2" ng-model="new.monto" id="exampleInputEmail1" placeholder="Monto" required="true"/>
+                        <label for="exampleInputEmail1">Cantidad</label>
+                        <input type="number" class="form-control" name="userNameField2" ng-model="new.cantidad" id="exampleInputEmail1" placeholder="Monto" required="true"/>
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField2.$error.required || userForm.userNameField2.$error.number">Este campo es requerido</div>
                     </div>  
-                    <div class="form-group">
-                        <label for="userStatus">Estado</label>
-                        <select id="user-status-option" name="userNameField3" ng-model="new.estado" id="exampleInputEmail1" placeholder="Estado" required="true" class="form-control" ng-options="stat for stat in status"></select>
-                        <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -292,4 +230,5 @@ Date.prototype.toMysqlFormat = function() {
 </div>
 
  <?php  include("../footer.php"); ?>
+
 
