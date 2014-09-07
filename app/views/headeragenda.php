@@ -16,7 +16,7 @@
     <title> The Men's Barbershop</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     <!-- Morris Charts CSS -->
     <link href="/public/css/plugins/morris.css" rel="stylesheet">
     <link href="/public/css/fullcalendar.min.css" rel="stylesheet">
-    <link href="/public/css/fullcalendar.print.css" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
