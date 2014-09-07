@@ -21,6 +21,25 @@ nombre varchar(512) not null,
 primary key(id_permiso)
 ) engine = InnoDB; 
 
+insert into permiso(nombre) values ('Caja');
+insert into permiso(nombre) values ('Roles');
+insert into permiso(nombre) values ('Permisos');
+insert into permiso(nombre) values ('Usuarios');
+insert into permiso(nombre) values ('TipoProducto');
+insert into permiso(nombre) values ('Producto');
+insert into permiso(nombre) values ('Mobiliario');
+insert into permiso(nombre) values ('CajaChica');
+insert into permiso(nombre) values ('Vale');
+insert into permiso(nombre) values ('Calendario');
+insert into permiso(nombre) values ('Gastos');
+insert into permiso(nombre) values ('Ventas');
+insert into permiso(nombre) values ('CatalogoVentas');
+insert into permiso(nombre) values ('Compras');
+insert into permiso(nombre) values ('CatalogoCompras');
+insert into permiso(nombre) values ('RolePermiso');
+insert into permiso(nombre) values ('Agenda');
+insert into permiso(nombre) values ('Perfil');
+
 create table role_permiso(
 id_role_permiso int auto_increment,
 id_role int not null,

@@ -41,6 +41,7 @@ function controller($scope, $modal, $log , $http)
 
         modalProductsOpen.result.then(function (detalleCompra) {   
             console.log(detalleCompra);
+            $scope.alerts = [];
             $http.post('./../../controllers/rolePermiso/rolePermisoFunctions.php', '{"action":"insert","rolePermiso":'+JSON.stringify(detalleCompra)+',"role":'+JSON.stringify($scope.detailRoleInit.role)+'}').success(function(data){
                     $scope.detailRoleInit.rolePermisos.push(data);
                     $scope.alerts.push({type: 'success', msg: 'Role-Permiso Agregado' });

@@ -13,7 +13,9 @@ try{
             $usuario = new Usuario();
             $user = $usuario->getUsersbyName($_SESSION["user"]);
             
+            $permisos = $usuario->getPermisos($user[0]['id_role']); 
             $_SESSION['usuario']=$user;
+            $_SESSION['permisos']=$permisos;
             
             header( 'Location: /app/views/main.php' ) ;
         }else{
