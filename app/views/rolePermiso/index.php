@@ -240,7 +240,7 @@ Date.prototype.toMysqlFormat = function() {
                     <div class="form-group">
                         <label for="exampleInputEmail12">Permiso</label>
                         <div class="row" id="exampleInputEmail12">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_permiso" class="form-control"  ng-options="product.id_permiso as product.nombre for product in permisos"></select>
                             </div>
                         </div>
