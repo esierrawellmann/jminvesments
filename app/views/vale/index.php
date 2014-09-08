@@ -210,6 +210,14 @@ Date.prototype.toMysqlFormat = function() {
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
+                          <form>
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <div class="input-group-addon">Filtro</div>
+                                  <input class="form-control" type="text" placeholder="Filtrar" ng-model="campo">
+                                </div>
+                              </div>
+                        </form>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
@@ -223,7 +231,7 @@ Date.prototype.toMysqlFormat = function() {
                                     </tr>
                                 </thead>
                                 <tbody ng-show="initialVales.vales.length > 0">
-                                    <tr ng-repeat="user in initialVales.vales" class="odd gradeX"> 
+                                    <tr ng-repeat="user in initialVales.vales | filter:campo" class="odd gradeX"> 
                                         <td>{{user.id_vale}}</td>
                                         <td>{{user.usuario_name}}</td>
                                         <td>{{user.motivo}}</td>
