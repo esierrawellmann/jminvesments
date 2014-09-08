@@ -325,7 +325,16 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
+
                                 <div class="table-responsive" style="overflow-x:auto ; height:600px; overflow-y:autp">
+                                    <form>
+                                          <div class="form-group">
+                                            <div class="input-group">
+                                              <div class="input-group-addon">Filtro</div>
+                                              <input class="form-control" type="text" placeholder="Filtrar" ng-model="campo">
+                                            </div>
+                                          </div>
+                                    </form>
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                         <thead>
                                             <tr>
@@ -337,7 +346,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                             </tr>
                                         </thead>
                                         <tbody ng-show="ventasIniciales.ventas.length > 0">
-                                            <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas"> 
+                                            <tr  class="odd gradeX" ng-repeat="ventas in ventasIniciales.ventas |filter campo"> 
                                                 <td ng-click="viewDetail(ventas)" >{{ventas.nombre}}</td>
                                                 <td ng-click="viewDetail(ventas)" >{{ventas.nit}}</td>
                                                 <td ng-click="viewDetail(ventas)" >{{ventas.fecha}}</td>
