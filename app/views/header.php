@@ -1,6 +1,8 @@
 <?php
     $pt = "";
     $pp = "/app/views";
+    session_start();
+    var_dump($_SESSION['permisos']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,10 +106,21 @@
             <div class="navbar-default sidebar" role="navigation">
                 <br>
                 <div class="sidebar-nav navbar-collapse">
+                    <?php $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                    var_dump($contador);
+                    if($contador>0){
+                    ?>
                     <ul class="nav" id="side-menu">
+                        <?php 
+                       for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                            case "Caja":
+                                ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/caja/index.php"><i class="fa fa-inbox fa-fw"></i> Caja</a>
                         </li>
+                               <?php break; ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
@@ -154,6 +167,11 @@
                             <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
                         </li>
                     </ul>
+                        <?php 
+                            }
+                        }
+                        } 
+                        ?>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
