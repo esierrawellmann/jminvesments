@@ -76,13 +76,21 @@
         });
 
         modalInstanceOpen.result.then(function (gasto) {
-           gasto.fecha = gasto.fecha.toMysqlFormat();
-            $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
-                  $scope.initialSpends.gastos.push(data);
-                  $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
+          gasto.hora_inicio = toMysqlFormatTime(gasto.hora_inicio);
           gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
+          gasto.fecha_inicio = toMysqlFormat1(fecha_inicio);
+          gasto.fecha_fin = toMysqlFormat1(fecha_fin);
+          gasto.fecha_inicio = gasto.fecha_inicio + " " + gasto.hora_inicio;
+          gasto.fecha_fin = gasto.fecha_fin + " " + gasto.fecha_fin;
+
+          console.log(gasto);
+
+           // gasto.fecha = gasto.fecha.toMysqlFormat();
+           //  $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
+           //        $scope.initialSpends.gastos.push(data);
+           //        $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
                 
-            });             
+           //  });             
         }, function () {});
     };
         
@@ -264,6 +272,9 @@ function twoDigits(d) {
 function toMysqlFormat1(date) {
     return date.getFullYear() + "-" + twoDigits(1 + date.getMonth()) + "-" + twoDigits(date.getDate());
 }
+function toMysqlFormatTime(date) {
+    return twoDigits(date.getHours()) + ":" + twoDigits(1 + date.getMinutes()) + ":" + twoDigits(date.getSeconds());
+}
 Date.prototype.toMysqlFormat = function() {
     return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate());
 };
@@ -304,14 +315,14 @@ Date.prototype.toMysqlFormat = function() {
                                         <td>{{spend.fecha_fin}}</td>                                        
                                         <td>
                                         	<div class="btn-group">
-										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-										    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
-										    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-										  </ul>
-										</div>
+                      										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                      										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
+                      										  </button>
+                      										  <ul class="dropdown-menu" role="menu">
+                      										    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                      										    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
+                      										  </ul>
+                      										</div>
                                     	</td>    
                                     </tr>
                                 </tbody>
@@ -341,14 +352,12 @@ Date.prototype.toMysqlFormat = function() {
 	                    	<div class="form-group">
 		                        <label for="user-rol-option">Fecha Inicio</label>
 		                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha_inicio" is-open="opened1"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open($event)" style="cursor:pointer;" />
-		                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
 		                    </div>
                     	</div>
                     	<div class="col-md-6">
 	                    	<div class="form-group">
 		                        <label for="user-rol-option">Hora Inicio</label>
 		                        <timepicker ng-model="new.hora_inicio"  hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-		                        <div class="alert-danger" role="alert" ng-show="mytime != null">Este campo es requerido</div>
 		                    </div>
                     	</div>
                     </div>
@@ -357,14 +366,12 @@ Date.prototype.toMysqlFormat = function() {
 	                    	<div class="form-group">
 		                        <label for="user-rol-option">Fecha Final</label>
 		                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="new.fecha_fin" is-open="opened2"  datepicker-options="dateOptions"  ng-required="true" readonly close-text="Close"  ng-click="open2($event)" style="cursor:pointer;" />
-		                        <div class="alert-danger" role="alert" ng-show="spendForm.dateNameField.$error.required">Este campo es requerido</div>
 		                    </div>
                     	</div>
                     	<div class="col-md-6">
                     		<div class="form-group">
                             <label for="user-rol-option">Hora Final</label>
                             <timepicker ng-model="new.hora_fin"  hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                            <div class="alert-danger" role="alert" ng-show="mytime != null">Este campo es requerido</div>
                         </div>
                     	</div>
                     </div>
