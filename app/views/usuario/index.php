@@ -149,7 +149,15 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                     </tr>
                                 </thead>
                                 <tbody ng-show="initialUsers.usuarios.length > 0">
-                                    <tr ng-repeat="user in initialUsers.usuarios" class="odd gradeX"> 
+                                    <form>
+                                          <div class="form-group">
+                                            <div class="input-group">
+                                              <div class="input-group-addon">Filtro</div>
+                                              <input class="form-control" type="text" placeholder="Filtrar" ng-model="campo">
+                                            </div>
+                                          </div>
+                                    </form>
+                                    <tr ng-repeat="user in initialUsers.usuarios| filter:campo" class="odd gradeX"> 
                                         <td>{{user.id_usuario}}</td>
                                         <td>{{user.nombre}}</td>
                                         <td>{{user.role_name}}</td>

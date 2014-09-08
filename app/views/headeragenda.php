@@ -1,8 +1,6 @@
 <?php
     $pt = "";
     $pp = "/app/views";
-    session_start();
-    var_dump($_SESSION['permisos']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,7 @@
     <title> The Men's Barbershop</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -28,11 +26,12 @@
 
     <!-- Custom CSS -->
     <link href="/public/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/public/css/calendar.css">
-    
+
     <!-- Morris Charts CSS -->
     <link href="/public/css/plugins/morris.css" rel="stylesheet">
+    <link href="/public/css/fullcalendar.min.css" rel="stylesheet">
+
+
     <!-- Custom Fonts -->
     <link href="/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -49,7 +48,9 @@
     <script src="/public/js/angular.min.js" type="text/javascript"></script>
     <!-- Morris Charts JavaScript -->
     <script src="/public/js/angular-route.min.js" type="text/javascript"></script>
+    <script src="/public/js/calendar.js"></script>
     <script src="/public/js/moment.js"></script>
+    <script src="/public/js/fullcalendar.min.js"></script>
     <script src="/public/js/plugins/morris/raphael.min.js"></script>
     <script src="/public/js/plugins/morris/morris.min.js"></script>
     <script src="/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
@@ -57,25 +58,6 @@
     <link href="/public/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom Theme JavaScript -->
     <script src="/public/js/sb-admin-2.js"></script>
-    <script type="text/javascript" src="/public/js/underscore-min.js"></script>
-    <script type="text/javascript" src="/public/js/jstz.min.js"></script>
-    <script type="text/javascript" src="/public/js/language/nl-NL.js"></script>
-    <script type="text/javascript" src="/public/js/language/fr-FR.js"></script>
-    <script type="text/javascript" src="/public/js/language/de-DE.js"></script>
-    <script type="text/javascript" src="/public/js/language/el-GR.js"></script>
-    <script type="text/javascript" src="/public/js/language/it-IT.js"></script>
-    <script type="text/javascript" src="/public/js/language/hu-HU.js"></script>
-    <script type="text/javascript" src="/public/js/language/pl-PL.js"></script>
-    <script type="text/javascript" src="/public/js/language/pt-BR.js"></script>
-    <script type="text/javascript" src="/public/js/language/ro-RO.js"></script>
-    <script type="text/javascript" src="/public/js/language/es-MX.js"></script>
-    <script type="text/javascript" src="/public/js/language/es-ES.js"></script>
-    <script type="text/javascript" src="/public/js/language/ru-RU.js"></script>
-    <script type="text/javascript" src="/public/js/language/sv-SE.js"></script>
-    <script type="text/javascript" src="/public/js/language/zh-TW.js"></script>
-    <script type="text/javascript" src="/public/js/language/cs-CZ.js"></script>
-    <script type="text/javascript" src="/public/js/language/ko-KR.js"></script>
-    <script type="text/javascript" src="/public/js/calendar.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,8 +65,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
 
 </head>
 
@@ -128,21 +108,10 @@
             <div class="navbar-default sidebar" role="navigation">
                 <br>
                 <div class="sidebar-nav navbar-collapse">
-                    <?php $contador = count($_SESSION['permisos']);
-                    $arreglo = $_SESSION['permisos'];
-                    var_dump($contador);
-                    if($contador>0){
-                    ?>
                     <ul class="nav" id="side-menu">
-                        <?php 
-                       for($c=0;$c<$contador;$c++){
-                            switch($arreglo[$c]['nombre']){
-                            case "Caja":
-                                ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/caja/index.php"><i class="fa fa-inbox fa-fw"></i> Caja</a>
                         </li>
-                               <?php break; ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
@@ -171,9 +140,6 @@
                             <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-calendar-o fa-fw"></i> Citas</a>
-                        </li>
-                        <li>
                             <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-credit-card fa-fw"></i> Gastos</a>
                         </li>
                         <li>
@@ -191,15 +157,7 @@
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
                         </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/perfil/index.php"><i class="fa fa-users fa-fw"></i> Perfiles</a>
-                        </li>
                     </ul>
-                        <?php 
-                            }
-                        }
-                        } 
-                        ?>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
