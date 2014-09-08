@@ -16,6 +16,21 @@ class Venta extends database {
       return array();
     }
   }
+  
+    function getVentasById($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("SELECT v.id_venta,v.nombre,v.nit,v.fecha,v.tarjeta,v.efectivo,u.id_usuario,u.nombre AS 'user_name' FROM venta v INNER JOIN usuario u ON v.id_usuario = u.id_usuario where v.id_usuario=".$id." ORDER BY fecha  desc, v.id_venta desc;");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function newVenta($venta){
     $ventaArray = get_object_vars($venta);
     $q = "INSERT INTO venta (id_usuario,nombre,nit,fecha,tarjeta,efectivo) VALUES (".$ventaArray['id_usuario'].",'".$ventaArray['nombre']."','".$ventaArray['nit']."','".$ventaArray['fecha']."',".$ventaArray['tarjeta'].",".$ventaArray['efectivo'].");";

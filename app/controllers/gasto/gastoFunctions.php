@@ -17,9 +17,31 @@
 	        break;
 	    case "query":
 		        $gasto = new Gasto();
-		        $objGasto = $gasto -> getGastos();
+		        
 		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario -> getUsers();
+		       	
+                        
+                        $u = $_SESSION['usuario'];
+                    $id_u = $u[0]['id_usuario'];
+                    $cambiar_usuario="false";
+                    $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                      for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                                case "UsuarioGastos":
+                                    $cambiar_usuario = "true";
+                                    break;
+                            }
+                      }
+                      
+                      if($cambiar_usuario==="true"){
+                        $objGasto = $gasto -> getGastos();
+                        $objUsuario = $usuario -> getUsers();
+                      }else{
+                        
+                        $objGasto = $gasto ->getGastosById($id_u);
+                        $objUsuario = $usuario ->getUsersbyId($id_u);
+                      }
 
 		        echo '{"usuarios":'.json_encode($objUsuario).',"gastos":'.json_encode($objGasto).'}';
 	    	break;

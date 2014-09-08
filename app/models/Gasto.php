@@ -16,6 +16,21 @@ class Gasto extends database {
       return array();
     }
   }
+  
+    function getGastosById($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("SELECT g.id_gasto,g.asunto,g.comentario,g.fecha,u.id_usuario,u.nombre AS 'user_name',g.monto FROM gasto g INNER JOIN usuario u ON g.id_usuario = u.id_usuario where g.id_usuario=".$id." ORDER BY g.id_gasto;");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function newGasto($gastoObj){
     $gasto = get_object_vars($gastoObj);
     $q = "INSERT INTO gasto (id_usuario,asunto,comentario,fecha,monto) VALUES (".$gasto['id_usuario'].",'".$gasto['asunto']."','".$gasto['comentario']."','".$gasto['fecha']."',".$gasto['monto'].");";

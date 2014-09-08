@@ -15,11 +15,30 @@
 		     }
 	        break;
 	    case "query":
-		        $vale = new Mobiliario();
-		        $objVale= $vale ->getMobiliario();
-
-		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario ->getUsers();
+		    
+                    $vale = new Mobiliario();
+		        
+                    $u = $_SESSION['usuario'];
+                    $id_u = $u[0]['id_usuario'];
+                    $cambiar_usuario="false";
+                    $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                      for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                                case "UsuarioMobiliario":
+                                    $cambiar_usuario = "true";
+                                    break;
+                            }
+                      }
+                      $usuario = new Usuario();
+                      if($cambiar_usuario==="true"){
+                        $objVale= $vale ->getMobiliario();
+                        $objUsuario = $usuario ->getUsers();
+                      }else{
+                          $objVale= $vale ->getMobiliarioByid($id_u);
+                          $objUsuario = $usuario ->getUsersbyId($id_u);
+                      }
+		       	
 
 		        echo '{"mobiliarios":'.json_encode($objVale).',"usuarios":'.json_encode($objUsuario).'}';
 	    	break;
