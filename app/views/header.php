@@ -26,12 +26,11 @@
 
     <!-- Custom CSS -->
     <link href="/public/css/sb-admin-2.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/public/css/calendar.css">
+    
     <!-- Morris Charts CSS -->
     <link href="/public/css/plugins/morris.css" rel="stylesheet">
-    <link href="/public/css/fullcalendar.min.css" rel="stylesheet">
-    <link href="/public/css/fullcalendar.print.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -48,9 +47,7 @@
     <script src="/public/js/angular.min.js" type="text/javascript"></script>
     <!-- Morris Charts JavaScript -->
     <script src="/public/js/angular-route.min.js" type="text/javascript"></script>
-    <script src="/public/js/calendar.js"></script>
     <script src="/public/js/moment.js"></script>
-    <script src="/public/js/fullcalendar.min.js"></script>
     <script src="/public/js/plugins/morris/raphael.min.js"></script>
     <script src="/public/js/plugins/morris/morris.min.js"></script>
     <script src="/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
@@ -58,6 +55,25 @@
     <link href="/public/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom Theme JavaScript -->
     <script src="/public/js/sb-admin-2.js"></script>
+    <script type="text/javascript" src="/public/js/underscore-min.js"></script>
+    <script type="text/javascript" src="/public/js/jstz.min.js"></script>
+    <script type="text/javascript" src="/public/js/language/nl-NL.js"></script>
+    <script type="text/javascript" src="/public/js/language/fr-FR.js"></script>
+    <script type="text/javascript" src="/public/js/language/de-DE.js"></script>
+    <script type="text/javascript" src="/public/js/language/el-GR.js"></script>
+    <script type="text/javascript" src="/public/js/language/it-IT.js"></script>
+    <script type="text/javascript" src="/public/js/language/hu-HU.js"></script>
+    <script type="text/javascript" src="/public/js/language/pl-PL.js"></script>
+    <script type="text/javascript" src="/public/js/language/pt-BR.js"></script>
+    <script type="text/javascript" src="/public/js/language/ro-RO.js"></script>
+    <script type="text/javascript" src="/public/js/language/es-MX.js"></script>
+    <script type="text/javascript" src="/public/js/language/es-ES.js"></script>
+    <script type="text/javascript" src="/public/js/language/ru-RU.js"></script>
+    <script type="text/javascript" src="/public/js/language/sv-SE.js"></script>
+    <script type="text/javascript" src="/public/js/language/zh-TW.js"></script>
+    <script type="text/javascript" src="/public/js/language/cs-CZ.js"></script>
+    <script type="text/javascript" src="/public/js/language/ko-KR.js"></script>
+    <script type="text/javascript" src="/public/js/calendar.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,6 +81,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
 
 </head>
 
@@ -140,6 +158,9 @@
                             <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
+                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-calendar-o fa-fw"></i> Citas</a>
+                        </li>
+                        <li>
                             <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-credit-card fa-fw"></i> Gastos</a>
                         </li>
                         <li>
@@ -156,6 +177,9 @@
                         </li>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/perfil/index.php"><i class="fa fa-users fa-fw"></i> Perfiles</a>
                         </li>
                     </ul>
                 </div>
