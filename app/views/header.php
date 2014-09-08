@@ -1,6 +1,7 @@
 <?php
     $pt = "";
     $pp = "/app/views";
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,62 +127,147 @@
             <div class="navbar-default sidebar" role="navigation">
                 <br>
                 <div class="sidebar-nav navbar-collapse">
+                    <?php $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                    if($contador>0){
+                    ?>
                     <ul class="nav" id="side-menu">
+                        <?php 
+                       for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                            case "Caja":
+                                ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/caja/index.php"><i class="fa fa-inbox fa-fw"></i> Caja</a>
                         </li>
+                               <?php break; 
+                           
+                            case "Roles":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
+                         <?php break; 
+                           
+                            case "Permisos":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/permiso/index.php"><i class="fa  fa-check fa-fw"></i> Permisos</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Usuarios":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
+                        <?php break; 
+                           
+                            case "TipoProducto":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/tipoProducto/index.php"><i class="fa fa-cogs fa-fw"></i> Tipo de Producto</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Producto":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/producto/index.php"><i class="fa fa-tasks fa-fw"></i> Producto</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Mobiliario":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/mobiliario/index.php"><i class="fa fa-truck fa-fw"></i> Mobiliario</a>
                         </li>
+                        <?php break; 
+                           
+                            case "CajaChica":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/cajaChica/index.php"><i class="fa fa-archive fa-fw"></i> Caja Chica</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Vale":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/vale/index.php"><i class="fa fa-money fa-fw"></i> Vale</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Calendario":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Agenda":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-calendar-o fa-fw"></i> Citas</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Gastos":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-credit-card fa-fw"></i> Gastos</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Ventas":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/venta/index.php"><i class="fa fa-usd fa-fw"></i> Ventas</a>
                         </li>
+                        <?php break; 
+                           
+                            case "CatalogoVentas":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/ventas/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Ventas</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Compras":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/compra/index.php"><i class="fa fa-clipboard fa-fw"></i> Compras</a>
                         </li>
+                        <?php break; 
+                           
+                            case "CatalogoCompras":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/compras/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Compras</a>
                         </li>
+                        <?php break; 
+                           
+                            case "RolePermiso":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
                         </li>
+                        <?php break; 
+                           
+                            case "Perfil":
+                           ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/perfil/index.php"><i class="fa fa-users fa-fw"></i> Perfiles</a>
                         </li>
-                    </ul>
+                   
+                        <?php 
+                        break;
+                            }
+                        } ?>
+                     </ul>
+                        <?php
+                        } 
+                        ?>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>

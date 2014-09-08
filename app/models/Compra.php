@@ -16,6 +16,21 @@ class Compra extends database {
       return array();
     }
   }
+  
+    function getComprasbyId($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("select c.id_compra,c.id_usuario,u.nombre,c.fecha from compra c inner join usuario u  on c.id_usuario = u.id_usuario where c.id_usuario=".$id." order by c.id_compra");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function newCompra($compra){
     $compraVars = get_object_vars($compra);
     

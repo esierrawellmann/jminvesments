@@ -64,7 +64,7 @@ class Usuario extends database {
   function getPermisos($id){
       $this->conectar();
       
-    $query = $this->consulta("select permiso.nombre from role_permiso inner join permiso on role_permiso.id_permiso = permiso.id_permiso where role_permiso.id_role=".$id);
+    $query = $this->consulta("select Distinct(permiso.nombre) from role_permiso inner join permiso on role_permiso.id_permiso = permiso.id_permiso where role_permiso.id_role=".$id);
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -79,6 +79,20 @@ class Usuario extends database {
   {
     $this->conectar();
     $query = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role where u.nombre='".$name."' order by u.id_usuario");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
+   function getUsersbyId($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role where u.id_usuario=".$id." order by u.id_usuario");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )

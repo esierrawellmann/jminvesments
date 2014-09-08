@@ -17,10 +17,29 @@
 	        break;
 	    case "query":
 		        $compra = new Compra();
-		        $objcompra = $compra->getCompras();
 
 		       	$usuario = new Usuario();
-		       	$objtipousuario = $usuario ->getUsers();
+                        
+                        $u = $_SESSION['usuario'];
+                    $id_u = $u[0]['id_usuario'];
+                    $cambiar_usuario="false";
+                    $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                      for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                                case "UsuarioCompras":
+                                    $cambiar_usuario = "true";
+                                    break;
+                            }
+                      }
+                      
+                      if($cambiar_usuario==="true"){
+                        $objcompra = $compra->getCompras();
+                        $objtipousuario = $usuario ->getUsers();
+                      }else{
+                          $objcompra = $compra->getComprasbyId($id_u);
+                        $objtipousuario = $usuario ->getUsersbyId($id_u);
+                      }
 
 		        echo '{"compras":'.json_encode($objcompra).',"usuarios":'.json_encode($objtipousuario).'}';
 	    	break;

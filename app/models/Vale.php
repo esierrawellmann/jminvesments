@@ -16,6 +16,21 @@ class Vale extends database {
       return array();
     }
   }
+  
+    function getValesbyId($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("select v.id_vale,v.id_usuario,u.nombre as 'usuario_name',v.motivo,v.monto,v.estado,v.fecha from vale v inner join usuario u on v.id_usuario = u.id_usuario where v.id_usuario=".$id." order by v.id_vale");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function newVale($vale){
     $valeVars = get_object_vars($vale);
     

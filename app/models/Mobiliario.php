@@ -16,6 +16,21 @@ class Mobiliario extends database {
       return array();
     }
   }
+  
+    function getMobiliarioByid($id)
+  {
+    $this->conectar();
+    $query = $this->consulta("select m.id_mobiliario,m.nombre,m.id_usuario,u.nombre as 'usuario_name',m.cantidad from mobiliario m inner join usuario u on m.id_usuario = u.id_usuario where m.id_usuario=".$id);
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function newMobiliario($vale){
     $valeVars = get_object_vars($vale);
     

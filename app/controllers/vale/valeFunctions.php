@@ -17,10 +17,30 @@
 	        break;
 	    case "query":
 		        $vale = new Vale();
-		        $objVale= $vale ->getVales();
-
 		       	$usuario = new Usuario();
-		       	$objUsuario = $usuario ->getUsers();
+		       	
+                        
+                    $u = $_SESSION['usuario'];
+                    $id_u = $u[0]['id_usuario'];
+                    $cambiar_usuario="false";
+                    $contador = count($_SESSION['permisos']);
+                    $arreglo = $_SESSION['permisos'];
+                      for($c=0;$c<$contador;$c++){
+                            switch($arreglo[$c]['nombre']){
+                                case "UsuarioVales":
+                                    $cambiar_usuario = "true";
+                                    break;
+                            }
+                      }
+                      
+                      if($cambiar_usuario==="true"){
+                        $objVale= $vale ->getVales();
+                        $objUsuario = $usuario ->getUsers();
+                      }else{
+                          $objVale= $vale ->getValesbyId($id_u);
+                          $objUsuario = $usuario ->getUsersbyId($id_u);
+                      }
+                        
 
 		        echo '{"vales":'.json_encode($objVale).',"usuarios":'.json_encode($objUsuario).'}';
 	    	break;
