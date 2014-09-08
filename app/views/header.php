@@ -2,6 +2,11 @@
     $pt = "";
     $pp = "/app/views";
     session_start();
+    if(!isset($_SESSION["user"])){
+        if($_SESSION["user"]===NULL){
+            header('Location: /index.php?error');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
