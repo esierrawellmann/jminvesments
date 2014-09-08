@@ -80,6 +80,7 @@
             $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.initialSpends.gastos.push(data);
                   $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
+          gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
                 
             });             
         }, function () {});
