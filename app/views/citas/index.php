@@ -69,28 +69,26 @@
             action: function(){
                 return "Insertar"
             },
-    		users:function(){
-				return $scope.initialSpends.usuarios;
-    		}
+        		users:function(){
+    				return $scope.initialSpends.usuarios;
+        		}
         	}
         });
 
         modalInstanceOpen.result.then(function (gasto) {
           gasto.hora_inicio = toMysqlFormatTime(gasto.hora_inicio);
           gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
-          gasto.fecha_inicio = toMysqlFormat1(fecha_inicio);
-          gasto.fecha_fin = toMysqlFormat1(fecha_fin);
-          gasto.fecha_inicio = gasto.fecha_inicio + " " + gasto.hora_inicio;
-          gasto.fecha_fin = gasto.fecha_fin + " " + gasto.fecha_fin;
+          gasto.fecha_inicio = toMysqlFormat1(gasto.fecha_inicio) +" "+gasto.hora_inicio;
+          gasto.fecha_fin = toMysqlFormat1(gasto.fecha_fin) + " " +gasto.hora_fin;
 
+
+        
           console.log(gasto);
-
-           // gasto.fecha = gasto.fecha.toMysqlFormat();
-           //  $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
-           //        $scope.initialSpends.gastos.push(data);
-           //        $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
+            $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
+                  $scope.initialSpends.citas.push(data);
+                  $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
                 
-           //  });             
+            });             
         }, function () {});
     };
         
@@ -105,6 +103,8 @@
     $scope.today = function() {
     $scope.new.fecha_inicio = new Date();
     $scope.new.fecha_fin = new Date();
+    $scope.new.hora_inicio = new Date();
+    $scope.new.hora_fin = new Date();
   };
   $scope.today();
 
@@ -315,7 +315,7 @@ Date.prototype.toMysqlFormat = function() {
                                         <td>{{spend.fecha_fin}}</td>                                        
                                         <td>
                                         	<div class="btn-group">
-                      										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                      										  <button type="button" ng-disabled="true" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
                       										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
                       										  </button>
                       										  <ul class="dropdown-menu" role="menu">

@@ -44,10 +44,10 @@ class Agenda extends database {
   }
   function newEvent($gastoObj){
     $gasto = get_object_vars($gastoObj);
-    $q = "INSERT INTO agenda (id_usuario,asunto,comentario,fecha,monto) VALUES (".$gasto['id_usuario'].",'".$gasto['asunto']."','".$gasto['comentario']."','".$gasto['fecha']."',".$gasto['monto'].");";
+    $q = "INSERT INTO agenda (id_usuario,comentario,fecha_inicio,fecha_fin) VALUES (".$gasto['id_usuario'].",'".$gasto['comentario']."','".$gasto['fecha_inicio']."','".$gasto['fecha_fin']."');";
     $this -> conectar();
     $query = $this->consulta($q);
-    $queryObject = $this->consulta( "SELECT g.id_gasto,g.asunto,g.comentario,g.fecha,u.id_usuario,u.nombre AS 'user_name',g.monto FROM gasto g INNER JOIN usuario u ON g.id_usuario = u.id_usuario ORDER BY g.id_gasto DESC LIMIT 1;");
+    $queryObject = $this->consulta( "select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,a.fecha_inicio,a.fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario ORDER BY a.id_agenda DESC LIMIT 1;");
     $this->disconnect();
     if($this->numero_de_filas($queryObject) > 0){
       while ( $tsArray = $this->fetch_assoc($queryObject) )

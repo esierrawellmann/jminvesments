@@ -80,7 +80,6 @@
   });
   });
 </script>
-        <button class="btn btn-default btn-sm pull-right" style="margin-top: 25px;">Añadir Cita</button>
         <h1>Citas</h1>
           <div class="page-header">
             <div class="form-inline">
