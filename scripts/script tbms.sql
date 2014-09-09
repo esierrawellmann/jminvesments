@@ -45,6 +45,7 @@ insert into permiso(nombre) values ('UsuarioGastos');
 insert into permiso(nombre) values ('UsuarioVentas');
 insert into permiso(nombre) values ('UsuarioCompras');
 insert into permiso(nombre) values ('ValesEstado');
+insert into permiso (nombre) values ('UsuarioCitas');
 
 create table role_permiso(
 id_role_permiso int auto_increment,

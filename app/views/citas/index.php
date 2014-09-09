@@ -334,7 +334,7 @@ Date.prototype.toMysqlFormat = function() {
         </div>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Gasto</h3>
+                <h3 class="modal-title"¨>{{action}} Cita</h3>
             </div>
             <div class="modal-body">
                 <form role="form" name="spendForm">

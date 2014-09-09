@@ -24,7 +24,7 @@
                 $arreglo = $_SESSION['permisos'];
 	              for($c=0;$c<$contador;$c++){
 	                    switch($arreglo[$c]['nombre']){
-	                        case "UsuarioGastos":
+	                        case "UsuarioCitas":
 	                            $cambiar_usuario = "true";
 	                            break;
 	                    }
