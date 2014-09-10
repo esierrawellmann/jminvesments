@@ -80,12 +80,22 @@
                                    }else{
                                      $fecha = date('Y-m-d');
                                    }
+
+                                   if(isset($_POST['fecha_final'])){
+                                       if($_POST['fecha_final']==""){
+                                           $fecha_final = date('Y-m-d');
+                                       }else{
+                                         $fecha_final = $_POST['fecha_final'];
+                                       }
+                                   }else{
+                                     $fecha_final = date('Y-m-d');
+                                   }
                                    
                                    if(isset($_POST['todos'])){
-                                       $ventas = $usuario->getCaja($fecha);
+                                       $ventas = $usuario->getCaja($fecha,$fecha_final);
                                    }else{
                                        if(isset($_POST['id_usuario'])){
-                                       $ventas = $usuario->getCajaxUser($_POST['id_usuario'],$fecha);
+                                       $ventas = $usuario->getCajaxUser($_POST['id_usuario'],$fecha,$fecha_final);
                                        }
                                    }
                                    

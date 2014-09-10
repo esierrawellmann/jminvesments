@@ -46,9 +46,9 @@ class Usuario extends database {
     }
   }
   
-    function getCaja($fecha){
+    function getCaja($fecha,$fecha_final){
       $this->conectar();
-      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha='".$fecha."' order by v.id_usuario ";
+      $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha,u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.fecha between '".$fecha."' and '".$fecha_final."' order by v.id_usuario ";
   
       $query = $this->consulta($consulta);
       $this->disconnect();
