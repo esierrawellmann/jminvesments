@@ -23,8 +23,8 @@
     $scope.deleteSpend = function (spend){
         var index = $scope.initialSpends.gastos.indexOf(spend);
          
-        $http.post('./../../controllers/gasto/gastoFunctions.php','{"action":"delete","gasto":'+JSON.stringify(spend)+'}').success(function(data){
-           $scope.alerts.push({type: 'success', msg: 'Gasto  Exitosamente Eliminado' });
+        $http.post('./../../controllers/agenda/agendaFunctions.php','{"action":"delete","agenda":'+JSON.stringify(spend)+'}').success(function(data){
+           $scope.alerts.push({type: 'success', msg: 'Cita Exitosamente Eliminada' });
             $scope.initialSpends.gastos.splice(index,1);
         
       });
@@ -85,7 +85,7 @@
         
           console.log(gasto);
             $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
-                  $scope.initialSpends.citas.push(data);
+                  $scope.initialSpends.citas.unshift(data);
                   $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
                 
             });             
@@ -315,11 +315,11 @@ Date.prototype.toMysqlFormat = function() {
                                         <td>{{spend.fecha_fin}}</td>                                        
                                         <td>
                                         	<div class="btn-group">
-                      										  <button type="button" ng-disabled="true" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                      										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
                       										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
                       										  </button>
                       										  <ul class="dropdown-menu" role="menu">
-                      										    <li><a href="#" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                      										    <li><a href="#"  ng-disabled="true" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
                       										    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                       										  </ul>
                       										</div>

@@ -19,7 +19,7 @@ class Agenda extends database {
   function getCitas()
   {
     $this->conectar();
-    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,a.fecha_inicio,a.fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario");
+    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,a.fecha_inicio,a.fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario order by id_agenda desc");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -32,7 +32,7 @@ class Agenda extends database {
   function getCitasxId($id)
   {
     $this->conectar();
-    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,fecha_inicio,fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario where u.id_usuario = ".$id);
+    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,fecha_inicio,fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario where u.id_usuario = ".$id." order by id_agenda desc");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -72,9 +72,9 @@ class Agenda extends database {
     }
   }
 
-function deleteRole($id){
+function deleteCita($id){
     $this -> conectar();
-    $query = $this -> consulta("delete from role where id_role = ".$id);
+    $query = $this -> consulta("delete from agenda where id_agenda = ".$id);
     $this ->disconnect();
 
     return array();

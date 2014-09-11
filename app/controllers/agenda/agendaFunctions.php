@@ -49,10 +49,10 @@
 	        }
 	        break;
 	    case "delete":
-		    $gasto = new Gasto();
+		    $gasto = new Agenda();
 		    if(isset($data['gasto'])){
-		    	$deleteSpend = get_object_vars($data['gasto']);
-	        	$objGasto = $gasto -> deleteSpend($deleteSpend['id_gasto']);
+		    	$deleteSpend = get_object_vars($data['agenda']);
+	        	$objGasto = $gasto -> deleteCita($deleteSpend['id_agenda']);
 	        	echo json_encode($objGasto);
 		    }
 		        break;

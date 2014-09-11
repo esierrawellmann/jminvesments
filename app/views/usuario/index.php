@@ -25,7 +25,7 @@
         var index = $scope.initialUsers.usuarios.indexOf(user);
          
         $http.post('./../../controllers/usuario/usuarioFunctions.php','{"action":"delete","usuario":'+JSON.stringify(user)+'}').success(function(data){
-           $scope.alerts.push({type: 'success', msg: 'Rol  Exitosamente Eliminado' });
+           $scope.alerts.push({type: 'success', msg: 'Usuario  Exitosamente Eliminado' });
             $scope.initialUsers.usuarios.splice(index,1);
         
       });
@@ -49,7 +49,7 @@
         });
         modalInstanceUpdate.result.then(function (user) {
             $http.post('./../../controllers/usuario/usuarioFunctions.php', '{"action":"update","usuario":'+JSON.stringify(user)+'}').success(function(data){
-                $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
+                $scope.alerts.push({type: 'success', msg: 'Usuario Modificado Exitosamente' });
              });
              
         }, function () {
