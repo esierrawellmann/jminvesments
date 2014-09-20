@@ -17,7 +17,8 @@
 	    case "query":
 		    
                     $vale = new Mobiliario();
-		        
+		    $usuario = new Usuario();
+                    
                     $u = $_SESSION['usuario'];
                     $id_u = $u[0]['id_usuario'];
                     $cambiar_usuario="false";
@@ -30,7 +31,7 @@
                                     break;
                             }
                       }
-                      $usuario = new Usuario();
+
                       if($cambiar_usuario==="true"){
                         $objVale= $vale ->getMobiliario();
                         $objUsuario = $usuario ->getUsers();
