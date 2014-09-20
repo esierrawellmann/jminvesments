@@ -19,6 +19,9 @@ function controller($scope, $modal, $log , $http)
 
     $scope.viewDetail = function (venta){
         $scope.showDetail = true;
+        $('#dataTables-example1').on('click', 'tbody tr', function(event) {
+                $(this).addClass('success').siblings().removeClass('success');
+            });
         $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailVentasInit = data;
          });

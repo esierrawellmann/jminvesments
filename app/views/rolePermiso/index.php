@@ -17,8 +17,12 @@ function controller($scope, $modal, $log , $http)
     
     $scope.viewDetail = function (venta){
         $scope.showDetail = true;
+        $('#dataTables-example1').on('click', 'tbody tr', function(event) {
+                $(this).addClass('success').siblings().removeClass('success');
+            });
         $http.post('./../../controllers/rolePermiso/rolePermisoFunctions.php', '{"action":"query" , "role":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailRoleInit = data;
+
          });
     };
     
@@ -162,8 +166,8 @@ Date.prototype.toMysqlFormat = function() {
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <div class="table-responsive" style="overflow-x:auto ; height:600px; overflow-y:auto">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -192,7 +196,7 @@ Date.prototype.toMysqlFormat = function() {
                     </div>
                 </div>   
             </div>
-             <div class="col-lg-6">
+             <div class="col-lg-8">
                 <div class="panel panel-default" ng-show="showDetail">
                     <div class="panel-heading">
                         Detalle Role - Permisos

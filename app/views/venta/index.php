@@ -19,8 +19,12 @@ function controller($scope, $modal, $log , $http)
 
     $scope.viewDetail = function (venta){
         $scope.showDetail = true;
+        $('#dataTables-example1').on('click', 'tbody tr', function(event) {
+                $(this).addClass('success').siblings().removeClass('success');
+            });
         $http.post('./../../controllers/detalleVenta/detalleVentaFunctions.php', '{"action":"query" , "venta":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailVentasInit = data;
+            
          });
     };
 
@@ -149,7 +153,7 @@ function controller($scope, $modal, $log , $http)
     } 
      
  }
- var productsModalController = function ($scope,$http, $modalInstance,action,products) {
+ var productsModalController = function ($scope,$http,$filter, $modalInstance,action,products) {
     $scope.products = products;
     $scope.detail ={};
 
@@ -159,6 +163,11 @@ function controller($scope, $modal, $log , $http)
             $modalInstance.close($scope.detail);
         } 
     };
+
+    $scope.filterOnArray = function(array,filter)
+    {
+         return   $filter('filter')(array, filter);
+    }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -465,7 +474,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                 <input type="text" class="form-control" name="asuntoNameField" ng-model="productFilter" id="asuntoID" placeholder="Filtrar Producto..." />
                             </div>
                             <div class="col-md-6">
-                                <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_producto" class="form-control"  ng-options="product.id_producto as product.nombre for product in products"></select>
+                                <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_producto" class="form-control"  ng-options="product.id_producto as product.nombre for product in filterOnArray(products,productFilter)"></select>
                             </div>
                         </div>
                         <div class="alert-danger" role="alert" ng-show="detailSales.selectProduct.$error.required">Este campo es requerido</div>

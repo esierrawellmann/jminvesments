@@ -17,6 +17,9 @@ function controller($scope, $modal, $log , $http)
     
     $scope.viewDetail = function (venta){
         $scope.showDetail = true;
+        $('#dataTables-example1').on('click', 'tbody tr', function(event) {
+                $(this).addClass('success').siblings().removeClass('success');
+            });
         $http.post('./../../controllers/detalleCompra/detalleCompraFunctions.php', '{"action":"query" , "compra":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailComprasInit = data;
          });
@@ -323,8 +326,8 @@ Date.prototype.toMysqlFormat = function() {
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <div class="table-responsive" style="overflow-x:auto ; height:600px; overflow-y:autp">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
