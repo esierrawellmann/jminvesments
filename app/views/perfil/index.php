@@ -140,8 +140,8 @@
                                                     <th>Id</th>
                                                     <th>Cliente</th>
                                                     <th>Vendedor</th>
-                                                    <th>Efectivo</th>
                                                     <th>Tarjeta</th>
+                                                    <th>Efectivo</th>
                                                     <th>Total</th>
                                                 </tr>
                                             </thead>
