@@ -19,7 +19,7 @@ class Agenda extends database {
   function getCitas()
   {
     $this->conectar();
-    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,a.fecha_inicio,a.fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario order by id_agenda desc");
+    $query = $this->consulta("select a.id_agenda, u.id_usuario,u.nombre,a.comentario ,a.fecha_inicio,a.fecha_fin from agenda a inner join usuario u on a.id_usuario = u.id_usuario order by id_agenda,fecha_inicio desc");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
@@ -57,18 +57,17 @@ class Agenda extends database {
       return array();
     }
   }
-  function updateRole($id,$name){
+  function updateAgenda($gasto){
     $this -> conectar();
-    $query = $this -> consulta("update role set nombre ='".$name."' where id_role = ".$id);
-
-    $queryObject = $this -> consulta("select * from role where id_role = ".$id);
+    $q = "update agenda  set  id_usuario=".$gasto['id_usuario']." ,comentario= '".$gasto['comentario']."', fecha_inicio = '".$gasto['fecha_inicio']."', fecha_fin = '".$gasto['fecha_fin']."' where id_agenda = ".$gasto['id_agenda'].";"; 
+    $query = $this -> consulta($q);
     $this ->disconnect();
     if($this->numero_de_filas($queryObject) > 0){
       while ( $tsArray = $this->fetch_assoc($queryObject) )
         $data[] = $tsArray;
       return $data;
     }else{
-      return array();
+      return '{ }';
     }
   }
 

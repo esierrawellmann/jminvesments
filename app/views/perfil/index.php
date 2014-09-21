@@ -131,7 +131,7 @@
                                               ykeys: ['cantidad'],
                                               // Labels for the ykeys -- will be displayed when you hover over the
                                               // chart.
-                                              labels: ['Value']
+                                              labels: ['Importe']
                                             });
                                           </script>";
                                              echo "<table class='table table-striped table-bordered table-hover' id='dataTables-example'>

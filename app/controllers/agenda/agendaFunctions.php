@@ -41,10 +41,10 @@
 		        echo '{"usuarios":'.json_encode($objUsuario).',"citas":'.json_encode($objGasto).'}';
 	    	break;
 	    case "update":
-	        $gasto = new Gasto();
-	        if(isset($data['gasto'])){
-	        	$updatedGasto = get_object_vars($data['gasto']);
-	        	$objUser = $gasto -> updateGasto($updatedGasto);
+	        $gasto = new Agenda();
+	        if(isset($data['agenda'])){
+	        	$updatedGasto = get_object_vars($data['agenda']);
+	        	$objUser = $gasto -> updateAgenda($updatedGasto);
 	        	echo json_encode($objUser);
 	        }
 	        break;

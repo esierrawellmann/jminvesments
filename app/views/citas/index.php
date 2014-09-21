@@ -41,7 +41,6 @@
                 return "Modificar"
                 }, 
                 gasto: function () {
-                        
                         return data;
                     },
                 users:function(){
@@ -51,13 +50,18 @@
         });
         modalInstanceUpdate.result.then(function (gasto) {
 
-           gasto.fecha = gasto.fecha.toMysqlFormat();
-            $http.post('./../../controllers/gasto/gastoFunctions.php', '{"action":"update","gasto":'+JSON.stringify(gasto)+'}').success(function(data){
-                $scope.alerts.push({type: 'success', msg: 'Rol Modificado Exitosamente' });
+            gasto.hora_inicio = toMysqlFormatTime(gasto.hora_inicio);
+            gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
+            gasto.fecha_inicio = toMysqlFormat1(gasto.fecha_inicio) +" "+gasto.hora_inicio;
+            gasto.fecha_fin = toMysqlFormat1(gasto.fecha_fin) + " " +gasto.hora_fin;
+
+            $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"update","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
+                $scope.alerts.push({type: 'success', msg: 'Cita Modificada Exitosamente' });
              });
              
         }, function () {
-            data.fecha = toMysqlFormat1(data.fecha);
+            data.fecha_inicio = toMysqlFormat1(data.fecha_inicio) + " " +toMysqlFormatTime(data.hora_inicio) ;
+            data.fecha_fin = toMysqlFormat1(data.fecha_fin) + " " +toMysqlFormatTime(data.hora_fin) ;
         });
     } 
     $scope.openGasto = function (size) {
@@ -80,10 +84,7 @@
           gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
           gasto.fecha_inicio = toMysqlFormat1(gasto.fecha_inicio) +" "+gasto.hora_inicio;
           gasto.fecha_fin = toMysqlFormat1(gasto.fecha_fin) + " " +gasto.hora_fin;
-
-
-        
-          console.log(gasto);
+    
             $http.post('./../../controllers/agenda/agendaFunctions.php', '{"action":"insert","agenda":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.initialSpends.citas.unshift(data);
                   $scope.alerts.push({type: 'success', msg: 'Cita Agregada Exitosamente' });
@@ -181,15 +182,17 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
     $scope.action = action;
     $scope.new = gasto;
     $scope.users = users;
-    $scope.$watch('new.monto',function(val,old){
-       $scope.new.monto = parseFloat(val); 
-    });
+    $scope.new.fecha_inicio  = new Date(gasto.fecha_inicio);
+    $scope.new.fecha_fin = new Date(gasto.fecha_fin);
+    $scope.new.hora_inicio = new Date(gasto.fecha_inicio);
+    $scope.new.hora_fin = new Date(gasto.fecha_fin);
+    
 
     $scope.today = function() {
         $scope.new.fecha_inicio = new Date();
         $scope.new.fecha_fin = new Date();
       };
-  $scope.today();
+
 
   $scope.clear = function () {
     $scope.new.fecha = null;
@@ -251,7 +254,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
     };
 
     $scope.cancel = function () {
-        $scope.new.fecha = toMysqlFormat1($scope.new.fecha);
+        $scope.new.fecha_inicio = toMysqlFormat1($scope.new.fecha_inicio) + " " +toMysqlFormatTime($scope.new.fecha_inicio) ;
+        $scope.new.fecha_fin = toMysqlFormat1($scope.new.fecha_fin) + " " +toMysqlFormatTime($scope.new.fecha_fin) ;
         $modalInstance.dismiss('cancel');
     };
 };
@@ -327,7 +331,7 @@ Date.prototype.toMysqlFormat = function() {
                       										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
                       										  </button>
                       										  <ul class="dropdown-menu" role="menu">
-                      										    <li><a href="#"  ng-disabled="true" ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                      										    <li><a href="#"  ng-click="showUpdateDialog(spend)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
                       										    <li><a href="#" ng-click="deleteSpend(spend)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                       										  </ul>
                       										</div>
