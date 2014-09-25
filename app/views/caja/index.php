@@ -88,7 +88,7 @@
                                          $fecha_final = $_POST['fecha_final'];
                                        }
                                    }else{
-                                     $fecha_final = date('Y-m-d');
+                                     $fecha_final = $fecha;
                                    }
                                    
                                    if(isset($_POST['todos'])){
@@ -110,6 +110,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
+                                                    <th>Fecha</th>
                                                     <th>Cliente</th>
                                                     <th>Vendedor</th>
                                                     <th>Tarjeta</th>
@@ -123,6 +124,7 @@
                                          for($c=0;$c<$contador;$c++){
                                                 echo " <tr class='odd gradeX'>";
                                                echo "<td>".$ventas[$c]['id_venta']."</td>";
+                                               echo "<td>".$ventas[$c]['fecha']."</td>";
                                                echo "<td>".$ventas[$c]['cliente']."</td>";
                                                echo "<td>".$ventas[$c]['vendedor']."</td>";
                                                echo "<td>".$ventas[$c]['tarjeta']."</td>";
