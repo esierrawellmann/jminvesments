@@ -22,67 +22,67 @@
     <title> The Men's Barbershop</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/backend/public/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/backend/public/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="/public/css/plugins/timeline.css" rel="stylesheet">
+    <link href="/backend/public/css/plugins/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/public/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/public/css/calendar.css">
-    <link rel="stylesheet" href="/public/css/datepicker.css">
+    <link href="/backend/public/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="/backend/public/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/backend/public/css/calendar.css">
+    <link rel="stylesheet" href="/backend/public/css/datepicker.css">
     
     <!-- Morris Charts CSS -->
-    <link href="/public/css/plugins/morris.css" rel="stylesheet">
+    <link href="/backend/public/css/plugins/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/backend/public/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- jQuery Version 1.11.0 -->
-    <script src="/public/js/jquery-1.11.0.js"></script>
+    <script src="/backend/public/js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="/public/js/funcionPagineo.js"></script>
+    <script src="/backend/public/js/bootstrap.min.js"></script>
+    <script src="/backend/public/js/funcionPagineo.js"></script>
     
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/public/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="/backend/public/js/plugins/metisMenu/metisMenu.min.js"></script>
 
-    <script src="/public/js/angular.min.js" type="text/javascript"></script>
-    <script src="/public/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="/backend/public/js/angular.min.js" type="text/javascript"></script>
+    <script src="/backend/public/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- Morris Charts JavaScript -->
-    <script src="/public/js/angular-route.min.js" type="text/javascript"></script>
-    <script src="/public/js/moment.js"></script>
-    <script src="/public/js/plugins/morris/raphael.min.js"></script>
+    <script src="/backend/public/js/angular-route.min.js" type="text/javascript"></script>
+    <script src="/backend/public/js/moment.js"></script>
+    <script src="/backend/public/js/plugins/morris/raphael.min.js"></script>
 
-    <script src="/public/js/plugins/morris/morris.min.js"></script>
-    <script src="/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
-    <!--<script src="./../../public/js/plugins/morris/morris-data.js"></script> -->
-    <link href="/public/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <script src="/backend/public/js/plugins/morris/morris.min.js"></script>
+    <script src="/backend/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
+    <!--<script src="./../../backend/public/js/plugins/morris/morris-data.js"></script> -->
+    <link href="/backend/public/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom Theme JavaScript -->
-    <script src="/public/js/sb-admin-2.js"></script>
-    <script type="text/javascript" src="/public/js/underscore-min.js"></script>
-    <script type="text/javascript" src="/public/js/jstz.min.js"></script>
-    <script type="text/javascript" src="/public/js/language/nl-NL.js"></script>
-    <script type="text/javascript" src="/public/js/language/fr-FR.js"></script>
-    <script type="text/javascript" src="/public/js/language/de-DE.js"></script>
-    <script type="text/javascript" src="/public/js/language/el-GR.js"></script>
-    <script type="text/javascript" src="/public/js/language/it-IT.js"></script>
-    <script type="text/javascript" src="/public/js/language/hu-HU.js"></script>
-    <script type="text/javascript" src="/public/js/language/pl-PL.js"></script>
-    <script type="text/javascript" src="/public/js/language/pt-BR.js"></script>
-    <script type="text/javascript" src="/public/js/language/ro-RO.js"></script>
-    <script type="text/javascript" src="/public/js/language/es-MX.js"></script>
-    <script type="text/javascript" src="/public/js/language/es-ES.js"></script>
-    <script type="text/javascript" src="/public/js/language/ru-RU.js"></script>
-    <script type="text/javascript" src="/public/js/language/sv-SE.js"></script>
-    <script type="text/javascript" src="/public/js/language/zh-TW.js"></script>
-    <script type="text/javascript" src="/public/js/language/cs-CZ.js"></script>
-    <script type="text/javascript" src="/public/js/language/ko-KR.js"></script>
-    <script type="text/javascript" src="/public/js/calendar.js"></script>
+    <script src="/backend/public/js/sb-admin-2.js"></script>
+    <script type="text/javascript" src="/backend/public/js/underscore-min.js"></script>
+    <script type="text/javascript" src="/backend/public/js/jstz.min.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/nl-NL.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/fr-FR.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/de-DE.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/el-GR.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/it-IT.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/hu-HU.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/pl-PL.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/pt-BR.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/ro-RO.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/es-MX.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/es-ES.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/ru-RU.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/sv-SE.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/zh-TW.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/cs-CZ.js"></script>
+    <script type="text/javascript" src="/backend/public/js/language/ko-KR.js"></script>
+    <script type="text/javascript" src="/backend/public/js/calendar.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
