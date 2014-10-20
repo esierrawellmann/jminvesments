@@ -123,29 +123,27 @@
 								<input id="renta" type="text" name="renta" value="">
 							</div>
 							<div class="row">
-								<div class="col-lg-6">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox"> Amueblado
-										</label>
+								<div class="form-group">
+									<div class="col-lg-6">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Amueblado
+											</label>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-6">	
-									<div class="checkbox">
-										<label>
-											<input type="checkbox"> Directa o Compartida
-										</label>
+									<div class="col-lg-6">	
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Directa o Compartida
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-12">
+								<button type="submit" class="btn btn-default pull-right">Submit</button>
 						</div>
-						<div class="col-lg-6">
-							<button type="submit" class="btn btn-default">Submit</button>
-						</div>
-						
-						</form>
 					</div>
 		    	</div>
 			</div>
