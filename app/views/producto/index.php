@@ -39,7 +39,6 @@
                 return "Modificar"
                 }, 
                 user: function () {
-                    console.log(data);
                         return data;
                     },
                 roles:function(){
@@ -48,11 +47,7 @@
           	}
         });
         modalInstanceUpdate.result.then(function (user) {
-            console.log(user);
-            $http.post('./../../controllers/producto/productoFunctions.php', '{"action":"update","producto":'+JSON.stringify(user)+'}').success(function(data){
-                $scope.alerts.push({type: 'success', msg: 'Producto Modificado Exitosamente' });
-             });
-             
+            $scope.requestPassword(user);
         }, function () {
         });
     } 
@@ -72,17 +67,29 @@
         });
 
         modalInstanceOpen.result.then(function (user) {
-            console.log(user);
-            console.log('----');
            $http.post('./../../controllers/producto/productoFunctions.php', '{"action":"insert","producto":'+JSON.stringify(user)+'}').success(function(data){
                  $scope.initialProductos.productos.push(data);
-                 console.log(data);
                  $scope.alerts.push({type: 'success', msg: 'Producto Agregado Exitosamente' });
                 
             });             
         }, function () {});
     };
-        
+    $scope.requestPassword = function (user,size) {
+        var modalInstanceOpen = $modal.open({
+          templateUrl: 'insertPassword.html',
+          controller: ModalInstancePassword,
+          size: size,
+          resolve: {}
+        });
+
+        modalInstanceOpen.result.then(function (data) {
+            console.log(data);
+           // $http.post('./../../controllers/producto/productoFunctions.php', '{"action":"insert","producto":'+JSON.stringify(user)+'}').success(function(data){
+           //       $scope.initialProductos.productos.push(data);
+           //       $scope.alerts.push({type: 'success', msg: 'Producto Agregado Exitosamente' });  
+           //  });             
+        }, function () {});
+    };    
 
  }
  var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,roles) {
@@ -92,6 +99,18 @@
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.new);
+        } 
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
+ var ModalInstancePassword = function ($scope,$http, $modalInstance) {
+    $scope.confirm = {};
+    $scope.ok = function (valid) {
+        if(valid){
+            $modalInstance.close($scope.confirm);
         } 
     };
 
@@ -231,6 +250,24 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                          <div class="alert-danger" role="alert" ng-show="userForm.userNameField4.$error.required || userForm.userNameField3.$error.number">Este campo es requerido</div>
                     </div>
                     
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok(userForm.$valid)">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+        <script type="text/ng-template" id="insertPassword.html">
+            <div class="modal-header">
+                <h3 class="modal-title"¨>Ingrese su contraseña</h3>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="userForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ingrese Su Password</label>
+                        <input type="text" class="form-control" name="userNameField" ng-model="confirm.password" id="exampleInputEmail1" placeholder="Ingrese su password" ng-required="true"/>
+                         <div class="alert-danger" role="alert" ng-show="userForm.userNameField.$error.required">Este campo es requerido</div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

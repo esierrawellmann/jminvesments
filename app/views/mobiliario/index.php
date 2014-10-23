@@ -11,6 +11,7 @@
 
     	$http.post('./../../controllers/mobiliario/mobiliarioFunctions.php', '{"action":"query"}').success(function(data){
             $scope.initialMobiliarios = data;
+            console.log(data);
          });
     });
 
