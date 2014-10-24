@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 /nbproject/private/
+=======
+/nbproject/private/
+/phpmyadmin
+/.idea
+/.settings
+/.buildpath
+/.project
+>>>>>>> origin/master

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 .select2-container-multi .select2-search-choice-close {
@@ -67,4 +68,13 @@ nav ul li.active>a:before {
 }
 .nav-ul-items{
 	margin: 15px;
+=======
+add-role-button {
+	margin-top: -7px;
+	margin-right: 0px;
+}
+.error font{
+	font-size: 10px;
+	color : red;
+>>>>>>> origin/master
 }

@@ -1,4 +1,5 @@
 <?php  include("header.php"); ?>
+<<<<<<< HEAD
 
     
     <!-- Script to Activate the Carousel -->
@@ -62,4 +63,12 @@
         <hr>
 
 				
+=======
+<br>
+<br>
+<br>
+<br>
+<br>
+<center><img  class="img-responsive" src="portada.jpg"></center>
+>>>>>>> origin/master
 <?php  include("footer.php"); ?>
