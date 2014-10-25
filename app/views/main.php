@@ -1,17 +1,14 @@
 <?php  include("header.php"); ?>
 <<<<<<< HEAD
 
-    
+
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
-    $('.li-main').addClass("active");
     </script>
-
-    
-	<header id="myCarousel" class="carousel slide" style="margin-top:50px">
+	<header id="myCarousel" class="carousel slide">
 	
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -52,6 +49,7 @@
             <span class="icon-next"></span>
         </a>
 	</header>
+	
 
         <div class="row">
             <div class="col-lg-12">
@@ -61,7 +59,8 @@
         </div>
 
         <hr>
-
+	</div>
+    <!-- /.container -->        
 				
 =======
 <br>

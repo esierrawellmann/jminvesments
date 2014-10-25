@@ -8,8 +8,6 @@
     <link href="/public/css/select2.css" rel="stylesheet">
     <script>
         $(document).ready(function() { 
-        	$(".li-advanced-search").addClass("active");
-
         	$("#tipo").select2(); 
         	$("#negocio").select2(); 
         	$("#zona").select2(); 
@@ -38,8 +36,7 @@
 		    });
         });
     </script>
-    <div class="main-content">
-		<div class="container">
+		<div class="container" style="margin-top:120px">
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Busqueda</h1>
@@ -135,32 +132,20 @@
 										</div>
 									</div>
 									<div class="col-lg-6">	
-										<div class="row">
-											<div class="col-lg-6">
-												<div class="checkbox">
-													<label>
-														<input type="radio" name="tipo-renta" value="directa">Directa<br>
-													</label>
-												</div>
-											</div>
-											<div class="col-lg-6">	
-												<div class="checkbox">
-													<label>
-														<input type="radio" name="tipo-renta" value="compartida">Compartida
-													</label>
-												</div>
-											</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Directa o Compartida
+											</label>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-12">
-								<button type="submit" class="btn btn-default pull-right">Busqueda</button>
+								<button type="submit" class="btn btn-default pull-right">Submit</button>
 						</div>
 					</div>
 		    	</div>
 			</div>
 		</div>
-	</div>
 <?php  include("../footer.php"); ?>

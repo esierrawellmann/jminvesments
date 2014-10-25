@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/tmbs.iml" filepath="$PROJECT_DIR$/tmbs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jminvesments.iml" filepath="$PROJECT_DIR$/.idea/jminvesments.iml" />
     </modules>
   </component>
 </project>
