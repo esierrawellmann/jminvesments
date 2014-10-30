@@ -30,7 +30,7 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background:#0C1A26">
-        <div class="container">
+        <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="background:#0C1A26">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -39,25 +39,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div><br><img src="/public/img/logojm.png"></div>
-            </div>
+                <img class="navbar-brand jm-logo" src="/public/img/logojm.png">
+                </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<br>
-			<br>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Inicio</a>
-                    </li>
-                    <li>
-                        <a href="#">Propiedades</a>
-                    </li>
-                    <li>
-                        <a href="#">Contacto</a>
-                    </li>
-                    <li>
-                        <a href="/app/views/busqueda/index.php">Busqueda Avanzada</a>
-                    </li>
+                <ul class="nav navbar-nav nav-ul-items" style="max-width:820px">
+                   <li class="li-main" >
+                        <a href="/app/views/main.php">Inicio</a>
+                   </li>
+
+                    <li class="dropdown li-advanced-search">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Busqueda Avanzada<span class="caret"></span></a>
+                        <ul class="dropdown-menu"  role="menu">
+                            <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
+                            <li><a href="#">Cotizacion</a></li>
+                        </ul>
+                   <li>
+                       <a href="#">Contacto</a>
+                   </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
