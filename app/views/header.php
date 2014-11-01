@@ -16,6 +16,10 @@
     <!-- Custom CSS -->
     <link href="/public/css/half-slider.css" rel="stylesheet">
 	<link href="/public/css/stylish-portfolio.css" rel="stylesheet">
+	<link href="/public/css/smartadmin-production.min.css" rel="stylesheet">
+	<link href="/public/css/main.css" rel="stylesheet">
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,17 +47,12 @@
                 </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav nav-ul-items" style="max-width:820px">
+                <ul class="nav navbar-nav nav-ul-items" style="max-width:750px">
                    <li class="li-main" >
                         <a href="/app/views/main.php">Inicio</a>
                    </li>
-
-                    <li class="dropdown li-advanced-search">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Busqueda Avanzada<span class="caret"></span></a>
-                        <ul class="dropdown-menu"  role="menu">
-                            <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
-                            <li><a href="#">Cotizacion</a></li>
-                        </ul>
+                    <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
+                    <li><a href="#">Cotizacion</a></li>
                    <li>
                        <a href="#">Contacto</a>
                    </li>

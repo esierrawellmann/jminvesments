@@ -3,12 +3,12 @@
 	<script src="/public/js/app.min.js"></script>
     <script src="/public/js/plugins/select2.min.js"></script>
 	<script src="/public/js/plugins/ion-slider/ion.rangeSlider.min.js"></script>
-	<link href="/public/css/smartadmin-production.min.css" rel="stylesheet">
+
     <link href="/public/css/select2-bootstrap.css" rel="stylesheet">
     <link href="/public/css/select2.css" rel="stylesheet">
     <script>
         $(document).ready(function() {
-        	$(".li-advanced-search").addClass("active");
+
 
         	$("#tipo").select2();
         	$("#negocio").select2();
