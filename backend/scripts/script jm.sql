@@ -25,15 +25,9 @@ primary key(id_agenda),
 foreign key(id_usuario) references usuario(id_usuario)
 )engine=innoDb;
 
-create table tipo(
-id_tipo int auto_increment,
-nombre varchar(512) not null,
-primary key(id_tipo)
-) engine=InnoDB;
-
 create table propiedad(
 id_propiedad int auto_increment,
-id_tipo int not null,
+tipo varchar(200) not null,
 negocio varchar(124) not null,
 zona varchar(5) not null,
 estado varchar(124) not null,
@@ -47,8 +41,7 @@ directa_compartida varchar(1) not null,
 direccion varchar(1024) null,
 departamento varchar(512) null,
 municipio varchar(512) null, 
-primary key(id_propiedad),
-foreign key(id_tipo) references tipo(id_tipo)
+primary key(id_propiedad)
 ) engine=InnoDB;
 
 create table detalle_propiedad(
