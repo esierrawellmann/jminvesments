@@ -132,7 +132,6 @@
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
-                <br>
                 <div class="sidebar-nav navbar-collapse">
                   
                     <ul class="nav" id="side-menu">

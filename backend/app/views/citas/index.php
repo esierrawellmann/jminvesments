@@ -49,7 +49,6 @@
           	}
         });
         modalInstanceUpdate.result.then(function (gasto) {
-
             gasto.hora_inicio = toMysqlFormatTime(gasto.hora_inicio);
             gasto.hora_fin = toMysqlFormatTime(gasto.hora_fin);
             gasto.fecha_inicio = toMysqlFormat1(gasto.fecha_inicio) +" "+gasto.hora_inicio;
@@ -121,6 +120,7 @@
     $scope.opened1 = true;
   };
     $scope.open2 = function($event) {
+      console.log($event);
     $event.preventDefault();
     $event.stopPropagation();
 
@@ -134,7 +134,7 @@
 
   $scope.initDate = new Date();
   $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
+  $scope.format = $scope.formats[1];
 
 
       $scope.mytime = new Date();
@@ -182,10 +182,22 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
     $scope.action = action;
     $scope.new = gasto;
     $scope.users = users;
-    $scope.new.fecha_inicio  = new Date(gasto.fecha_inicio);
-    $scope.new.fecha_fin = new Date(gasto.fecha_fin);
-    $scope.new.hora_inicio = new Date(gasto.fecha_inicio);
-    $scope.new.hora_fin = new Date(gasto.fecha_fin);
+    
+    var dateArray = gasto.fecha_inicio.split(" ");
+    var fecha_inicio = dateArray[0];
+    var hora_inicio = dateArray[1];
+    var partsDate = fecha_inicio.split("-");
+    var partsHour = hora_inicio.split(":");
+    console.log(gasto.fecha_inicio);
+    $scope.new.fecha_inicio = new Date(partsDate[0], partsDate[1] - 1, partsDate[2], partsHour[0], partsHour[1], partsHour[2]);
+    $scope.new.hora_inicio =  new Date(partsDate[0], partsDate[1] - 1, partsDate[2], partsHour[0], partsHour[1], partsHour[2]);
+    var dateEndArray = gasto.fecha_fin.split(" ");
+    var fecha_fin = dateEndArray[0];
+    var hora_fin = dateEndArray[1];
+    var partsDateEnd = fecha_fin.split("-");
+    var partsHourEnd = hora_fin.split(":");
+    $scope.new.fecha_fin = new Date(partsDateEnd[0], partsDateEnd[1] - 1, partsDateEnd[2], partsHourEnd[0], partsHourEnd[1], partsHourEnd[2]);
+    $scope.new.hora_fin =  new Date(partsDateEnd[0], partsDateEnd[1] - 1, partsDateEnd[2], partsHourEnd[0], partsHourEnd[1], partsHourEnd[2]);
     
 
     $scope.today = function() {
@@ -211,8 +223,8 @@ var ModalInstanceUpdateCtrl = function ($scope, $modalInstance,gasto,users,actio
   };
 
   $scope.initDate = new Date();
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[1];
 
 
       $scope.mytime = new Date();
