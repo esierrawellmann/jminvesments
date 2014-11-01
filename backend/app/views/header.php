@@ -109,7 +109,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    <div style='float:left'><a class="navbar-brand" href="/backend/app/views/main.php"><img src="/backend/logojm.png"></a></div>  
+                    <div style='float:left'><a class="navbar-brand" style="height:80px" href="/backend/app/views/main.php"><img style="max-height: 50px;" src="/backend/logojm.png"></a></div>
                 </div>
             </div>
             <!-- /.navbar-header -->
