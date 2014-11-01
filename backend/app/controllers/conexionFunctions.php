@@ -9,17 +9,10 @@ try{
         if($conectar==="true"){
             $_SESSION["user"]=$_POST["user"];
             $_SESSION["pass"]=$_POST["pass"];
-            
-            $usuario = new Usuario();
-            $user = $usuario->getUsersbyName($_SESSION["user"]);
-            
-            $permisos = $usuario->getPermisos($user[0]['id_role']); 
-            $_SESSION['usuario']=$user;
-            $_SESSION['permisos']=$permisos;
-            
-            header( 'Location: /app/views/main.php' ) ;
+                                    
+            header( 'Location: /backend/app/views/main.php' ) ;
         }else{
-            header('Location: /index.php?error');
+            header('Location: /backend/index.php?error');
         }
 }
  catch (Exception $er){

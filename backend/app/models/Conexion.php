@@ -12,7 +12,7 @@ class database {
 
      try{
             $conexion = mysql_connect("localhost",$user,$pass); 
-            $conecto = mysql_select_db("tmbs",$conexion);
+            $conecto = mysql_select_db("jm",$conexion);
         
                 if(!$conecto){
                     return "false";
@@ -28,7 +28,7 @@ class database {
      $pass=$_SESSION["pass"];
      
      $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
-            mysql_select_db("tmbs",$this->conexion) or die("Could not open the db");
+            mysql_select_db("jm",$this->conexion) or die("Could not open the db");
             
     }
   /* METODO PARA REALIZAR UNA CONSULTA 
