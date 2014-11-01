@@ -1,5 +1,6 @@
 create database jm; 
 use jm; 
+
 create table role (
 id_role int auto_increment,
 nombre varchar(512) not null,
@@ -13,6 +14,16 @@ nombre varchar(512) not null,
 primary key(id_usuario),
 foreign key(id_role) references role(id_role)
 ) engine=InnoDB;
+
+create table agenda(
+id_agenda int auto_increment,
+id_usuario int not null,
+comentario varchar(512) not null,
+fecha_inicio datetime not null,
+fecha_fin datetime not null,
+primary key(id_agenda),
+foreign key(id_usuario) references usuario(id_usuario)
+)engine=innoDb;
 
 create table tipo(
 id_tipo int auto_increment,

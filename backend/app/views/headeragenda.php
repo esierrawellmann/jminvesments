@@ -1,6 +1,6 @@
 <?php
     $pt = "";
-    $pp = "/app/views";
+    $pp = "/backend/app/views";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> The Men's Barbershop</title>
+    <title> JM Inversiones</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/public/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -82,8 +82,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                <div style='float:left'><img src="/mustache1.png"></div>  
-                <div style='float:right;alignment-adjust:central'><a class="navbar-brand" href="/app/views/main.php">The Men's Barbershop Admin </a></div>
+                    <div style='float:left'><a class="navbar-brand" href="/backend/app/views/main.php"><img src="/backend/logojm.png"></a></div>  
                 </div>
             </div>
             <!-- /.navbar-header -->
@@ -96,7 +95,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/index.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/backend/index.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
