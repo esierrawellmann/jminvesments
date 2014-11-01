@@ -142,6 +142,12 @@
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-child fa-fw"></i> Calendario</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-child fa-fw"></i> Citas</a>
+                        </li>
                      </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
