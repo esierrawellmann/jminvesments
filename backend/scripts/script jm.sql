@@ -22,7 +22,7 @@ primary key(id_tipo)
 
 create table propiedad(
 id_propiedad int auto_increment,
-id_tipo int auto_increment,
+id_tipo int not null,
 negocio varchar(124) not null,
 zona varchar(5) not null,
 estado varchar(124) not null,
