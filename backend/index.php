@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div class="alert alert-success" role="alert"><h3>The Men's Barbershop &nbsp; <img src="mustache1.png"> </h3></div>
+<div class="alert alert-info" role="alert"><h3><img src="logojm.png"> </h3></div>
     <?php if(isset($_GET["error"])){ ?>
 <div class="alert alert-danger">
   <a href="#" class="alert-link">No se pudo conectar a la base de datos. Usuario o Contraseña incorrectas.</a>
@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>The Men's Barbershop</title>
+    <title>JM Inversiones</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
                                     <input class="form-control" placeholder="Contraseña" name="pass" type="password" value="">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" value="Iniciar Sesi&oacute;n" class="btn btn-lg btn-success btn-block">
+                                <input type="submit" value="Iniciar Sesi&oacute;n" class="btn btn-lg btn-primary btn-block">
                             </fieldset>
                         </form>
                     </div>
