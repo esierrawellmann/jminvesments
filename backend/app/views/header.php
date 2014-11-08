@@ -142,10 +142,13 @@
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-child fa-fw"></i> Calendario</a>
+                            <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-child fa-fw"></i> Citas</a>
+                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-pencil-square-o fa-fw"></i> Citas</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/propiedad/index.php"><i class="fa fa-building fa-fw"></i> Ingreso Propiedades</a>
                         </li>
                      </ul>
                 </div>
