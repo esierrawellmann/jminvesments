@@ -15,21 +15,9 @@
 	 angular.module('rol', ['ui.bootstrap']);
 	 function controller($scope, $modal, $log , $http)
 	 {
+	 	$scope.src = {};
 	 	angular.element(document).ready(function () {
-    	  
-	    });
-
- 		$scope.findProperties = function (datos){
-
-			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":"'+JSON.stringify(datos)+'"}').success(function(data){
-				console.log(data);
-			});             
-		}
-	 }
-        $(document).ready(function() {
-
-
-        	$("#tipo").select2();
+	 		$("#tipo").select2();
         	$("#negocio").select2();
         	$("#zona").select2();
 
@@ -42,7 +30,11 @@
 		        step: 1,
 		        prefix: "$",
 		        prettify: false,
-		        hasGrid: true
+		        hasGrid: true, 
+		        onChange: function (obj) {      // callback is called on every slider change
+			       $scope.src.renta_desde = obj.fromNumber;
+			       $scope.src.renta_hasta = obj.toNumber;
+			    }
 		    });
         	  $("#venta").ionRangeSlider({
 		        min: 0,
@@ -53,9 +45,22 @@
 		        step: 1,
 		        prefix: "$",
 		        prettify: false,
-		        hasGrid: true
+		        hasGrid: true, 
+		        onChange: function (obj) {      // callback is called on every slider change
+			       $scope.src.venta_desde = obj.fromNumber;
+			       $scope.src.venta_hasta = obj.toNumber;
+			    }
 		    });
-        });
+    	  
+	    });
+
+ 		$scope.findProperties = function (datos){
+
+			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
+				console.log(data);
+			});             
+		}
+	 }
     </script>
 
     <div class="main-content" ng-app="rol"> 
@@ -143,7 +148,7 @@
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label for="renta">Precio de renta</label>
-								<input id="renta" type="text" name="renta" ng-model="src.precio_renta" value="">
+								<input id="renta" type="text" name="renta" ng-model="src.precio_renta" >
 							</div>
 							<div class="row">
 								<div class="form-group">

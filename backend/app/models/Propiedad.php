@@ -56,6 +56,46 @@ class Propiedad extends database {
 		}
 	}
 
+function searchForProperties($params){
+    $params = get_object_vars($params);
+    $query = "select * from propiedad where ";
+    $query .= " precio_renta between ".$params['renta_desde']." and ".$params['renta_hasta']." ";
+    $query .=" and  precio_renta between ".$params['venta_desde']." and ".$params['venta_hasta']." ";
+    if(isset($params['tipo'])){
+        $query .= " and tipo in('".implode("','",$params['tipo'])."')";
+    }
+    if(isset($params['nombre_proyecto'])){
+       $query .=" and nombre_proyecto like '%".$params['nombre_proyecto']."%'"; 
+    }
+    if(isset($params['nombre_propietario'])){
+        $query .=" and nombre_propietario like '%".$params['nombre_propietario']."%'";
+    }
+    if(isset($params['estado'])){
+        $query .= " and estado = '".$params['estado']."'";
+    }
+    if(isset($params['estado'])){
+        $query .= " and estado = '".$params['estado']."'";
+    }
+    if(isset($params['negocio'])){
+        $query .= " and negocio in('".implode("','",$params['negocio'])."')";
+    }
+    if(isset($params['zona'])){
+         $query .= " and zona in('".implode("','",$params['zona'])."')";
+    }
+    if(isset($params['dormitorios'])){
+         $query .= " and dormitorios = '".$params['dormitorios']."'";
+    }    
+    $this->conectar();
+    $query = $this->consulta($query);
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+}
 function deletePropiedad($propiedad){
     $this -> conectar();
     $query = $this -> consulta("delete from propiedad where id_propiedad = ".$propiedad['id_propiedad']);

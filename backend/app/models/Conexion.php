@@ -26,9 +26,15 @@ class database {
      
      $user=$_SESSION["user"];
      $pass=$_SESSION["pass"];
-     
-     $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
+     if(isset($_SESSION["user"])){
+      $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
             mysql_select_db("jm",$this->conexion) or die("Could not open the db");
+      
+     }else{
+      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
+            mysql_select_db("jm",$this->conexion) or die("Could not open the db");
+      
+     }
             
     }
   /* METODO PARA REALIZAR UNA CONSULTA 
