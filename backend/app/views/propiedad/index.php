@@ -9,6 +9,7 @@ function controller($scope, $modal, $log , $http)
     $scope.comprasIniciales =[];
     $scope.detailComprasInit = [];
     $scope.users = [];
+
     angular.element(document).ready(function () {
         $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"query"}').success(function(data){
             console.log(data);
@@ -314,7 +315,7 @@ Date.prototype.toMysqlFormat = function() {
             <div class="col-lg-12">
 		        <h1 class="page-header">Ingreso de Propiedades</h1>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Propiedad
@@ -329,6 +330,7 @@ Date.prototype.toMysqlFormat = function() {
                                         <th>Id</th>
                                         <th>Ambiente</th>
                                         <th>Negocio</th>
+                                        <th>Zona</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -336,7 +338,8 @@ Date.prototype.toMysqlFormat = function() {
                                     <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras"> 
                                         <td>{{compras.id_propiedad}}</td>
                                         <td>{{compras.ambiente}}</td>
-                                        <td>{{compras.Negocio}}</td>
+                                        <td>{{compras.negocio}}</td>
+                                        <td>{{compras.zona}}</td>
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">

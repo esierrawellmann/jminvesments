@@ -16,7 +16,7 @@
 	    case "query":
 		    $propiedad = new Propiedad();  
                     $objGasto = $propiedad ->getPropiedades();
-                    echo json_encode($objGasto);
+                    echo '{"compras":'.json_encode($objGasto).'}';
 	    	break;
 	    case "update":
 	        $propiedad = new Propiedad();
