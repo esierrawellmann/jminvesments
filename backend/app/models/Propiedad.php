@@ -19,11 +19,12 @@ class Propiedad extends database {
   function newPropiedad($propiedad){
     $this -> conectar();
     
-    $query = $this->consulta("insert into propiedad(tipo,negocio,zona,estado,nombre_proyecto,nombre_propietario,dormitorios,precio_renta,precio_venta,amueblado,directa_compartida,direccion,departamento,municipio) values (" .
+    $query = $this->consulta("insert into propiedad(tipo,negocio,zona,estado,nombre_proyecto,nombre_propietario,dormitorios,precio_renta,precio_venta,amueblado,directa_compartida,direccion,departamento,municipio,ambiente,area,imagen_portada) values (" .
             "'".$propiedad['tipo']."','" . $propiedad['negocio'] . "','" . $propiedad['zona'] . "','" . $propiedad['estado'] . "',"
             . "'".$propiedad['nombre_proyecto']."','" . $propiedad['nombre_propietario'] . "','" . $propiedad['dormitorios'] . "'," . $propiedad['precio_renta'] . ","
             . $propiedad['precio_venta'].",'" . $propiedad['amueblado'] . "','" . $propiedad['directa_compartida'] . "','" . $propiedad['direccion'] . "'," 
-            . $propiedad['departamento'].",'" . $propiedad['municipio'] . "');");
+            . $propiedad['departamento'].",'" . $propiedad['municipio'] . "',"
+            . "'".$propiedad['ambiente']."','". "'".$propiedad['area']."','"."'".$propiedad['imagen_portada'].");");
     
     $queryObject = $this->consulta("SELECT * from propiedad ORDER BY id_propiedad DESC LIMIT 1 ");
     $this->disconnect();
@@ -43,7 +44,9 @@ class Propiedad extends database {
                 "tipo='".$propiedad['tipo']."',negocio='" . $propiedad['negocio'] . "',zona='" . $propiedad['zona'] . "',estado='" . $propiedad['estado'] . "',"
                 . "nombre_proyecto='".$propiedad['nombre_proyecto']."',nombre_propietario='" . $propiedad['nombre_propietario'] . "',dormitorios='" . $propiedad['dormitorios'] . "',precio_renta=" . $propiedad['precio_renta'] . ","
                 . "precio_venta=".$propiedad['precio_venta'].",amueblado='" . $propiedad['amueblado'] . "',directa_compartida='" . $propiedad['directa_compartida'] . "',direccion='" . $propiedad['direccion'] . "'," 
-                . "departamento='". $propiedad['departamento']."',municipio='" . $propiedad['municipio'] . "' where id_propiedad=". $propiedad['id_propiedad'] .";");
+                . "departamento='". $propiedad['departamento']."',municipio='" . $propiedad['municipio'] 
+                        ."',ambiente='" . $propiedad['ambiente'] . "',area='".$propiedad['area']."',imagen_portada='".$propiedad['imagen_portada']."'"
+                        . " where id_propiedad=". $propiedad['id_propiedad'] .";");
 
 		$queryObject = $this -> consulta("select * from propiedad where id_propiedad = ".$propiedad['id_propiedad']);
 		$this ->disconnect();

@@ -51,6 +51,7 @@ create table detalle_propiedad(
 id_detalle_propiedad int auto_increment,
 id_propiedad int not null,
 direccion varchar(1024) not null, 
+nombre varchar(512) not null,
 primary key (id_detalle_propiedad),
 foreign key (id_propiedad) references propiedad(id_propiedad)
 ) engine=InnoDB;
