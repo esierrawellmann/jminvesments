@@ -24,7 +24,7 @@ class Propiedad extends database {
             . "'".$propiedad['nombre_proyecto']."','" . $propiedad['nombre_propietario'] . "','" . $propiedad['dormitorios'] . "'," . $propiedad['precio_renta'] . ","
             . $propiedad['precio_venta'].",'" . $propiedad['amueblado'] . "','" . $propiedad['directa_compartida'] . "','" . $propiedad['direccion'] . "'," 
             . $propiedad['departamento'].",'" . $propiedad['municipio'] . "',"
-            . "'".$propiedad['ambiente']."','". "'".$propiedad['area']."','"."'".$propiedad['imagen_portada'].");");
+            . "'".$propiedad['ambiente']."','". "'".$propiedad['area']."');");
     
     $queryObject = $this->consulta("SELECT * from propiedad ORDER BY id_propiedad DESC LIMIT 1 ");
     $this->disconnect();
@@ -45,7 +45,7 @@ class Propiedad extends database {
                 . "nombre_proyecto='".$propiedad['nombre_proyecto']."',nombre_propietario='" . $propiedad['nombre_propietario'] . "',dormitorios='" . $propiedad['dormitorios'] . "',precio_renta=" . $propiedad['precio_renta'] . ","
                 . "precio_venta=".$propiedad['precio_venta'].",amueblado='" . $propiedad['amueblado'] . "',directa_compartida='" . $propiedad['directa_compartida'] . "',direccion='" . $propiedad['direccion'] . "'," 
                 . "departamento='". $propiedad['departamento']."',municipio='" . $propiedad['municipio'] 
-                        ."',ambiente='" . $propiedad['ambiente'] . "',area='".$propiedad['area']."',imagen_portada='".$propiedad['imagen_portada']."'"
+                        ."',ambiente='" . $propiedad['ambiente'] . "',area='".$propiedad['area']."'"
                         . " where id_propiedad=". $propiedad['id_propiedad'] .";");
 
 		$queryObject = $this -> consulta("select * from propiedad where id_propiedad = ".$propiedad['id_propiedad']);
