@@ -88,6 +88,12 @@ function searchForProperties($params){
     if(isset($params['dormitorios'])){
          $query .= " and dormitorios = '".$params['dormitorios']."'";
     }    
+    if(isset($params['directa_compartida'])){
+        $query .= "and directa_compartida = '".$params['dormitorios']."'";
+    }
+    if(isset($params['amueblado'])){
+        $query .= "and amueblado = '".$params['amueblado']."'";
+    }
     $this->conectar();
     $query = $this->consulta($query);
     $this->disconnect();
