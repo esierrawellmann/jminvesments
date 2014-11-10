@@ -57,7 +57,6 @@
  		$scope.findProperties = function (datos){
 
 			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
-				console.log(data);
 			});             
 		}
 	 }
@@ -67,10 +66,12 @@
 		<div class="container" ng-controller="controller">
 			<div class="row">
 				<div class="col-lg-12">
+					<button class="btn btn-default pull-right btn-xs" ng-click="isCollapsed = !isCollapsed">{{ isCollapsed ? 'Mostrar':'Ocultar' }}</button>
 					<h1 class="page-header">Busqueda</h1>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			
+			<div class="panel panel-default"  collapse="isCollapsed">
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-lg-6">
@@ -147,7 +148,7 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
-								<label for="renta">Precio de renta</label>
+								<label for="renta">Precio de renta</label> 
 								<input id="renta" type="text" name="renta" ng-model="src.precio_renta" >
 							</div>
 							<div class="row">
