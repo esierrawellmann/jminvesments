@@ -317,7 +317,7 @@ Date.prototype.toMysqlFormat = function() {
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Propiedad
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas()">Nueva Propiedad</button>
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="openVentas('lg')">Nueva Propiedad</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -403,92 +403,120 @@ Date.prototype.toMysqlFormat = function() {
                         <h3 class="modal-title"¨>{{action}} Propiedad</h3>
                     </div>
                     <div class="modal-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="userStatus">Tipo</label>
-                                <select id="user-status-option" name="userNameField3" ng-model="new.tipo" id="exampleInputEmail1" placeholder="Tipo" required="true" class="form-control" ng-options="stat for stat in tipos"></select>
-                                <div class="alert-danger" role="alert" ng-show="userForm.userNameField3.$error.required">Este campo es requerido</div>
+                        <form role="form" name="userForm">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="userStatus">Tipo</label>
+                                        <select  name="tipo" ng-model="new.tipo" id="tipo"  required="true" class="form-control" ng-options="tipo for tipo in tipos"></select>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.tipo.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="negocio">Negocio</label>
+                                        <select name="negocio" ng-model="new.negocio" id="negocio" placeholder="Negocio" required="true" class="form-control" ng-options="negocio for negocio in negocios"></select>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.negocio.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="userStatus">Negocio</label>
-                                <select id="user-status-option" name="userNameField4" ng-model="new.negocio" id="exampleInputEmail1" placeholder="Negocio" required="true" class="form-control" ng-options="stat for stat in negocios"></select>
-                                <div class="alert-danger" role="alert" ng-show="userForm.userNameField4.$error.required">Este campo es requerido</div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="zona">Zona</label>
+                                        <select name="zona" ng-model="new.zona" id="zona" placeholder="Zona" required="true" class="form-control" ng-options="zona for zona in zonas"></select>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.zona.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="nombre_proyecto">Nombre Proyecto</label>
+                                        <input type="text" class="form-control" name="nombre_proyecto" required="true" ng-model="new.nombre_proyecto" id="nombre_proyecto" placeholder="Nombre del Proyecto"/>          
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="userStatus">Zona</label>
-                                <select id="user-status-option" name="userNameField5" ng-model="new.zona" id="exampleInputEmail1" placeholder="Zona" required="true" class="form-control" ng-options="stat for stat in zonas"></select>
-                                <div class="alert-danger" role="alert" ng-show="userForm.userNameField5.$error.required">Este campo es requerido</div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="nombre_propietario">Nombre Propietario</label>
+                                        <input type="text" class="form-control" required="true" ng-model="new.nombre_propietario" id="nombre_propietario" placeholder="Nombre del Propietario"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_propietario.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="dormitorios">Dormitorios</label>
+                                        <input type="text" class="form-control" type="number" ng-model="new.dormitorios" id="dormitorios" name="dormitorios" placeholder="Numero de Dormitorios"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nombre Proyecto</label>
-                                <input type="text" class="form-control" ng-model="rol.nombre_proyecto" id="exampleInputEmail1" placeholder="Nombre del Proyecto"/>          
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Precio Renta</label>
+                                        <input type="text" class="form-control" type="number" ng-model="rol.precio_renta" id="exampleInputEmail1" placeholder="Precio de Renta"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Precio Compra</label>
+                                        <input type="text" class="form-control" type="number" ng-model="rol.precio_venta" id="exampleInputEmail1" placeholder="Precio de Venta"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox"  ng-model="rol.amueblado" id="exampleInputEmail1"/>
+                                        Amueblado</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="radio" name="directa_compartida" value="Directa" ng-model="rol.directa_compartida" id="exampleInputEmail1"/>
+                                        Directa</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="radio" name="directa_compartida" value="Compartida" ng-model="rol.directa_compartida" id="exampleInputEmail1"/>
+                                        Compartida</label>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nombre Propietario</label>
-                                <input type="text" class="form-control" ng-model="rol.nombre_propietario" id="exampleInputEmail1" placeholder="Nombre del Propietario"/>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Area</label>
+                                        <input type="text" class="form-control" ng-model="rol.area" id="exampleInputEmail1" placeholder="Area"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Direccion</label>
+                                        <input type="text" class="form-control" ng-model="rol.direccion" id="exampleInputEmail1" placeholder="Direccion de la Propiedad"/>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Dormitorios</label>
-                                <input type="text" class="form-control" ng-model="rol.dormitorios" id="exampleInputEmail1" placeholder="Numero de Dormitorios"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Precio Renta</label>
-                                <input type="text" class="form-control" ng-model="rol.precio_renta" id="exampleInputEmail1" placeholder="Precio de Renta"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Precio Compra</label>
-                                <input type="text" class="form-control" ng-model="rol.precio_venta" id="exampleInputEmail1" placeholder="Precio de Venta"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Amueblado</label>
-                                <input type="text" class="form-control" ng-model="rol.amueblado" id="exampleInputEmail1" placeholder="Amueblado"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Directa/Compartida</label>
-                                <input type="text" class="form-control" ng-model="rol.directa_compartida" id="exampleInputEmail1" placeholder="Directa o Compartida"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Area</label>
-                                <input type="text" class="form-control" ng-model="rol.area" id="exampleInputEmail1" placeholder="Area"/>
-                            </div>
-                        </form>
-                       <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Direccion</label>
-                                <input type="text" class="form-control" ng-model="rol.direccion" id="exampleInputEmail1" placeholder="Direccion de la Propiedad"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Departamento</label>
-                                <input type="text" class="form-control" ng-model="rol.departamento" id="exampleInputEmail1" placeholder="Nombre del Departamento"/>
-                            </div>
-                        </form>
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Municipio</label>
-                                <input type="text" class="form-control" ng-model="rol.municipio" id="exampleInputEmail1" placeholder="Nombre del Municipio"/>
-                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Departamento</label>
+                                        <input type="text" class="form-control" ng-model="rol.departamento" id="exampleInputEmail1" placeholder="Nombre del Departamento"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Municipio</label>
+                                        <input type="text" class="form-control" ng-model="rol.municipio" id="exampleInputEmail1" placeholder="Nombre del Municipio"/>
+                                    </div>
+                                </div>
+                            </div>     
                         </form>
                     </div>
                     <div class="modal-footer">
