@@ -12,7 +12,6 @@ function controller($scope, $modal, $log , $http)
 
     angular.element(document).ready(function () {
         $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"query"}').success(function(data){
-            console.log(data);
             $scope.comprasIniciales = data;
          });
     });
@@ -47,7 +46,6 @@ function controller($scope, $modal, $log , $http)
         modalProductsOpen.result.then(function (detalleCompra) {   
             $http.post('./../../controllers/detalleCompra/detalleCompraFunctions.php', '{"action":"insert","detalleCompra":'+JSON.stringify(detalleCompra)+',"compra":'+JSON.stringify($scope.detailComprasInit.compra)+'}').success(function(data){
                   $scope.detailComprasInit.detalleCompras.push(data);
-                  console.log(data);
             });             
         }, function () {});
     }
@@ -123,7 +121,6 @@ function controller($scope, $modal, $log , $http)
         });
 
         modalInstanceOpen.result.then(function (gasto) {
-            console.log(gasto);
             $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"insert","propiedad":'+JSON.stringify(gasto)+'}').success(function(data){
                   $scope.comprasIniciales.compras.push(data);
                   $scope.alerts.push({type: 'success', msg: 'Propiedad Agregada Exitosamente' });
@@ -176,9 +173,8 @@ function controller($scope, $modal, $log , $http)
     };
  } 
     
-      var ModalInstanceDetailUpdateCtrl = function($scope,$http, $modalInstance,action,detalleVenta,products){
+  var ModalInstanceDetailUpdateCtrl = function($scope,$http, $modalInstance,action,detalleVenta,products){
     $scope.products = products;
-    console.log(products);
     $scope.action = action;
     $scope.detail = detalleVenta;
 
@@ -198,34 +194,7 @@ function controller($scope, $modal, $log , $http)
     $scope.new = compras;
     $scope.users = users;
     $scope.action = action;
-    console.log($scope.new.fecha);
-
-    $scope.today = function() {
-    $scope.new.fecha = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.new.fecha = null;
-  };
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date();
-  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-
-
+ 
     $scope.ok = function (valid) {
         if(valid){
             $modalInstance.close($scope.new);
@@ -240,40 +209,16 @@ function controller($scope, $modal, $log , $http)
   var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
     $scope.users = users;
     $scope.action = action;
-    $scope.new = {"directa_compartida":"Directa"};
+    $scope.new = {"directa_compartida":"Directa","departamento":{}};
 
 
     $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno"];
     $scope.negocios =["Venta","Renta"];
     $scope.zonas =["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"];
-
-
-    $scope.today = function() {
-    $scope.new.fecha = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.new.fecha = null;
-  };
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date();
-  $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-
-
+    $scope.departamentos = JSON.parse('{"departamentos":[{"nombre":"Alta Verapaz","municipios":["Chahal","Lanquín","San Juan Chamelco","Santa María Cahabón","Tucurú","Chisec","Panzós","San Pedro Carchá","Senahú","Cobán","Raxruhá","Santa Catalina La Tinta","Tactic","Fray Bartolomé de las Casas","San Cristóbal Verapaz","Santa Cruz Verapaz","Tamahú"]},{"nombre":"El Progreso","municipios":["El Jícaro","San Antonio La Paz","Guastatoya","San Cristóbal Acasaguastlán","Morazán","Sanarate","San Agustín Acasaguastlán","Sansare"]},{"nombre":"Izabal","municipios":["El Estor","Puerto Barrios","Livingston","Los Amates","Morales"]},{"nombre":"Quetzaltenango","municipios":["Almolonga","Coatepeque","Flores Costa Cuca","Olintepeque","San Carlos Sija","San Mateo","Cabricán","Colomba","Génova","Palestina de Los Altos","San Francisco La Unión","San Miguel Sigüilá","Cajolá","Concepción Chiquirichapa","Huitán","Quetzaltenango","San Juan Ostuncalco","Sibilia","Cantel","El Palmar","La Esperanza","Salcajá","San Martín Sacatepéquez","Zunil"]},{"nombre":"San Marcos","municipios":["Ayutla","El Quetzal","IxchiguánW","Ocós","San Cristóbal Cucho","San Miguel Ixtahuacán","Sibinal","Tejutla","Catarina","El Rodeo","La Reforma","Pajapita","San José Ojetenam","San Pablo","Sipacapa","Comitancillo","El Tumbador","Malacatán","Río Blanco","San Lorenzo","San Pedro Sacatepéquez","Tacaná","Concepción Tutuapa","Esquipulas Palo Gordo","Nuevo Progreso","San Antonio Sacatepéquez","San Marcos","San Rafael Pie de La Cuesta","Tajumulco"]},{"nombre":"Totonicapán","municipios":["Momostenango","San Francisco El Alto","San Andrés Xecul","Santa Lucía La Reforma","San Bartolo","Santa María Chiquimula","San Cristóbal Totonicapán","Totonicapán"]},{"nombre":"Baja Verapaz","municipios":["Cubulco","Salamá","Granados","San Jerónimo","Purulhá","San Miguel Chicaj","Rabinal","Santa Cruz el Chol"]},{"nombre":"Escuintla","municipios":["Escuintla","La Gomera","San José","Tiquisate","Guanagazapa","Masagua","San Vicente Pacaya","Iztapa","Nueva Concepción","Santa Lucía Cotzumalguapa","La Democracia","Palín","Siquinalá"]},{"nombre":"Jalapa","municipios":["Jalapa","San Luis Jilotepeque","Mataquescuintla","San Manuel Chaparrón","Monjas","San Pedro Pinula","San Carlos Alzatate"]},{"nombre":"Quiché","municipios":["Canillá","Chichicastenango","Joyabaj","Sacapulas","San Juan Cotzal","Zacualpa","Chajul","Chinique","Nebaj","San Andrés Sajcabajá","San Pedro Jocopilas","Chicamán","Cunén","Pachalum","San Antonio Ilotenango","Santa Cruz del Quiché","Chiché","Ixcán","Patzité","San Bartolomé Jocotenango","Uspantán"]},{"nombre":"Santa Rosa","municipios":["Barberena","Guazacapán","San Juan Tecuaco","Santa Rosa de Lima","Casillas","Nueva Santa Rosa","San Rafaél Las Flores","Taxisco","Chiquimulilla","Oratorio","Santa Cruz Naranjo","Cuilapa","Pueblo Nuevo Viñas","Santa María Ixhuatán"]},{"nombre":"Zacapa","municipios":["Cabañas","La Unión","Usumatlán","Estanzuela","Río Hondo","Zacapa","Gualán","San Diego","Huité","Teculután"]},{"nombre":"Chimaltenango","municipios":["Acatenango","Patzicía","San José Poaquil","Santa Cruz Balanyá","Chimaltenango","Patzún","San Juan Comalapa","Tecpán","El Tejar","Pochuta","San Martín Jilotepeque","Yepocapa","Parramos","San Andrés Itzapa","Santa Apolonia","Zaragoza"]},{"nombre":"Guatemala","municipios":["Amatitlán","Guatemala","San José Pinula","San Pedro Sacatepéquez","Villa Nueva","Chinautla","Mixco","San Juan Sacatepéquez","San Raymundo","Chuarrancho","Palencia","San Miguel Petapa","Santa Catarina Pinula","Fraijanes","San José del Golfo","San Pedro Ayampuc","Villa Canales"]},{"nombre":"Jutiapa","municipios":["Agua Blanca","Conguaco","Jerez","Quesada","Zapotitlán","Asunción Mita","El Adelanto","Jutiapa","San José Acatempa","Atescatempa","El Progreso","Moyuta","Santa Catarina Mita","Comapa","Jalpatagua","Pasaco","Yupiltepeque"]},{"nombre":"Retalhuleu","municipios":["Champerico","San Andrés Villa Seca","Santa Cruz Muluá","El Asintal","San Felipe","Nuevo San Carlos","San Martín Zapotitlán","Retalhuleu","San Sebastián"]},{"nombre":"Sololá","municipios":["Concepción","San Antonio Palopó","San Marcos La Laguna","Santa Catarina Palopó","Santa María Visitación","Nahualá","San José Chacayá","San Pablo La Laguna","Santa Clara La Laguna","Santiago Atitlán","Panajachel","San Juan La Laguna","San Pedro La Laguna","Santa Cruz La Laguna","Sololá","San Andrés Semetabaj","San Lucas Tolimán","Santa Catarina Ixtahuacan","Santa Lucía Utatlán"]},{"nombre":"Chiquimula","municipios":["Camotán","Ipala","San Jacinto","Chiquimula","Jocotán","San José La Arada","Concepción Las Minas","Olopa","San Juan Ermita","Esquipulas","Quezaltepeque"]},{"nombre":"Huehuetenango","municipios":["Aguacatán","Cuilco","La Libertad","San Gaspar Ixchil","San Mateo Ixtatán","San Rafael La Independencia","Santa Ana Huista","Santiago Chimaltenango","Chiantla","Huehuetenango","Malacatancito","San Ildefonso Ixtahuacán","San Miguel Acatán","San Rafael Petzal","Santa Bárbara","Tectitán","Colotenango","Jacaltenango","Nentón","San Juan Atitán","San Pedro Necta","San Sebastián Coatán","Santa Cruz Barillas","Todos Santos Cuchumatánes","Concepción Huista","La Democracia","San Antonio Huista","San Juan Ixcoy","San Pedro Soloma","San Sebastián","Santa Eulalia","Unión Cantinil"]},{"nombre":"Petén","municipios":["Dolores","Melchor de Mencos","San Francisco","Sayaxché","Flores","Poptún","San José","La Libertad","San Andrés","San Luis","Las Cruces","San Benito","Santa Ana"]},{"nombre":"Sacatepéquez","municipios":["Alotenango","Magdalena Milpas Altas","San Lucas Sacatepéquez","Santa María de Jesús","La Antigua Guatemala","Pastores","San Miguel Dueñas","Santiago Sacatepéquez","Ciudad Vieja","San Antonio Aguas Calientes","Santa Catarina Barahona","Santo Domingo Xenacoj","Jocotenango","San Bartolomé Milpas Altas","Santa Lucía Milpas Altas","Sumpango"]},{"nombre":"Suchitepéquez","municipios":["Chicacao","Pueblo Nuevo","San Bernardino","San Juan Bautista","Santa Bárbara","Cuyotenango","Río Bravo","San Francisco Zapotitlán","San Lorenzo","Santo Domingo","Mazatenango","Samayac","San Gabriel","San Miguel Panán","Santo Tomás La Unión","Patulul","San Antonio","San José El Ídolo","San Pablo Jocopilas","Zunilito"]}]}');
+    $scope.getMunicipios = function (departamento){
+        return departamento.municipios;
+    }
     $scope.ok = function (valid) {
         
         if(valid){
@@ -509,14 +454,16 @@ Date.prototype.toMysqlFormat = function() {
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Departamento</label>
-                                        <input type="text" class="form-control" ng-model="new.departamento" id="exampleInputEmail1" placeholder="Nombre del Departamento"/>
+                                        <label for="departamentos">Departamento</label>
+                                        <select name="departamentos" ng-model="new.departamento" id="departamentos"  required="true" class="form-control" ng-options="departamento.nombre for departamento in departamentos.departamentos"></select>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.departamentos.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Municipio</label>
-                                        <input type="text" class="form-control" ng-model="new.municipio" id="exampleInputEmail1" placeholder="Nombre del Municipio"/>
+                                        <label for="municipios">Municipio</label>
+                                        <select name="municipio" ng-model="new.municipio" id="municipio"  required="true" class="form-control" ng-options="municipio for municipio in getMunicipios(new.departamento)"></select>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.municipio.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                             </div>     
