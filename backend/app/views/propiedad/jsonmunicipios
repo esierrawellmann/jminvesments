@@ -1,0 +1,185 @@
+{"departamentos":[
+{"nombre":"Alta Verapaz","municipios":[
+
+]},
+{"nombre":"El Progreso","municipios":[
+
+]},
+{"nombre":"Izabal","municipios":[
+
+]},
+{"nombre":"Quetzaltenango","municipios":[
+
+]},
+{"nombre":"San Marcos","municipios":[
+"AyutlaW",
+"El QuetzalW",
+"IxchiguánW",
+"OcósW",
+"San Cristóbal CuchoW",
+"San Miguel IxtahuacánW",
+"SibinalW",
+"TejutlaW",
+"CatarinaW",
+"El RodeoW",
+"La ReformaW",
+"PajapitaW",
+"San José OjetenamW",
+"San PabloW",
+"SipacapaW",
+"ComitancilloW",
+"El TumbadorW",
+"MalacatánW",
+"Río BlancoW",
+"San LorenzoW",
+"San Pedro SacatepéquezW",
+"TacanáW",
+"Concepción TutuapaW",
+"Esquipulas Palo GordoW",
+"Nuevo ProgresoW",
+"San Antonio SacatepéquezW",
+"San MarcosW",
+"San Rafael Pie de La CuestaW",
+"TajumulcoW"
+]},
+{"nombre":"Totonicapán","municipios":[
+"Momostenango",
+"San Francisco El Alto",
+"San Andrés Xecul",
+"Santa Lucía La Reforma",
+"San Bartolo",
+"Santa María Chiquimula",
+"San Cristóbal Totonicapán",
+"Totonicapán"
+]},
+{"nombre":"Baja Verapaz","municipios":[
+
+]},
+{"nombre":"Escuintla","municipios":[
+
+]},
+{"nombre":"Jalapa","municipios":[
+
+]},
+{"nombre":"Quiché","municipios":[
+
+]},
+{"nombre":"Santa Rosa","municipios":[
+"Barberena",
+"Guazacapán",
+"San Juan Tecuaco",
+"Santa Rosa de Lima",
+"Casillas",
+"Nueva Santa Rosa",
+"San Rafaél Las Flores",
+"Taxisco",
+"Chiquimulilla",
+"Oratorio",
+"Santa Cruz Naranjo",
+"Cuilapa",
+"Pueblo Nuevo Viñas",
+"Santa María Ixhuatán"
+]},
+{"nombre":"Zacapa","municipios":[
+"Cabañas",
+"La Unión",
+"Usumatlán",
+"Estanzuela",
+"Río Hondo",
+"Zacapa",
+"Gualán",
+"San Diego",
+"Huité",
+"Teculután"
+]},
+{"nombre":"Chimaltenango","municipios":[
+
+]},
+{"nombre":"Guatemala","municipios":[
+
+]},
+{"nombre":"Jutiapa","municipios":[
+
+]},
+{"nombre":"Retalhuleu","municipios":[
+"Champerico",
+"San Andrés Villa Seca",
+"Santa Cruz Muluá",
+"El Asintal",
+"San Felipe",
+"Nuevo San Carlos",
+"San Martín Zapotitlán",
+"Retalhuleu",
+"San Sebastián"
+]},
+{"nombre":"Sololá","municipios":[
+"Concepción",
+"San Antonio Palopó",
+"San Marcos La Laguna",
+"Santa Catarina Palopó",
+"Santa María Visitación",
+"Nahualá",
+"San José Chacayá",
+"San Pablo La Laguna",
+"Santa Clara La Laguna",
+"Santiago Atitlán",
+"Panajachel",
+"San Juan La Laguna",
+"San Pedro La Laguna",
+"Santa Cruz La Laguna",
+"Sololá",
+"San Andrés Semetabaj",
+"San Lucas Tolimán",
+"Santa Catarina Ixtahuacan",
+"Santa Lucía Utatlán"
+]},
+{"nombre":"Chiquimula","municipios":[
+
+]},
+{"nombre":"Huehuetenango","municipios":[
+
+]},
+{"nombre":"Petén","municipios":[
+
+]},
+{"nombre":"Sacatepéquez","municipios":[
+"Alotenango",
+"Magdalena Milpas Altas",
+"San Lucas Sacatepéquez",
+"Santa María de Jesús",
+"La Antigua Guatemala",
+"Pastores",
+"San Miguel Dueñas",
+"Santiago Sacatepéquez",
+"Ciudad Vieja",
+"San Antonio Aguas Calientes",
+"Santa Catarina Barahona",
+"Santo Domingo Xenacoj",
+"Jocotenango",
+"San Bartolomé Milpas Altas",
+"Santa Lucía Milpas Altas",
+"Sumpango"
+]},
+{"nombre":"Suchitepéquez","municipios":[
+"Chicacao",
+"Pueblo Nuevo",
+"San Bernardino",
+"San Juan Bautista",
+"Santa Bárbara",
+"Cuyotenango",
+"Río Bravo",
+"San Francisco Zapotitlán",
+"San Lorenzo",
+"Santo Domingo",
+"Mazatenango",
+"Samayac",
+"San Gabriel",
+"San Miguel Panán",
+"Santo Tomás La Unión",
+"Patulul",
+"San Antonio",
+"San José El Ídolo",
+"San Pablo Jocopilas",
+"Zunilito"
+]}
+]}

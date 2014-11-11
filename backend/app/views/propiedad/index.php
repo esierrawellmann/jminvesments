@@ -240,12 +240,13 @@ function controller($scope, $modal, $log , $http)
   var ModalInstanceAddCtrl = function ($scope,$http, $modalInstance,action,users) {
     $scope.users = users;
     $scope.action = action;
-    $scope.new = {};
+    $scope.new = {"directa_compartida":"Directa"};
 
 
     $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno"];
     $scope.negocios =["Venta","Renta"];
     $scope.zonas =["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"];
+
 
     $scope.today = function() {
     $scope.new.fecha = new Date();
@@ -409,14 +410,14 @@ Date.prototype.toMysqlFormat = function() {
                                     <div class="form-group">
                                         <label for="userStatus">Tipo</label>
                                         <select  name="tipo" ng-model="new.tipo" id="tipo"  required="true" class="form-control" ng-options="tipo for tipo in tipos"></select>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.tipo.$error.required">Este campo es requerido</div>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.tipo.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="negocio">Negocio</label>
                                         <select name="negocio" ng-model="new.negocio" id="negocio" placeholder="Negocio" required="true" class="form-control" ng-options="negocio for negocio in negocios"></select>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.negocio.$error.required">Este campo es requerido</div>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.negocio.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                             </div>
@@ -425,14 +426,14 @@ Date.prototype.toMysqlFormat = function() {
                                     <div class="form-group">
                                         <label for="zona">Zona</label>
                                         <select name="zona" ng-model="new.zona" id="zona" placeholder="Zona" required="true" class="form-control" ng-options="zona for zona in zonas"></select>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.zona.$error.required">Este campo es requerido</div>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.zona.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="nombre_proyecto">Nombre Proyecto</label>
                                         <input type="text" class="form-control" name="nombre_proyecto" required="true" ng-model="new.nombre_proyecto" id="nombre_proyecto" placeholder="Nombre del Proyecto"/>          
-                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                             </div>
@@ -440,66 +441,68 @@ Date.prototype.toMysqlFormat = function() {
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="nombre_propietario">Nombre Propietario</label>
-                                        <input type="text" class="form-control" required="true" ng-model="new.nombre_propietario" id="nombre_propietario" placeholder="Nombre del Propietario"/>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_propietario.$error.required">Este campo es requerido</div>
+                                        <input type="text" class="form-control" required="true" ng-model="new.nombre_propietario" name="nombre_propietario" id="nombre_propietario" placeholder="Nombre del Propietario"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_propietario.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="dormitorios">Dormitorios</label>
-                                        <input type="text" class="form-control" type="number" ng-model="new.dormitorios" id="dormitorios" name="dormitorios" placeholder="Numero de Dormitorios"/>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                        <input class="form-control" type="number" integer required="true" ng-model="new.dormitorios" id="dormitorios" name="dormitorios" placeholder="Numero de Dormitorios"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.dormitorios.$error.required || userForm.dormitorios.$error.integer"><small>Este campo es requerido o invalido</small></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Precio Renta</label>
-                                        <input type="text" class="form-control" type="number" ng-model="rol.precio_renta" id="exampleInputEmail1" placeholder="Precio de Renta"/>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                        <label for="precio_renta">Precio Renta</label>
+                                        <input type="number" class="form-control" ng-model="new.precio_renta" required="true" name="precio_renta" id="precio_renta" placeholder="Precio de Renta"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.precio_renta.$error.required  || userForm.precio_renta.$error.integer"><small>Este campo es requerido o invalido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Precio Compra</label>
-                                        <input type="text" class="form-control" type="number" ng-model="rol.precio_venta" id="exampleInputEmail1" placeholder="Precio de Venta"/>
-                                        <div class="alert-danger" role="alert" ng-show="userForm.nombre_proyecto.$error.required">Este campo es requerido</div>
+                                        <label for="precio_venta">Precio Compra</label>
+                                        <input class="form-control" name="precio_venta" type="number" required="true" ng-model="new.precio_venta" id="precio_venta" placeholder="Precio de Venta"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.precio_venta.$error.required || userForm.precio_venta.$error.integer"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="checkbox">
                                         <label>
-                                        <input type="checkbox"  ng-model="rol.amueblado" id="exampleInputEmail1"/>
+                                        <input type="checkbox"  ng-model="new.amueblado" id="amueblado" name="amueblado"/>
                                         Amueblado</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="checkbox">
                                         <label>
-                                        <input type="radio" name="directa_compartida" value="Directa" ng-model="rol.directa_compartida" id="exampleInputEmail1"/>
+                                        <input type="radio" name="directa_compartida" checked value="Directa" ng-model="new.directa_compartida" id="directa"/>
                                         Directa</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="checkbox">
                                         <label>
-                                        <input type="radio" name="directa_compartida" value="Compartida" ng-model="rol.directa_compartida" id="exampleInputEmail1"/>
+                                        <input type="radio" name="directa_compartida" value="Compartida" ng-model="new.directa_compartida" id="compartida"/>
                                         Compartida</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Area</label>
-                                        <input type="text" class="form-control" ng-model="rol.area" id="exampleInputEmail1" placeholder="Area"/>
+                                   <div class="form-group">
+                                        <label for="area">Area</label>
+                                        <input class="form-control" name="area" type="number" required="true" ng-model="new.area" id="area" placeholder="Area"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.area.$error.required || userForm.area.$error.integer"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Direccion</label>
-                                        <input type="text" class="form-control" ng-model="rol.direccion" id="exampleInputEmail1" placeholder="Direccion de la Propiedad"/>
+                                        <label for="direccion">Direccion</label>
+                                        <input type="text" class="form-control" required="true" ng-model="new.direccion" name="direccion" id="direccion" placeholder="Direccion"/>
+                                        <div class="alert-danger" role="alert" ng-show="userForm.direccion.$error.required"><small>Este campo es requerido</small></div>
                                     </div>
                                 </div>
                             </div>
@@ -507,13 +510,13 @@ Date.prototype.toMysqlFormat = function() {
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Departamento</label>
-                                        <input type="text" class="form-control" ng-model="rol.departamento" id="exampleInputEmail1" placeholder="Nombre del Departamento"/>
+                                        <input type="text" class="form-control" ng-model="new.departamento" id="exampleInputEmail1" placeholder="Nombre del Departamento"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Municipio</label>
-                                        <input type="text" class="form-control" ng-model="rol.municipio" id="exampleInputEmail1" placeholder="Nombre del Municipio"/>
+                                        <input type="text" class="form-control" ng-model="new.municipio" id="exampleInputEmail1" placeholder="Nombre del Municipio"/>
                                     </div>
                                 </div>
                             </div>     
@@ -540,17 +543,17 @@ Date.prototype.toMysqlFormat = function() {
                                 <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_producto" class="form-control"  ng-options="product.id_producto as product.nombre for product in products"></select>
                             </div>
                         </div>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.selectProduct.$error.required">Este campo es requerido</div>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.selectProduct.$error.required"><small>Este campo es requerido</small></div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Precio</label>
                         <input type="number" class="form-control" name="precio" ng-model="detail.precio" id="asuntoID" placeholder="Precio"  ng-required="true"/>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.precio.$error.required || detailSales.precio.$error.number">Este campo es requerido o incorrecto</div>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.precio.$error.required || detailSales.precio.$error.number"><small>Este campo es requerido</small> o incorrecto</div>
                     </div>
                     <div class="form-group">
                         <label for="user-rol-option">Cantidad</label>
                         <input type="number" class="form-control" name="cantidad" ng-model="detail.cantidad" id="comentarioID" placeholder="cantidad" ng-required="true"/>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number">Este campo es requerido o incorrecto</div>
+                        <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number"><small>Este campo es requerido</small> o incorrecto</div>
                     </div>
                 </form>
             </div>
