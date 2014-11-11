@@ -8,7 +8,7 @@
 <script>
         var app = angular.module('rol', ['ngRoute']);
 	angular.module('rol', ['ui.bootstrap']);
-         function controller($scope, $modal, $log , $http)
+     function controller($scope, $modal, $log , $http)
 	 {
              
              $scope.calculo = function(){
@@ -20,17 +20,13 @@
                 $scope.saldo =$scope.enganche - $scope.reservas;
             } 
             
-            $scope.pmt = function(fv, type) {
-                
-                    var i = $scope.tasa/12; 
-                    var n = $scope.plazo;
-                    var p = $scope.financiar * (-1);
-                    
-                    var pmt = ((p * i)/(100 * (1-(1 + Math.pow((i/100),-n)))));
 
-                    $scope.cuota = pmt;
-                    $scope.calificar = $scope.cuota * 3.3;
-                   }
+
+            $scope.pmt = function(i, n, p) {
+                var val = i * p * Math.pow((1 + i), n) / (1 - Math.pow((1 + i), n));
+                $scope.cuota = val.toFixed(2);
+                $scope.calificar = (val * 3.3).toFixed(2);
+            }
              
          }
         
@@ -155,7 +151,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Tasa Variable</label>
-                                        <input type="text" class="form-control" ng-model="tasa" ng-change="pmt()" id="exampleInputEmail1" placeholder="Tasa Variable"/>
+                                        <input type="text" class="form-control" ng-model="tasa" ng-change="pmt(tasa/1200,plazo,-financiar)" id="exampleInputEmail1" placeholder="Tasa Variable"/>
                                     </div>
                                 </div>
                             </div>
