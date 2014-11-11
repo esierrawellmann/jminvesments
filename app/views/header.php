@@ -52,7 +52,7 @@
                         <a href="/app/views/main.php">Inicio</a>
                    </li>
                     <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
-                    <li><a href="#">Cotizacion</a></li>
+                    <li><a href="/app/views/cotizacionEnLinea/index.php">Cotizacion</a></li>
                    <li>
                        <a href="#">Contacto</a>
                    </li>
