@@ -8,7 +8,7 @@
 	    case "insert":
 	    	if(isset($data['propiedad'])){
 	    		$propiedad = new Propiedad();
-		     	$objPropiedad = $propiedad ->newPropiedad($propiedad);
+		     	$objPropiedad = $propiedad ->newPropiedad($data['propiedad']);
 		     	$result = $objPropiedad[0];
 		     	echo json_encode($result);
 		     }
@@ -21,16 +21,14 @@
 	    case "update":
 	        $propiedad = new Propiedad();
 	        if(isset($data['propiedad'])){
-	        	$updatedPropiedad = get_object_vars($data['propiedad']);
-	        	$objUser = $propiedad ->updatePropiedad($updatedPropiedad);
+	        	$objUser = $propiedad ->updatePropiedad($data['propiedad']);
 	        	echo json_encode($objUser);
 	        }
 	        break;
 	    case "delete":
 		    $propiedad = new Propiedad();
 		    if(isset($data['propiedad'])){
-		    	$deletePropiedad = get_object_vars($data['propiedad']);
-	        	$objGasto = $propiedad -> deleteCita($deletePropiedad['id_propiedad']);
+	        	$objGasto = $propiedad->deletePropiedad($data['propiedad']);
 	        	echo json_encode($objGasto);
 		    }
 		        break;
