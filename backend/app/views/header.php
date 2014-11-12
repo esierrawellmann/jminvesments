@@ -150,6 +150,9 @@
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/propiedad/index.php"><i class="fa fa-building fa-fw"></i> Ingreso Propiedades</a>
                         </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/cotizador/index.php"><i class="fa fa-book fa-fw"></i> Cotizador</a>
+                        </li>
                      </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
