@@ -37,9 +37,7 @@ function controller($scope, $modal, $log , $http,$location)
       }
 
       $scope.crearCotizacion = function(){
-          var url = "../cotizador/impresion.php?param="+ JSON.stringify($scope.propiedades);
-          var 
-          window.location = url
+            document.getElementById("param").value = JSON.stringify($scope.propiedades);
       }
  }
  
@@ -63,7 +61,7 @@ function controller($scope, $modal, $log , $http,$location)
             </div>
              
              
-             <form action="../cotizador/impresion.php" method="POST"> 
+             <form action="../cotizador/impresion.php" method="POST" id="idForm"> 
                                 <div class="col-lg-12">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -104,11 +102,13 @@ function controller($scope, $modal, $log , $http,$location)
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <div class="btn-group">
-                                                <button type="button" ng-click="crearCotizacion()" class="btn btn-primary">Crear Cotizacion</button>
+                                                <button type="Submit" ng-click="crearCotizacion()" class="btn btn-primary">Crear Cotizacion</button>
                                             </div>
                                          </div>
                                     </div>
                                  </div>
+                 
+                 <input type="hidden" id="param" name="param" value=""/>
              </form>
              
             <div class="col-lg-12">
