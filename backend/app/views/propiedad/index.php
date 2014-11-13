@@ -1,3 +1,34 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="js/vendor/jquery.ui.widget.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload Angular JS module -->
+<script src="js/jquery.fileupload-angular.js"></script>
+<!-- The main application script -->
+<script src="js/app.js"></script>
+
 <?php  include("../header.php");?>
 <script>
 var app = angular.module('moduloCompras', ['ngRoute']);
@@ -21,7 +52,7 @@ function controller($scope, $modal, $log , $http)
         $('#dataTables-example1').on('click', 'tbody tr', function(event) {
                 $(this).addClass('success').siblings().removeClass('success');
             });
-        $http.post('./../../controllers/detalleCompra/detalleCompraFunctions.php', '{"action":"query" , "compra":'+JSON.stringify(venta)+'}').success(function(data){
+        $http.post('./../../controllers/detallePropiedad/detallePropiedadFunctions.php', '{"action":"query" , "detallePropiedad":'+JSON.stringify(venta)+'}').success(function(data){
             $scope.detailComprasInit = data;
          });
     };
@@ -292,10 +323,10 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                 </thead>
                                 <tbody ng-show="comprasIniciales.compras.length > 0">
                                     <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras"> 
-                                        <td>{{compras.id_propiedad}}</td>
-                                        <td>{{compras.ambiente}}</td>
-                                        <td>{{compras.negocio}}</td>
-                                        <td>{{compras.zona}}</td>
+                                        <td ng-click="viewDetail(compras)">{{compras.id_propiedad}}</td>
+                                        <td ng-click="viewDetail(compras)">{{compras.ambiente}}</td>
+                                        <td ng-click="viewDetail(compras)">{{compras.negocio}}</td>
+                                        <td ng-click="viewDetail(compras)">{{compras.zona}}</td>
                                         <td>
                                         	<div class="btn-group">
 											  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -334,16 +365,15 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="detalle in detailComprasInit.detalleCompras" class="odd gradeX"> 
-                                            <td>{{detalle.id_compra}}</td>
+                                            <td>{{detalle.id_detalle_propiedad}}</td>
+                                            <td>{{detalle.direccion}}</td>
                                             <td>{{detalle.nombre}}</td>
-                                            <td>{{detalle.cantidad}}</td>
                                             <td>
                                             	<div class="btn-group">
         										  <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
         										    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
         										  </button>
         										  <ul class="dropdown-menu" role="menu">
-        										    <li><a href="#" ng-click="showDetailUpdateDialog(detalle)"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
         										    <li><a href="#" ng-click="deleteDetail(detalle)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
         										  </ul>
         										</div>
@@ -513,38 +543,112 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
     </div>
 </script>
                  <script type="text/ng-template" id="myProductosModal.html">
+                    <link rel="stylesheet" href="css/style.css">
+                    <!-- blueimp Gallery styles -->
+                    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+                    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+                    <link rel="stylesheet" href="css/jquery.fileupload.css">
+                    <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+                    <!-- CSS adjustments for browsers with JavaScript disabled -->
+                    <noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
+                    <noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
+                    <style>
+                    /* Hide Angular JS elements before initializing */
+                    .ng-cloak {
+                        display: none;
+                    }
+                    </style>
+            
             <div class="modal-header">
-                <h3 class="modal-title"¨>{{action}} Detalle Compra</h3>
+                <h3 class="modal-title"¨>Ingresar Detalle Propiedades</h3>
             </div>
             <div class="modal-body">
-                <form role="form" name="detailSales">
-                    <div class="form-group">
-                        <label for="exampleInputEmail12">Producto</label>
-                        <div class="row" id="exampleInputEmail12">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="asuntoNameField" ng-model="productFilter" id="asuntoID" placeholder="Filtrar Producto..." />
-                            </div>
-                            <div class="col-md-6">
-                                <select id="user-product-option" name="selectProduct"  ng-required="true" ng-model="detail.id_producto" class="form-control"  ng-options="product.id_producto as product.nombre for product in products"></select>
-                            </div>
-                        </div>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.selectProduct.$error.required"><small>Este campo es requerido</small></div>
+              <div class="container">   
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
+        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <input type="hidden" id="param" name="param" value="C:\Users\Brian\Pictures\nuevas\1\"/>
+        <div class="row fileupload-buttonbar">
+            <div class="col-lg-7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Agregar Archivos...</span>
+                    <input type="file" name="files[]" multiple ng-disabled="disabled">
+                </span>
+                <button type="button" class="btn btn-primary start" data-ng-click="submit()">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Subir Archivos</span>
+                </button>
+                <!-- The global file processing state -->
+                <span class="fileupload-process"></span>
+            </div>
+            <!-- The global progress state -->
+            <div class="col-lg-5 fade" data-ng-class="{in: active()}">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table class="table table-striped files ng-cloak">
+            <tr data-ng-repeat="file in queue" data-ng-class="{'processing': file.$processing()}">
+                <td data-ng-switch data-on="!!file.thumbnailUrl">
+                    <div class="preview" data-ng-switch-when="true">
+                        <a data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery><img data-ng-src="{{file.thumbnailUrl}}" alt=""></a>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Precio</label>
-                        <input type="number" class="form-control" name="precio" ng-model="detail.precio" id="asuntoID" placeholder="Precio"  ng-required="true"/>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.precio.$error.required || detailSales.precio.$error.number"><small>Este campo es requerido</small> o incorrecto</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-rol-option">Cantidad</label>
-                        <input type="number" class="form-control" name="cantidad" ng-model="detail.cantidad" id="comentarioID" placeholder="cantidad" ng-required="true"/>
-                        <div class="alert-danger" role="alert" ng-show="detailSales.cantidad.$error.required  || detailSales.cantidad.$error.number"><small>Este campo es requerido</small> o incorrecto</div>
-                    </div>
-                </form>
+                    <div class="preview" data-ng-switch-default data-file-upload-preview="file"></div>
+                </td>
+                <td>
+                    <p class="name" data-ng-switch data-on="!!file.url">
+                        <span data-ng-switch-when="true" data-ng-switch data-on="!!file.thumbnailUrl">
+                            <a data-ng-switch-when="true" data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery>{{file.name}}</a>
+                            <a data-ng-switch-default data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}">{{file.name}}</a>
+                        </span>
+                        <span data-ng-switch-default>{{file.name}}</span>
+                    </p>
+                    <strong data-ng-show="file.error" class="error text-danger">{{file.error}}</strong>
+                </td>
+                <td>
+                    <p class="size">{{file.size | formatFileSize}}</p>
+                    <div class="progress progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]" data-file-upload-progress="file.$progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary start" data-ng-click="file.$submit()" data-ng-hide="!file.$submit || options.autoUpload" data-ng-disabled="file.$state() == 'pending' || file.$state() == 'rejected'">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>Start</span>
+                    </button>
+                    <button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()" data-ng-hide="!file.$cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel</span>
+                    </button>
+                    <button data-ng-controller="FileDestroyController" type="button" class="btn btn-danger destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span>Delete</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+</div>
+<!-- The blueimp Gallery widget -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok(detailSales.$valid)">OK</button>
-                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+               
             </div>
         </script>
             </div>      
