@@ -16,6 +16,7 @@
 	 function controller($scope, $modal, $log , $http)
 	 {
 	 	$scope.src = {};
+	 	$scope.resultados = {"mostrar":false};
 	 	angular.element(document).ready(function () {
 	 		$("#tipo").select2();
         	$("#negocio").select2();
@@ -55,8 +56,9 @@
 	    });
 
  		$scope.findProperties = function (datos){
-
+ 			$scope.resultados.mostrar = true;
 			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
+				$scope.properties = data;
 			});             
 		}
 	 }
@@ -187,6 +189,18 @@
 					</div>
 		    	</div>
 			</div>
+
+			<div class="panel panel-default" >
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" style="border:solid 1px; height:50px" ng-repeat="property in properties">
+							{{property.ambiente}}
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 <?php  include("../footer.php"); ?>

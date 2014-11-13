@@ -335,8 +335,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 											  <ul class="dropdown-menu" role="menu">
 											    <li><a href="#" ng-click="showUpdateDialog(compras,'lg')"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
 											    <li><a href="#" ng-click="deleteCompra(compras)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
-                                                <li><a href="#" ng-click="viewDetail(compras)"> <i class="fa fa-list-alt"></i>  Ver Detalle</a></li>
-											  </ul>
+                                              </ul>
 											</div>
                                     	</td>    
                                     </tr>

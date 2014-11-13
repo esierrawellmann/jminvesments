@@ -74,9 +74,6 @@ function searchForProperties($params){
     if(isset($params['estado'])){
         $query .= " and estado = '".$params['estado']."'";
     }
-    if(isset($params['estado'])){
-        $query .= " and estado = '".$params['estado']."'";
-    }
     if(isset($params['negocio'])){
         $query .= " and negocio in('".implode("','",$params['negocio'])."')";
     }

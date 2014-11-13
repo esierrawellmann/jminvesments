@@ -29,7 +29,9 @@ line-height: 1;
 }
 
 
-
+.values{
+	margin-bottom: 20px;
+}
 
 .select2-search-choice-close:before {
 color: #fff;
@@ -74,4 +76,23 @@ nav ul li.active>a:before {
 .error font{
 	font-size: 10px;
 	color : red;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
 }

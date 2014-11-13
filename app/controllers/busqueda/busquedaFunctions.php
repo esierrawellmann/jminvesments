@@ -7,7 +7,7 @@
 	    case "query":
 		        $objPropiedad = new Propiedad();
 		     	$qryResult = $objPropiedad -> searchForProperties($data['data']);
-		     	echo var_dump($qryResult);
+		     	echo json_encode($qryResult);
     	break;
 	}
 ?>

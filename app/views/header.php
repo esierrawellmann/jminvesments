@@ -51,10 +51,13 @@
                    <li class="li-main" >
                         <a href="/app/views/main.php">Inicio</a>
                    </li>
+                   <li>
+                        <a href="/app/views/acerca/index.php">Acerca de Nosotros</a>
+                   </li>
                     <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
                     <li><a href="/app/views/cotizacionEnLinea/index.php">Cotizacion</a></li>
                    <li>
-                       <a href="#">Contacto</a>
+                       <a href="/app/views/contacto/index.php">Contacto</a>
                    </li>
                 </ul>
             </div>
