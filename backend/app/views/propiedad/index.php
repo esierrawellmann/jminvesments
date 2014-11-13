@@ -1,51 +1,4 @@
-
-
 <?php  include("../header.php");?>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<!-- blueimp Gallery script -->
-<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="js/jquery.iframe-transport.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="js/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="js/jquery.fileupload-process.js"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="js/jquery.fileupload-image.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="js/jquery.fileupload-video.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="js/jquery.fileupload-validate.js"></script>
-<!-- The File Upload Angular JS module -->
-<script src="js/jquery.fileupload-angular.js"></script>
-<!-- The main application script -->
-<script src="js/app.js"></script>
-
-<link rel="stylesheet" href="css/style.css">
-<!-- blueimp Gallery styles -->
-<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="css/jquery.fileupload.css">
-<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
-<noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
-<noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
-<style>
-/* Hide Angular JS elements before initializing */
-.ng-cloak {
-    display: none;
-}
-</style>
-<script src="js/vendor/jquery.ui.widget.js"></script>
-
-
 <script>
 var app = angular.module('moduloCompras', ['ngRoute']);
 angular.module('moduloCompras', ['ui.bootstrap']);
@@ -56,7 +9,7 @@ function controller($scope, $modal, $log , $http)
     $scope.comprasIniciales =[];
     $scope.detailComprasInit = [];
     $scope.users = [];
-
+    $scope.compraActual = {};
     angular.element(document).ready(function () {
         $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"query"}').success(function(data){
             $scope.comprasIniciales = data;
@@ -65,6 +18,7 @@ function controller($scope, $modal, $log , $http)
     
     $scope.viewDetail = function (venta){
         $scope.showDetail = true;
+        $scope.compraActual = venta;
         $('#dataTables-example1').on('click', 'tbody tr', function(event) {
                 $(this).addClass('success').siblings().removeClass('success');
             });
@@ -72,6 +26,13 @@ function controller($scope, $modal, $log , $http)
             $scope.detailComprasInit = data;
          });
     };
+    
+    $scope.AgregarDetalle = function(){
+        
+        console.log($scope.compraActual);
+        var url = "./../../views/propiedad/detallePropiedad.php?idPropiedad=" + $scope.compraActual.id_propiedad;
+        window.location = url;
+    }
     
     $scope.addProductsToDetail = function(size)
     {
@@ -365,7 +326,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                 <div class="panel panel-default" ng-show="showDetail">
                     <div class="panel-heading">
                         Detalle Propiedades
-                        <button class="btn btn-default pull-right btn-xs"  ng-click="addProductsToDetail(compras)">Agregar Imagenes</button>
+                        <button class="btn btn-default pull-right btn-xs"  ng-click="AgregarDetalle(compras)">Agregar Imagenes</button>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -557,90 +518,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>
-<script type="text/ng-template" id="myProductosModal.html">
-            <div class="modal-header">
-                <h3 class="modal-title"¨>Ingresar Detalle Propiedades</h3>
-            </div>
-            <div class="modal-body">
-              <div class="container">   
-                <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data"  data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
-                    <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-                    <input type="hidden" id="param" name="param" value="C:\Users\Brian\Pictures\nuevas\1\"/>
-                    <div class="row fileupload-buttonbar">
-                        <div class="col-lg-7">
-                            <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                <span>Agregar Archivos...</span>
-                                <input type="file" name="files[]" multiple ng-disabled="disabled">
-                            </span>
-                            <button type="button" class="btn btn-primary start" data-ng-click="submit()">
-                                <i class="glyphicon glyphicon-upload"></i>
-                                <span>Subir Archivos</span>
-                            </button>
-                            <span class="fileupload-process"></span>
-                        </div>
-                        <div class="col-lg-5 fade" data-ng-class="{in: active()}">
-                            <!-- The global progress bar -->
-                            <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
-                            <!-- The extended global progress state -->
-                            <div class="progress-extended">&nbsp;</div>
-                        </div>
-                    </div>
-                    <table class="table table-striped files ng-cloak">
-                        <tr data-ng-repeat="file in queue" data-ng-class="{'processing': file.$processing()}">
-                            <td data-ng-switch data-on="!!file.thumbnailUrl">
-                                <div class="preview" data-ng-switch-when="true">
-                                    <a data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery><img data-ng-src="{{file.thumbnailUrl}}" alt=""></a>
-                                </div>
-                                <div class="preview" data-ng-switch-default data-file-upload-preview="file"></div>
-                            </td>
-                            <td>
-                                <p class="name" data-ng-switch data-on="!!file.url">
-                                    <span data-ng-switch-when="true" data-ng-switch data-on="!!file.thumbnailUrl">
-                                        <a data-ng-switch-when="true" data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery>{{file.name}}</a>
-                                        <a data-ng-switch-default data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}">{{file.name}}</a>
-                                    </span>
-                                    <span data-ng-switch-default>{{file.name}}</span>
-                                </p>
-                                <strong data-ng-show="file.error" class="error text-danger">{{file.error}}</strong>
-                            </td>
-                            <td>
-                                <p class="size">{{file.size | formatFileSize}}</p>
-                                <div class="progress progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]" data-file-upload-progress="file.$progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-primary start" data-ng-click="file.$submit()" data-ng-hide="!file.$submit || options.autoUpload" data-ng-disabled="file.$state() == 'pending' || file.$state() == 'rejected'">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Start</span>
-                                </button>
-                                <button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()" data-ng-hide="!file.$cancel">
-                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                    <span>Cancel</span>
-                                </button>
-                                <button data-ng-controller="FileDestroyController" type="button" class="btn btn-danger destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                    <span>Delete</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                <br>
-            </div>
-            <!-- The blueimp Gallery widget -->
-            <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-                <div class="slides"></div>
-                <h3 class="title"></h3>
-                <a class="prev">‹</a>
-                <a class="next">›</a>
-                <a class="close">×</a>
-                <a class="play-pause"></a>
-                <ol class="indicator"></ol>
-            </div>
-        </div>
-        <div class="modal-footer">  
-    </div>
-</script>
+ 
             </div>      
         </div>
 <?php  include("../footer.php"); ?>

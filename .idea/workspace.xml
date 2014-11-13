@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9265bed-9e8e-4c6d-baed-8e32e4ed9ab6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1 (1).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1 (2).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1 (2).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1 (3).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1 (3).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1 (4).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1 (4).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1 (5).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1 (5).PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1.PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/thumbnail/imagen1.PNG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/detallePropiedad.php" />
-      <change type="DELETED" beforePath="C:\Users\Renato Sierra\Documents\Renato Sierra\Projects\jminvesments\backend\app\views\propiedad\newEmptyPHP.php" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Renato Sierra\Documents\Renato Sierra\Projects\jminvesments\backend\app\views\propiedad\server\php\apartamentos (1).PNG" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/imagen1 (1).PNG" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/models/DetallePropiedad.php" afterPath="$PROJECT_DIR$/backend/app/models/DetallePropiedad.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/UploadHandler.php" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/server/php/UploadHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/views/propiedad/detalle.html" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/detalle.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/views/propiedad/index.php" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/views/propiedad/css/style.css" afterPath="$PROJECT_DIR$/backend/app/views/propiedad/css/style.css" />
     </list>
     <ignored path="jminvesments.iws" />
     <ignored path=".idea/workspace.xml" />
