@@ -8,8 +8,8 @@
 
 	    case "insert":
 	    	if(isset($data['detallePropiedad'])){
-	    		$dcompra = new DetalleCompra();
-		     	$objCompra = $dcompra ->newDetalleCompra($data['detalleCompra'],$data['compra']);
+	    		$dcompra = new DetallePropiedad();
+		     	$objCompra = $dcompra ->newDetallePropiedad($data['detallePropiedad'],$data['propiedad']);
 		     	$result = $objCompra[0];
 		     	echo json_encode($result);
 
@@ -22,21 +22,13 @@
 
 		        echo '{"detalleCompras":'.json_encode($objCompra).',"compra":'.json_encode($compraData).'}';
 	    	break;
-	    case "update":
-	        if(isset($data['detalleCompra'])){
-	        	$compraData = new DetalleCompra();
-				$updatedDetalle = get_object_vars($data['detalleCompra']);
-	        	$objUser = $compraData ->updateDetalleCompra($updatedDetalle);
-	        	echo json_encode($objUser);
-	        }
-	        break;
 	    case "delete":
 		    
-		    if(isset($data['detalleCompra'])){
-		    	$detalle = new DetalleCompra();
-		    	$deleteDetail = get_object_vars($data['detalleCompra']);
+		    if(isset($data['detallePropiedad'])){
+		    	$detalle = new DetallePropiedad();
+		    	$deleteDetail = get_object_vars($data['detallePropiedad']);
 
-	        	$objCompra = $detalle ->deleteDetalleCompra($deleteDetail['id_detalle_compra']);
+	        	$objCompra = $detalle ->deleteDetalleCompra($deleteDetail['id_detalle_propiedad']);
 	        	echo json_encode($objCompra);
 		    }
 		        break;
