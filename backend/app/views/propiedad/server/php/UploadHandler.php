@@ -1,20 +1,14 @@
 <?php
-/*
- * jQuery File Upload Plugin PHP Class 8.1.0
- * https://github.com/blueimp/jQuery-File-Upload
- *
- * Copyright 2010, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
+require_once '/../../../../models/DetallePropiedad.php';
 
+       
 class UploadHandler
 {
-
+     
     protected $options;
-
+    public $url;
+    public $idPropiedad;
+    public $detalle;
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
@@ -42,7 +36,9 @@ class UploadHandler
 
     function __construct($options = null, $initialize = true, $error_messages = null) {
         
-        $url= $_POST['param'];
+        $this->url= $_POST['param'];
+        $this->idPropiedad = $_POST['idPropiedad'];
+        $this->detalle = new DetallePropiedad();
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
             'upload_dir' => $url,
@@ -1295,6 +1291,7 @@ class UploadHandler
                     $index,
                     $content_range
                 );
+                //inserta($upload['name'][$index]);   
             }
         } else {
             // param_name is a single object identifier like "file",
@@ -1311,11 +1308,17 @@ class UploadHandler
                 null,
                 $content_range
             );
-        }
+        } 
+        
         return $this->generate_response(
             array($this->options['param_name'] => $files),
             $print_response
         );
+    }
+    
+    public function inserta($nombre){
+  $this->detalle->insertarDetalle($this->idPropiedad, $this->url, $nombre);
+              
     }
 
     public function delete($print_response = true) {

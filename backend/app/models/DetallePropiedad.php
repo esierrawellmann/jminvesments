@@ -33,8 +33,16 @@ class DetallePropiedad extends database {
       return array();
     }
   }
-
-  function updateDetallePropiedad($detalleCompra){
+  
+  function insertarDetalle($idPropiedad,$direccion,$nombre){
+    $q = "insert into detalle_propiedad(id_propiedad,direccion,nombre) values (".$idPropiedad.",'".$direccion."','".$nombre."');";
+    $this -> conectar();
+    $query = $this->consulta($q);
+    $this->disconnect(); 
+    
+    return "Ok";
+  }
+            function updateDetallePropiedad($detalleCompra){
 		$this -> conectar();
     $q = "update detalle_propiedad set direccion=".$detalleCompra['direccion']." ,nombre= ".$detalleCompra['nombre']." where id_detalle_propiedad = ".$detalleCompra['id_detalle_propiedad'].";"; 
     $query = $this -> consulta($q);
