@@ -59,7 +59,7 @@ class Propiedad extends database {
 
 function searchForProperties($params){
     $params = get_object_vars($params);
-    $query = "select * from propiedad where ";
+    $query = "select *,(select direccion from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'url' from propiedad where ";
     $query .= " precio_renta between ".$params['renta_desde']." and ".$params['renta_hasta']." ";
     $query .=" and  precio_renta between ".$params['venta_desde']." and ".$params['venta_hasta']." ";
     if(isset($params['tipo'])){
@@ -100,11 +100,24 @@ function searchForProperties($params){
       return array();
     }
 }
+function getPropertyImages($params){
+    $this -> conectar();
+    $query = $this -> consulta("select direccion from detalle_propiedad where id_propiedad = ".$params);
+    $this ->disconnect();
+
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+
+}
 function deletePropiedad($propiedad){
 
-    $objPropiedad = get_object_vars($propiedad);
     $this -> conectar();
-    $query = $this -> consulta("delete from propiedad where id_propiedad = ".$objPropiedad['id_propiedad']);
+    $query = $this -> consulta("delete from propiedad where id_propiedad = ".$propiedad);
     $this ->disconnect();
 
     return array();

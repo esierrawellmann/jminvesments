@@ -55,6 +55,11 @@
     	  
 	    });
 
+		$scope.showDetail = function (data){
+			window.location = "/app/views/propiedades/index.php?property="+data.id_propiedad;
+		}
+
+
  		$scope.findProperties = function (datos){
  			$scope.resultados.mostrar = true;
 			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
@@ -190,11 +195,29 @@
 		    	</div>
 			</div>
 
-			<div class="panel panel-default" >
+			<div class="panel panel-default" ng-show="resultados.mostrar">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" style="border:solid 1px; height:50px" ng-repeat="property in properties">
-							{{property.ambiente}}
+						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"  ng-repeat="property in properties">
+							<div class="well" style="height:175px; overflow-y:auto; cursor:pointer;" ng-click="showDetail(property)">
+								<div class="row">
+									<div class="col-lg-4 olis">
+										<img class="img-responsive img-circle" width="50px" ng-src="{{property.url}}"></img>
+									</div>
+									<div class="col-lg-8">
+										<small><strong>Tipo: </strong>{{property.tipo}}</small></br>
+										<small><strong>Zona: </strong>{{property.zona}}</small></br>
+										<small><strong>Amueblada: </strong>{{property.amueblado === 'true' ? 'Si': 'No' }} </small></br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12" style="overflow:auto;">
+										<small><strong>Direccion: </strong>{{property.direccion}}</small></br>
+										<small><strong>Ambiente: </strong>{{property.ambiente}}</small>
+									</div>
+									
+								</div>
+							</div>
 						</div>
 						
 					</div>
