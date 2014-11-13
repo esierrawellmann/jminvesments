@@ -123,7 +123,7 @@
                 <!-- Redirect browsers with JavaScript disabled to the origin page -->
                 <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                <input type="hidden" id="param" name="param" value="C:/Users/Renato Sierra/Documents/Renato Sierra/Projects/jminvesments" />
+                <input type="hidden" id="param" name="param" value="C:/Users/Renato Sierra/Documents/Renato Sierra/Projects/jminvesments/backend/images" />
                 <input type="hidden" id="idPropiedad" name="idPropiedad" value="" />
                 <div class="row fileupload-buttonbar">
                     <div class="col-lg-7">

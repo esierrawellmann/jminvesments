@@ -201,8 +201,8 @@
 						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"  ng-repeat="property in properties">
 							<div class="well" style="height:175px; overflow-y:auto; cursor:pointer;" ng-click="showDetail(property)">
 								<div class="row">
-									<div class="col-lg-4 olis">
-										<img class="img-responsive img-circle" width="50px" ng-src="{{property.url}}"></img>
+									<div class="col-lg-4 olis" style="height: 62px;">
+										<img class="img-responsive img-circle" width="50px" ng-src="/backend/images/{{property.id_propiedad}}/{{property.url}}"></img>
 									</div>
 									<div class="col-lg-8">
 										<small><strong>Tipo: </strong>{{property.tipo}}</small></br>
