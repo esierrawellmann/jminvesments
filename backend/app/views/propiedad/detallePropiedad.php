@@ -123,7 +123,7 @@
                 <!-- Redirect browsers with JavaScript disabled to the origin page -->
                 <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                <input type="hidden" id="param" name="param" value="C:\Users\Brian\Pictures" />
+                <input type="hidden" id="param" name="param" value="C:/Users/Brian/Pictures" />
                 <input type="hidden" id="idPropiedad" name="idPropiedad" value="" />
                 <div class="row fileupload-buttonbar">
                     <div class="col-lg-7">
@@ -235,7 +235,7 @@
     
     var variablejs = "<?php echo $idPropiedad; ?>";
     
-    var url = document.getElementById("param").value + "\\" + variablejs +  "\\";
+    var url = document.getElementById("param").value + "/" + variablejs +  "/";
     document.getElementById("param").value = url;
     document.getElementById("idPropiedad").value = variablejs;
     console.log(document.getElementById("param").value);

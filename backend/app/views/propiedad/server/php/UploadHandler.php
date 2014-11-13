@@ -1,7 +1,4 @@
-<?php
-require_once '/../../../../models/DetallePropiedad.php';
-
-       
+<?php       
 class UploadHandler
 {
      
@@ -36,13 +33,14 @@ class UploadHandler
 
     function __construct($options = null, $initialize = true, $error_messages = null) {
         
+        require_once '/../../../../models/DetallePropiedad.php';
         $this->url= $_POST['param'];
         $this->idPropiedad = $_POST['idPropiedad'];
         $this->detalle = new DetallePropiedad();
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => $url,
-            'upload_url' => $url,
+            'upload_dir' => $this->url,
+            'upload_url' => $this->url,
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -1291,7 +1289,7 @@ class UploadHandler
                     $index,
                     $content_range
                 );
-                //inserta($upload['name'][$index]);   
+                $this->detalle->insertarDetalle($this->idPropiedad, $this->url, $file_name ? $file_name : $upload['name'][$index]);
             }
         } else {
             // param_name is a single object identifier like "file",

@@ -39,8 +39,6 @@ class DetallePropiedad extends database {
     $this -> conectar();
     $query = $this->consulta($q);
     $this->disconnect(); 
-    
-    return "Ok";
   }
             function updateDetallePropiedad($detalleCompra){
 		$this -> conectar();
