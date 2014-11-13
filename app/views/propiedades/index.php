@@ -27,7 +27,7 @@
 		     	foreach ($objPropiedad as  $key=>$value) {
 		     		$class = $key == 0  ? 'active' : '';
 	     			echo '<div class="item '.$class.'">';
-				 		echo '<div class="fill" style="background-image:url(\''.$value['direccion'].'\');"></div>';
+				 		echo '<div class="fill" style="background-image:url(\''.$value['nombre'].$value['direccion'].'\');"></div>';
 					echo '</div>';
 				}
         	?>

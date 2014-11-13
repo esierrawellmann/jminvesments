@@ -102,7 +102,7 @@ function searchForProperties($params){
 }
 function getPropertyImages($params){
     $this -> conectar();
-    $query = $this -> consulta("select direccion from detalle_propiedad where id_propiedad = ".$params);
+    $query = $this -> consulta("select concat(direccion,nombre) as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
     $this ->disconnect();
 
     if($this->numero_de_filas($query) > 0){
