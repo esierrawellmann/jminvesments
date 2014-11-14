@@ -59,7 +59,7 @@ class Propiedad extends database {
 
 function searchForProperties($params){
     $params = get_object_vars($params);
-    $query = "select *,(select direccion from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'url' from propiedad where ";
+    $query = "select *,(select nombre from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'url' from propiedad where ";
     $query .= " precio_renta between ".$params['renta_desde']." and ".$params['renta_hasta']." ";
     $query .=" and  precio_renta between ".$params['venta_desde']." and ".$params['venta_hasta']." ";
     if(isset($params['tipo'])){
@@ -102,13 +102,28 @@ function searchForProperties($params){
 }
 function getPropertyImages($params){
     $this -> conectar();
-    $query = $this -> consulta("select concat(direccion,nombre) as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
+    $query = $this -> consulta("select concat(nombre) as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
     $this ->disconnect();
 
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )
         $data[] = $tsArray;   
         return $data;
+    }else{
+      return array();
+    }
+
+}
+
+function getPropertyById($params){
+    $this -> conectar();
+    $query = $this -> consulta("select * from propiedad where id_propiedad = ".$params);
+    $this ->disconnect();
+
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data[0];
     }else{
       return array();
     }
