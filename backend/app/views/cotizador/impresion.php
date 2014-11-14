@@ -17,6 +17,14 @@ $json = json_decode($_POST['param'], true);
 $contador = count($json);
 ?>
 
+<style>
+    @media print {
+        .row {
+            margin-left: 50px;
+        }
+    }
+</style>
+
     <div class="row" >
     
                 <div class="col-lg-8 pull-right">
@@ -73,6 +81,8 @@ $contador = count($json);
     </div>
 
   <?php include("../footer.php"); 
-  
   ?>
+
+
+
 

@@ -5,6 +5,9 @@
     <script src="/public/js/app.config.js"></script>
     <script src="/public/js/app.min.js"></script>
         
+        
+        <link href="/backend/public/css/bootstrap.min.css" media="print" rel="stylesheet">
+
 <script>
         var app = angular.module('rol', ['ngRoute']);
 	angular.module('rol', ['ui.bootstrap']);
@@ -32,11 +35,20 @@
         
 </script>
 
+<style>
+    @media print {
+        .main-content {
+            margin-left: 50px;
+            margin-top: 0px;
+        }
+    }
+</style>
+
  <div class="main-content" ng-app="rol"> 
 		<div class="container" ng-controller="controller">
 			<div class="row">
 				<div class="col-lg-12">
-					<img src="/public/img/logojm.png" class="img-responsive pull-right" alt="Logo">
+					<!--<img src="/public/img/logojm.png" class="img-responsive pull-right" alt="Logo">-->
 					<h1 class="page-header">Cotización en linea - Proyecciones para su Inversion</h1>
 				</div>
 			</div>
