@@ -17,6 +17,22 @@ class Propiedad extends database {
     }
   }
 
+
+function searchTopFor(){
+    $params = get_object_vars($params);
+    $query = "select *,(select nombre from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'imagen' from propiedad order by id_propiedad desc limit 4 ";
+    $this->conectar();
+    $query = $this->consulta($query);
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+}
+
   function getTopForImages(){
     $this->conectar();
     $query = $this->consulta("select propiedad.id_propiedad,detalle_propiedad.nombre as 'direccion' from detalle_propiedad inner join propiedad on propiedad.id_propiedad = detalle_propiedad.id_propiedad ");

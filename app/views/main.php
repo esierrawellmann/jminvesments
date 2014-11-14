@@ -16,8 +16,7 @@
         <ol class="carousel-indicators">
            <?php 
                 $propiedad = new Propiedad();
-                $objPropiedadSinImagen = $propiedad ->getTopForProperties();
-                $objPropiedad = $propiedad ->getTopForImages();
+                $objPropiedad = $propiedad ->searchTopFor();
                 foreach ($objPropiedad as  $key=>$value) {
                     $class = $key == 0  ? 'class="active"' : '';
                   echo '<li data-target="#myCarousel"  data-slide-to="'.$key.'" '.$class.'></li>';
@@ -30,7 +29,7 @@
                 foreach ($objPropiedad as  $key=>$value) {
                     $class = $key == 0  ? 'active' : '';
                     echo '<div class="item '.$class.'">';
-                        echo '<div class="fill" style="background-image:url(\'/backend/images/'.$value['id_propiedad'].'/'.$value['direccion'].'\');"></div>';
+                        echo '<div class="fill" style="background-image:url(\'/backend/images/'.$value['id_propiedad'].'/'.$value['imagen'].'\');"></div>';
                     echo '</div>';
                 }
             ?>
@@ -50,23 +49,24 @@
         <div class="container">
             <div class="row">
 
-                <?php foreach ($objPropiedadSinImagen as  $key=>$value) { ?>
+                <?php
+                foreach ($objPropiedad as  $key=>$value) { ?>
                 <div class="col-lg-6">
                     <div class="well" style="height:175px; overflow-y:auto; cursor:pointer;">
                         <div class="row">
                             <div class="col-lg-4 olis" style="height: 60px;padding-right: 0px;  ">
-                                <img class="img-responsive img-circle" style="height: inherit;width: 64px;" ng-src="/backend/images/{{property.id_propiedad}}/{{property.url}}"></img>
+                                <img class="img-responsive img-circle" style="height: inherit;width: 64px;"     ></img>
                             </div>
                             <div class="col-lg-8">
-                                <small><strong>Tipo: </strong>{{property.tipo}}</small></br>
-                                <small><strong>Zona: </strong>{{property.zona}}</small></br>
-                                <small><strong>Amueblada: </strong>{{property.amueblado === 'true' ? 'Si': 'No' }} </small></br>
+                                <small><strong>Tipo: </strong><?php echo $value['tipo']; ?></small></br>
+                                <small><strong>Zona: </strong><?php echo $value['zona']; ?></small></br>
+                                <small><strong>Amueblada: </strong><?php echo $value['amueblado']; ?></small></br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12" style="overflow:auto;">
-                                <small><strong>Direccion: </strong>{{property.direccion}}</small></br>
-                                <small><strong>Ambiente: </strong>{{property.ambiente}}</small>
+                                <small><strong>Direccion: </strong><?php echo $value['direccion']; ?></small></br>
+                                <small><strong>Ambiente: </strong><?php echo $value['ambiente']; ?></small>
                             </div>
                             
                         </div>
