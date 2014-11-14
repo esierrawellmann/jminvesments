@@ -1,4 +1,5 @@
 <?php
+    session_start();
   $idPropiedad = $_GET['idPropiedad'];
     $pt = "";
     $pp = "/backend/app/views";
