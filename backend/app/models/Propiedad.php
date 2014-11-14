@@ -114,6 +114,21 @@ function getPropertyImages($params){
     }
 
 }
+
+function getPropertyById($params){
+    $this -> conectar();
+    $query = $this -> consulta("select * from propiedad where id_propiedad = ".$params);
+    $this ->disconnect();
+
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data[0];
+    }else{
+      return array();
+    }
+
+}
 function deletePropiedad($propiedad){
 
     $this -> conectar();
