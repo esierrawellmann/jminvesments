@@ -45,7 +45,7 @@
         </a>
 	</header>
 
-    <?php  echo var_dump($_SESSION)?>
+
     <div class="main-content" > 
         <div class="container">
             <div class="row">
