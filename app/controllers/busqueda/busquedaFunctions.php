@@ -9,5 +9,10 @@
 		     	$qryResult = $objPropiedad -> searchForProperties($data['data']);
 		     	echo json_encode($qryResult);
     	break;
+    	case "especial":
+		        $objPropiedad = new Propiedad();
+		     	$qryResult = $objPropiedad -> searchForPropertiesFiltered($data['data']);
+		     	echo json_encode($qryResult);
+    	break;
 	}
 ?>

@@ -93,6 +93,16 @@
 					            	<option>Terreno</option>
 				              	</select>
 							</div>
+							<div class="form-group">
+								<label for="dormitorios">Dormitorios</label>
+								<input type="number" class="form-control" ng-model="src.dormitorios" id="dormitorios" >
+							</div>
+							<div class="form-group">
+								<label for="venta">Precio de venta</label>
+								<input id="venta"  type="text" name="venta" ng-model="src.precio_venta" value="">
+							</div>
+						</div>
+				    	<div class="col-lg-6">
 							<label for="negocio">Negocio</label>
 							<div class="form-group">
 								<select multiple="" ng-model="src.negocio" name="negocio" id="negocio" class="form-control populate select2-offscreen" tabindex="-1">
@@ -126,32 +136,6 @@
 					            	<option>21</option>
 				              	</select>
 							</div>
-							<div class="form-group">
-								<label for="zona">Status</label>
-								<select class="form-control" ng-model="src.estado">
-									<option>Todos</option>
-									<option>Disponible</option>
-									<option>No Disponible</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="venta">Precio de venta</label>
-								<input id="venta"  type="text" name="venta" ng-model="src.precio_venta" value="">
-							</div>
-						</div>
-				    	<div class="col-lg-6">
-							<div class="form-group">
-								<label for="proyecto">Nombre del proyecto</label>
-								<input type="text" class="form-control" ng-model="src.nombre_proyecto" id="proyecto" >
-							</div>
-							<div class="form-group">
-								<label for="propietario">Nombre del propietario</label>
-								<input type="text" class="form-control" ng-model="src.nombre_propietario" id="propietario" >
-							</div>
-							<div class="form-group">
-								<label for="dormitorios">Dormitorios</label>
-								<input type="number" class="form-control" ng-model="src.dormitorios" id="dormitorios" >
-							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
@@ -160,29 +144,11 @@
 							</div>
 							<div class="row">
 								<div class="form-group">
-									<div class="col-lg-6">
+									<div class="col-lg-12">
 										<div class="checkbox">
 											<label>
 												<input type="checkbox" ng-model="src.amueblado"> Amueblado
 											</label>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="row">
-											<div class="col-lg-6">
-												<div class="checkbox">
-													<label>
-														<input type="radio" name="tipo-renta" ng-model="src.directa_compartida" value="directa">Directa<br>
-													</label>
-												</div>
-											</div>
-											<div class="col-lg-6">
-												<div class="checkbox">
-													<label>
-														<input type="radio" name="tipo-renta" ng-model="src.directa_compartida" value="compartida">Compartida
-													</label>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>

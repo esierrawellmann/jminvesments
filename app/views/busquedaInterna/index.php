@@ -62,7 +62,7 @@
 
  		$scope.findProperties = function (datos){
  			$scope.resultados.mostrar = true;
-			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
+			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"especial","data":'+JSON.stringify(datos)+'}').success(function(data){
 				$scope.properties = data;
 			});             
 		}
