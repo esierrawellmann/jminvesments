@@ -28,8 +28,10 @@
 		    	$detalle = new DetallePropiedad();
 		    	$deleteDetail = get_object_vars($data['detallePropiedad']);
 
-	        	$objCompra = $detalle ->deleteDetalleCompra($deleteDetail['id_detalle_propiedad']);
-	        	echo json_encode($objCompra);
+	        	$objCompra = $detalle ->deleteDetallePropiedad($deleteDetail['id_detalle_propiedad']);
+                        $url = "C:/Users/Brian/Pictures/".$deleteDetail['id_propiedad']."/".$deleteDetail['nombre'];
+                        
+	        	echo unlink($url);
 		    }
 		        break;
 	}

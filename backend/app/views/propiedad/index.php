@@ -77,7 +77,9 @@ function controller($scope, $modal, $log , $http)
         
             $scope.deleteDetail = function (detalle){
         if(confirm("Esta apunto de eliminar Desea continuar?")){
-            $http.post('./../../controllers/detalleCompra/detalleCompraFunctions.php','{"action":"delete","detalleCompra":'+JSON.stringify(detalle)+'}').success(function(data){
+            $http.post('./../../controllers/detallePropiedad/detallePropiedadFunctions.php','{"action":"delete","detallePropiedad":'+JSON.stringify(detalle)+'}').success(function(data){
+                
+                console.log(data);
                 var index = $scope.detailComprasInit.detalleCompras.indexOf(detalle);
                 $scope.alerts.push({type: 'success', msg: 'Detalle de Compra Exitosamente Eliminado' });
                 $scope.detailComprasInit.detalleCompras.splice(index,1);

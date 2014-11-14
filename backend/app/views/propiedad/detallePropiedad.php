@@ -86,12 +86,17 @@
                 <div class="sidebar-nav navbar-collapse">
                   
                     <ul class="nav" id="side-menu">
+                        
+                        <?php if($_SESSION["role"]=="Administrador"){ ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
+                        <?php } ?>
+                        <?php if($_SESSION["role"]=="Administrador"){ ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
+                        <?php } ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
@@ -103,6 +108,9 @@
                         </li>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/cotizador/index.php"><i class="fa fa-book fa-fw"></i> Cotizador</a>
+                        </li>
+                        <li>
+                            <a class="active" href="<?php echo $pp; ?>/propiedades/index.php"><i class="fa fa-folder-open fa-fw"></i> Buscar Propiedades</a>
                         </li>
                      </ul>
                 </div>
@@ -123,7 +131,7 @@
                 <!-- Redirect browsers with JavaScript disabled to the origin page -->
                 <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                <input type="hidden" id="param" name="param" value="C:/Users/Renato Sierra/Documents/Renato Sierra/Projects/jminvesments" />
+                <input type="hidden" id="param" name="param" value="C:/Users/Brian/Pictures" />
                 <input type="hidden" id="idPropiedad" name="idPropiedad" value="" />
                 <div class="row fileupload-buttonbar">
                     <div class="col-lg-7">

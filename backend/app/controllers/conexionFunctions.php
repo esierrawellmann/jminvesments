@@ -9,6 +9,11 @@ try{
         if($conectar==="true"){
             $_SESSION["user"]=$_POST["user"];
             $_SESSION["pass"]=$_POST["pass"];
+            
+            $usuario = new Usuario();
+            $user = $usuario->getUsersbyName($_SESSION["user"]);
+            
+            $_SESSION["role"]=$user[0]['role_name'];
                                     
             header( 'Location: /backend/app/views/main.php' ) ;
         }else{

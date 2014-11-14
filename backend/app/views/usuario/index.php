@@ -1,5 +1,9 @@
 <?php  include("../header.php");
  ?>
+<?php if($_SESSION["role"]!="Administrador"){ 
+    header('Location: ../main.php');  
+}
+?>
 <script>    
  var app = angular.module('usuario', ['ngRoute']);
  angular.module('usuario', ['ui.bootstrap']);
