@@ -16,6 +16,31 @@ class Propiedad extends database {
       return array();
     }
   }
+
+  function getTopForImages(){
+    $this->conectar();
+    $query = $this->consulta("select propiedad.id_propiedad,detalle_propiedad.nombre as 'direccion' from detalle_propiedad inner join propiedad on propiedad.id_propiedad = detalle_propiedad.id_propiedad ");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  function getTopForProperties(){
+    $this->conectar();
+    $query = $this->consulta("SELECT * FROM propiedad order by id_propiedad desc limit 4 ");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
   function newPropiedad($propiedad){
     
 
@@ -102,7 +127,7 @@ function searchForProperties($params){
 }
 function getPropertyImages($params){
     $this -> conectar();
-    $query = $this -> consulta("select concat(nombre) as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
+    $query = $this -> consulta("select nombre as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
     $this ->disconnect();
 
     if($this->numero_de_filas($query) > 0){

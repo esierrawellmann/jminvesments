@@ -330,7 +330,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                         Detalle Propiedades
                         <button class="btn btn-default pull-right btn-xs"  ng-click="AgregarDetalle(compras)">Agregar Imagenes</button>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="overflow-x:auto;">
                         <div class="table-responsive">
                         	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>

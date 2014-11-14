@@ -1,4 +1,5 @@
 <?php  include("header.php"); ?>
+<?php  include("./../../backend/app/models/Propiedad.php"); ?>
 
 
     <!-- Script to Activate the Carousel -->
@@ -13,33 +14,26 @@
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+           <?php 
+                $propiedad = new Propiedad();
+                $objPropiedadSinImagen = $propiedad ->getTopForProperties();
+                $objPropiedad = $propiedad ->getTopForImages();
+                foreach ($objPropiedad as  $key=>$value) {
+                    $class = $key == 0  ? 'class="active"' : '';
+                  echo '<li data-target="#myCarousel"  data-slide-to="'.$key.'" '.$class.'></li>';
+                }
+            ?>
         </ol>
         <!-- Wrapper for Slides -->
         <div class="carousel-inner">
-            <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 1</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 3</h2>
-                </div>
-            </div>
+            <?php 
+                foreach ($objPropiedad as  $key=>$value) {
+                    $class = $key == 0  ? 'active' : '';
+                    echo '<div class="item '.$class.'">';
+                        echo '<div class="fill" style="background-image:url(\'/backend/images/'.$value['id_propiedad'].'/'.$value['direccion'].'\');"></div>';
+                    echo '</div>';
+                }
+            ?>
         </div>
 
         <!-- Controls -->
@@ -51,14 +45,38 @@
         </a>
 	</header>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>JM Inversiones</h1>
-                <p>Aqui va un texto</p>
-            </div>
-        </div>
+    <?php  echo var_dump($_SESSION)?>
+    <div class="main-content" > 
+        <div class="container">
+            <div class="row">
 
-        <hr>
+                <?php foreach ($objPropiedadSinImagen as  $key=>$value) { ?>
+                <div class="col-lg-6">
+                    <div class="well" style="height:175px; overflow-y:auto; cursor:pointer;">
+                        <div class="row">
+                            <div class="col-lg-4 olis" style="height: 60px;padding-right: 0px;  ">
+                                <img class="img-responsive img-circle" style="height: inherit;width: 64px;" ng-src="/backend/images/{{property.id_propiedad}}/{{property.url}}"></img>
+                            </div>
+                            <div class="col-lg-8">
+                                <small><strong>Tipo: </strong>{{property.tipo}}</small></br>
+                                <small><strong>Zona: </strong>{{property.zona}}</small></br>
+                                <small><strong>Amueblada: </strong>{{property.amueblado === 'true' ? 'Si': 'No' }} </small></br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12" style="overflow:auto;">
+                                <small><strong>Direccion: </strong>{{property.direccion}}</small></br>
+                                <small><strong>Ambiente: </strong>{{property.ambiente}}</small>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+
+    </div>
+</div>
 
 
 <?php  include("footer.php"); ?>
