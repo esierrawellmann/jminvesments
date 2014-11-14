@@ -111,7 +111,7 @@
                             <a class="active" href="<?php echo $pp; ?>/cotizador/index.php"><i class="fa fa-book fa-fw"></i> Cotizador</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/propiedades/index.php"><i class="fa fa-folder-open fa-fw"></i> Buscar Propiedades</a>
+                            <a class="active" href="<?php echo $pp; ?>/busquedaInterna/index.php"><i class="fa fa-folder-open fa-fw"></i> Buscar Propiedades</a>
                         </li>
                      </ul>
                 </div>

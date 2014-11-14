@@ -16,6 +16,31 @@ class Propiedad extends database {
       return array();
     }
   }
+
+  function getTopForImages(){
+    $this->conectar();
+    $query = $this->consulta("select propiedad.id_propiedad,detalle_propiedad.nombre as 'direccion' from detalle_propiedad inner join propiedad on propiedad.id_propiedad = detalle_propiedad.id_propiedad ");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  function getTopForProperties(){
+    $this->conectar();
+    $query = $this->consulta("SELECT * FROM propiedad order by id_propiedad desc limit 4 ");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
   function newPropiedad($propiedad){
     
 
@@ -65,6 +90,39 @@ function searchForProperties($params){
     if(isset($params['tipo'])){
         $query .= " and tipo in('".implode("','",$params['tipo'])."')";
     }
+   $query .= " and estado = 'Disponible'";
+    if(isset($params['negocio'])){
+        $query .= " and negocio in('".implode("','",$params['negocio'])."')";
+    }
+    if(isset($params['zona'])){
+         $query .= " and zona in('".implode("','",$params['zona'])."')";
+    }
+    if(isset($params['dormitorios'])){
+         $query .= " and dormitorios = '".$params['dormitorios']."'";
+    }    
+    if(isset($params['amueblado'])){
+        $query .= "and amueblado = '".$params['amueblado']."'";
+    }
+    $this->conectar();
+    $query = $this->consulta($query);
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+}
+
+function searchForPropertiesFiltered($params){
+    $params = get_object_vars($params);
+    $query = "select *,(select nombre from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'url' from propiedad where ";
+    $query .= " precio_renta between ".$params['renta_desde']." and ".$params['renta_hasta']." ";
+    $query .=" and  precio_renta between ".$params['venta_desde']." and ".$params['venta_hasta']." ";
+    if(isset($params['tipo'])){
+        $query .= " and tipo in('".implode("','",$params['tipo'])."')";
+    }
     if(isset($params['nombre_proyecto'])){
        $query .=" and nombre_proyecto like '%".$params['nombre_proyecto']."%'"; 
     }
@@ -89,6 +147,7 @@ function searchForProperties($params){
     if(isset($params['amueblado'])){
         $query .= "and amueblado = '".$params['amueblado']."'";
     }
+
     $this->conectar();
     $query = $this->consulta($query);
     $this->disconnect();
@@ -102,7 +161,7 @@ function searchForProperties($params){
 }
 function getPropertyImages($params){
     $this -> conectar();
-    $query = $this -> consulta("select concat(nombre) as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
+    $query = $this -> consulta("select nombre as 'direccion' from detalle_propiedad where id_propiedad = ".$params);
     $this ->disconnect();
 
     if($this->numero_de_filas($query) > 0){

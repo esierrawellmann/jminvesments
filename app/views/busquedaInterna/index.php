@@ -62,7 +62,7 @@
 
  		$scope.findProperties = function (datos){
  			$scope.resultados.mostrar = true;
-			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"query","data":'+JSON.stringify(datos)+'}').success(function(data){
+			$http.post('/app/controllers/busqueda/busquedaFunctions.php', '{"action":"especial","data":'+JSON.stringify(datos)+'}').success(function(data){
 				$scope.properties = data;
 			});             
 		}
@@ -93,16 +93,6 @@
 					            	<option>Terreno</option>
 				              	</select>
 							</div>
-							<div class="form-group">
-								<label for="dormitorios">Dormitorios</label>
-								<input type="number" class="form-control" ng-model="src.dormitorios" id="dormitorios" >
-							</div>
-							<div class="form-group">
-								<label for="venta">Precio de venta</label>
-								<input id="venta"  type="text" name="venta" ng-model="src.precio_venta" value="">
-							</div>
-						</div>
-				    	<div class="col-lg-6">
 							<label for="negocio">Negocio</label>
 							<div class="form-group">
 								<select multiple="" ng-model="src.negocio" name="negocio" id="negocio" class="form-control populate select2-offscreen" tabindex="-1">
@@ -136,6 +126,32 @@
 					            	<option>21</option>
 				              	</select>
 							</div>
+							<div class="form-group">
+								<label for="zona">Status</label>
+								<select class="form-control" ng-model="src.estado">
+									<option>Todos</option>
+									<option>Disponible</option>
+									<option>No Disponible</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="venta">Precio de venta</label>
+								<input id="venta"  type="text" name="venta" ng-model="src.precio_venta" value="">
+							</div>
+						</div>
+				    	<div class="col-lg-6">
+							<div class="form-group">
+								<label for="proyecto">Nombre del proyecto</label>
+								<input type="text" class="form-control" ng-model="src.nombre_proyecto" id="proyecto" >
+							</div>
+							<div class="form-group">
+								<label for="propietario">Nombre del propietario</label>
+								<input type="text" class="form-control" ng-model="src.nombre_propietario" id="propietario" >
+							</div>
+							<div class="form-group">
+								<label for="dormitorios">Dormitorios</label>
+								<input type="number" class="form-control" ng-model="src.dormitorios" id="dormitorios" >
+							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
@@ -144,11 +160,29 @@
 							</div>
 							<div class="row">
 								<div class="form-group">
-									<div class="col-lg-12">
+									<div class="col-lg-6">
 										<div class="checkbox">
 											<label>
 												<input type="checkbox" ng-model="src.amueblado"> Amueblado
 											</label>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="checkbox">
+													<label>
+														<input type="radio" name="tipo-renta" ng-model="src.directa_compartida" value="directa">Directa<br>
+													</label>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="checkbox">
+													<label>
+														<input type="radio" name="tipo-renta" ng-model="src.directa_compartida" value="compartida">Compartida
+													</label>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -160,36 +194,52 @@
 					</div>
 		    	</div>
 			</div>
-
-			<div class="panel panel-default" ng-show="resultados.mostrar">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"  ng-repeat="property in properties">
-							<div class="well" style="height:175px; overflow-y:auto; cursor:pointer;" ng-click="showDetail(property)">
-								<div class="row">
-									<div class="col-lg-4 olis" style="height: 60px;padding-right: 0px; 	">
-										<img class="img-responsive img-circle" style="height: inherit;width: 64px;" ng-src="/backend/images/{{property.id_propiedad}}/{{property.url}}"></img>
-									</div>
-									<div class="col-lg-8">
-										<small><strong>Tipo: </strong>{{property.tipo}}</small></br>
-										<small><strong>Zona: </strong>{{property.zona}}</small></br>
-										<small><strong>Amueblada: </strong>{{property.amueblado === 'true' ? 'Si': 'No' }} </small></br>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12" style="overflow:auto;">
-										<small><strong>Direccion: </strong>{{property.direccion}}</small></br>
-										<small><strong>Ambiente: </strong>{{property.ambiente}}</small>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
+			<div class="row" ng-show="resultados.mostrar">
+				<div class="col-lg-12">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        Propiedad
+	                        </div>
+		                    <!-- /.panel-heading -->
+		                    <div class="panel-body">
+		                        <div class="table-responsive" style="overflow-x:auto ; height:600px; overflow-y:autp">
+		                            <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
+		                                <thead>
+		                                    <tr>
+		                                        <th>Id</th>
+		                                        <th>Estado</th>
+		                                        <th>Negocio</th>
+		                                        <th>Zona</th>
+		                                        <th>Tipo</th>
+		                                        <?php if($_SESSION["role"]=="Administrador"){ ?>
+		                                        <th>Propietario</th>
+		                                        <?php }?>
+		                                        <th>Dormitorios</th>
+		                                        <th>Area</th>
+		                                        <th>Directa o Compartida</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody ng-show="properties.length > 0">
+		                                    <tr  class="odd gradeX" ng-repeat="compras in properties"> 
+		                                        <td>{{compras.id_propiedad}}</td>
+		                                        <td>{{compras.estado}}</td>
+		                                        <td>{{compras.negocio}}</td>
+		                                        <td>{{compras.zona}}</td> 
+		                                        <td>{{compras.tipo}}</td>
+		                                        <?php if($_SESSION["role"]=="Administrador"){ ?>
+		                                        <td>{{compras.propietario}}</td>
+		                                        <?php }?>
+		                                        <td>{{compras.dormitorios}}</td>
+		                                        <td>{{compras.area}}</td>
+		                                        <td>{{compras.directa_compartida}}</td>   
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>   
+		            </div>
 			</div>
-
 		</div>
 	</div>
 <?php  include("../footer.php"); ?>
