@@ -1,4 +1,6 @@
-<?php  include("../header.php"); ?>
+<?php  include("../header.php"); 
+	session_start();
+?>
     <script src="/backend/public/js/angular.min.js" type="text/javascript"></script>
     <!-- Morris Charts JavaScript -->
     <script src="/backend/public/js/angular-route.min.js" type="text/javascript"></script>
@@ -227,7 +229,7 @@
 		                                        <td>{{compras.zona}}</td> 
 		                                        <td>{{compras.tipo}}</td>
 		                                        <?php if($_SESSION["role"]=="Administrador"){ ?>
-		                                        <td>{{compras.propietario}}</td>
+		                                        <td>{{compras.nombre_propietario}}</td>
 		                                        <?php }?>
 		                                        <td>{{compras.dormitorios}}</td>
 		                                        <td>{{compras.area}}</td>
