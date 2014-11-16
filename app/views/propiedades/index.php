@@ -5,6 +5,9 @@
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
+    function cotizar(propiedad){
+        
+    }
     </script>
 
 
@@ -93,6 +96,7 @@ hr{
                 ?>
             </div>
             <div class="col-lg-3" >
+                 <button type="button" onclick="cotizar(<?php echo $objPropiedad['id_propiedad'] ; ?>)">Cotizar</button>
             </div>
         </div>
 		

@@ -55,7 +55,6 @@
                         <a href="/app/views/acerca/index.php">Acerca de Nosotros</a>
                    </li>
                     <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
-                    <li><a href="/app/views/cotizacionEnLinea/index.php">Cotizacion</a></li>
                    <li>
                        <a href="/app/views/contacto/index.php">Contacto</a>
                    </li>
