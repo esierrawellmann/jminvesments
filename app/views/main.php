@@ -7,6 +7,9 @@
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
+    function singleView(propiedad){
+        window.location = "/app/views/propiedades/index.php?property="+propiedad;
+    }
     </script>
 
 
@@ -45,22 +48,24 @@
 	</header>
 
 
-    <div class="main-content" > 
-        <div class="container">
-            <div class="row">
+    <div class="" > 
+        <div class="">
+            <div class="row" style="padding-top: 20px;  width: 73%; margin: 0 auto;">
 
                 <?php
-                foreach ($objPropiedad as  $key=>$value) { ?>
+                foreach ($objPropiedad as  $key=>$value) { 
+                    $amueblado = strcmp($value['amueblado'],'true') ? 'Si' : 'No'; 
+                    ?>
                 <div class="col-lg-6">
-                    <div class="well" style="height:175px; overflow-y:auto; cursor:pointer;">
+                    <div class="well" style="height:250px; overflow-y:auto; cursor:pointer;" onclick="singleView(<?php echo $value['id_propiedad']; ?>)">
                         <div class="row">
-                            <div class="col-lg-4 olis" style="height: 60px;padding-right: 0px;  ">
-                                <img class="img-responsive img-circle" style="height: inherit;width: 64px;"     ></img>
+                            <div class="col-lg-4 olis" style="padding-right: 0px;  ">
+                                <img class="img-responsive"  style="height: 100px;width: 140px;"   src="<?php echo '/backend/images/'.$value['id_propiedad'].'/'.$value['imagen']; ?>"  ></img>
                             </div>
                             <div class="col-lg-8">
                                 <small><strong>Tipo: </strong><?php echo $value['tipo']; ?></small></br>
                                 <small><strong>Zona: </strong><?php echo $value['zona']; ?></small></br>
-                                <small><strong>Amueblada: </strong><?php echo $value['amueblado']; ?></small></br>
+                                <small><strong>Amueblada: </strong><?php echo $amueblado; ?></small></br>
                             </div>
                         </div>
                         <div class="row">

@@ -25,10 +25,19 @@
 	        	echo json_encode($objUser);
 	        }
 	        break;
+        case "detail":
+        $propiedad = new Propiedad();
+        if(isset($data['propiedad'])){
+        	$prop = get_object_vars($data['propiedad']); 
+        	$objUser = $propiedad ->getPropertyById($prop['id_propiedad']);
+        	echo json_encode($objUser);
+        }
+        break;
 	    case "delete":
 		    $propiedad = new Propiedad();
 		    if(isset($data['propiedad'])){
-	        	$objGasto = $propiedad->deletePropiedad($data['propiedad']);
+		    	$prop = get_object_vars($data['propiedad']); 
+	        	$objGasto = $propiedad->deletePropiedad($prop['id_propiedad']);
 	        	echo json_encode($objGasto);
 		    }
 		        break;

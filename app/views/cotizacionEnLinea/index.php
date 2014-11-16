@@ -13,8 +13,16 @@
 	angular.module('rol', ['ui.bootstrap']);
      function controller($scope, $modal, $log , $http)
 	 {
+        $scope.propiedad ={};
+        $scope.propiedad.id_propiedad = <?php echo $_GET['property']; ?>;
+            angular.element(document).ready(function () {
+                $http.post('./../../../backend/app/controllers/propiedad/propiedadFunctions.php', '{"action":"detail","propiedad":'+JSON.stringify($scope.propiedad)+'}').success(function(data){
+                    $scope.propiedad = data;
+                    $scope.precio = $scope.propiedad.precio_venta;
+                 });
+            });
              
-             $scope.calculo = function(){
+            $scope.calculo = function(){
                 $scope.enganche =$scope.precio *0.3;
                 $scope.financiar = $scope.precio - $scope.enganche;
             }
@@ -56,7 +64,7 @@
             <div class="row">
                 <div class="col-sm-8"> 
                    <div class="panel panel-primary">
-                        <div class="panel-heading"><h6 class="panel-title">Nombre del apartamento</h6></div>
+                        <div class="panel-heading"><h6 class="panel-title">{{propiedad.direccion}}</h6></div>
                         <div class="panel-body">
                             <form role="form" name="userForm">
                                 <div class="row">
@@ -77,13 +85,13 @@
                                     <div class="col-lg-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="zona">Mts² de Construccion</label>
-                                            <input type="text" class="form-control" ng-model="rol.area" id="exampleInputEmail1" placeholder="Mts² de Construccion"/>
+                                            <input type="text" class="form-control" ng-model="propiedad.area" id="exampleInputEmail1" placeholder="Mts² de Construccion"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="nombre_proyecto">No. Dormitorios</label>
-                                            <input type="text" class="form-control" name="nombre_proyecto" required="true" ng-model="new.nombre_proyecto" id="nombre_proyecto" placeholder="No. de Dormitorios"/>          
+                                            <input type="text" class="form-control" name="nombre_proyecto" required="true" ng-model="propiedad.dormitorios" id="nombre_proyecto" placeholder="No. de Dormitorios"/>          
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +105,7 @@
                                     <div class="col-lg-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="dormitorios">No. de Dormitorios</label>
-                                            <input type="text" class="form-control" type="number" ng-model="new.dormitorios" id="dormitorios" name="dormitorios" placeholder="Numero de Dormitorios"/>
+                                            <input type="text" class="form-control" type="number" ng-model="propiedad.dormitorios" id="dormitorios" name="dormitorios" placeholder="Numero de Dormitorios"/>
                                         </div>
                                     </div>
                                 </div>

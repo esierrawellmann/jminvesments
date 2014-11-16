@@ -205,7 +205,6 @@ function getPropertyById($params){
 
 }
 function deletePropiedad($propiedad){
-
     $this -> conectar();
     $query = $this -> consulta("delete from propiedad where id_propiedad = ".$propiedad);
     $this ->disconnect();

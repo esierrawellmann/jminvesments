@@ -6,7 +6,7 @@
         interval: 5000 //changes the speed
     })
     function cotizar(propiedad){
-        
+        window.location = "/app/views/cotizacionEnLinea/index.php?property="+propiedad;
     }
     </script>
 
@@ -95,8 +95,8 @@ hr{
 
                 ?>
             </div>
-            <div class="col-lg-3" >
-                 <button type="button" onclick="cotizar(<?php echo $objPropiedad['id_propiedad'] ; ?>)">Cotizar</button>
+            <div class="col-lg-3" style="margin-top:20px;" >
+                 <button type="button" style="margin:0 auto;" class="btn btn-default btn-xs" onclick="cotizar(<?php echo $objPropiedad['id_propiedad'] ; ?>)">Cotizar</button>
             </div>
         </div>
 		

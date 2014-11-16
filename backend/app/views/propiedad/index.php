@@ -13,6 +13,7 @@ function controller($scope, $modal, $log , $http)
     angular.element(document).ready(function () {
         $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"query"}').success(function(data){
             $scope.comprasIniciales = data;
+            console.log(data);
          });
     });
     
@@ -336,15 +337,13 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nombre</th>
-                                            <th>Ubicacion</th>
+                                            <th>Nombre del archivo</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="detalle in detailComprasInit.detalleCompras" class="odd gradeX"> 
                                             <td>{{detalle.id_detalle_propiedad}}</td>
-                                            <td>{{detalle.direccion}}</td>
                                             <td>{{detalle.nombre}}</td>
                                             <td>
                                             	<div class="btn-group">

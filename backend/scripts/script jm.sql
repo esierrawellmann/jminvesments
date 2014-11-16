@@ -47,7 +47,7 @@ area varchar(254) not null,
 direccion varchar(1024) null,
 departamento varchar(512) null,
 municipio varchar(512) null, 
-primary key(id_propiedad)
+primary key(id_propiedad) ON DELETE CASCADE ON UPDATE CASCADE,
 ) engine=InnoDB;
 
 create table detalle_propiedad(
