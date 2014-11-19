@@ -82,3 +82,7 @@ update mysql.user set mysql.user.User=usuario, mysql.user.Password=PASSWORD(pass
 FLUSH PRIVILEGES;
 END$$ 
 DELIMITER ;
+
+insert into role(nombre) values ("Administrador");
+insert into usuario(id_role,nombre) values (1,"usuario"); 
+call ins_users('localhost','usuario','123');
