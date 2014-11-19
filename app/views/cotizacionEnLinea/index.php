@@ -48,7 +48,7 @@
 <style>
     @media print {
         .main-content {
-            margin-left: 50px;
+            margin-left: 95px;
             margin-top: 0px;
         }
     }
@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<!--<img src="/public/img/logojm.png" class="img-responsive pull-right" alt="Logo">-->
-					<h1 class="page-header">Cotización en linea - Proyecciones para su Inversion</h1>
+					<h4 class="page-header">Cotización en linea - Proyecciones para su Inversion</h4>
 				</div>
 			</div>
              
