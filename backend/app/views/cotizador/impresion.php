@@ -6,14 +6,14 @@ $contador = count($json);
 <style>
     @media print {
         .row {
-            margin-left: 80px;
+            margin-left: 100px;
             margin:top:75px
         }
 
     }
 </style>
     <div class="row" style="" >
-        <div class="col-sm-12" style="margin-top:100px;">
+        <div class="col-sm-12" style="margin-top:70px;">
                 <label class=""><?php echo $_POST['encabezado']; ?></label>
         </div>
 

@@ -48,7 +48,7 @@
 <style>
     @media print {
         .main-content {
-            margin-left: 95px;
+            margin-left: 105px;
             margin-top: 0px;
         }
     }
