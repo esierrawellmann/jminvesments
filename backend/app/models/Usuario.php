@@ -111,8 +111,6 @@ class Usuario extends database {
     $q = "insert into usuario(id_role,nombre) values (".$userVars['id_role'].",'".$userName."');";
     $this -> conectar();
     $query = $this->consulta($q);
-    $us = "call ins_users('localhost','".$userName."','".$userVars['pass']."');";
-    $consulta = $this->consulta($us);
     $queryObject = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role ORDER BY u.id_usuario DESC LIMIT 1; ");
     $this->disconnect();
     if($this->numero_de_filas($queryObject) > 0){
@@ -131,7 +129,6 @@ class Usuario extends database {
                 
                 $usuario_anterior = $data2[0]['nombre'];
 		$query = $this -> consulta("update usuario set nombre ='".$user['nombre']."', id_role = ".$user['id_role']." where id_usuario = ".$user['id_usuario'].";");
-		$consul = $this-> consulta("call update_users('localhost','".$user['nombre']."','".$user['pass']."','".$usuario_anterior."');");
                 $queryObject = $this -> consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role where u.id_usuario =".$user['id_usuario']." ORDER BY u.id_usuario DESC LIMIT 1; ");
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
@@ -146,7 +143,6 @@ class Usuario extends database {
 function deleteUser($id,$userName){
     $this -> conectar();
     $query = $this -> consulta("delete from usuario where id_usuario = ".$id);
-    $query = $this->consulta("call eli_users('localhost','".$userName."')");
     $this ->disconnect();
 
     return '{"success":true}';
