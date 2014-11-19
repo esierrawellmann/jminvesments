@@ -17,6 +17,19 @@ class Usuario extends database {
     }
   }
   
+  function getConexion(){
+      $this->conectar();
+    $query = $this->consulta("");
+    $this->disconnect();
+    if($this->numero_de_filas($query) > 0){
+      while ( $tsArray = $this->fetch_assoc($query) )
+        $data[] = $tsArray;   
+        return $data;
+    }else{
+      return array();
+    }
+  }
+  
   function getCajaxUser($id,$fecha,$fecha_final){
       $this->conectar();
       $consulta = "select v.id_venta, v.nombre as 'cliente' ,v.fecha as'fecha',u.nombre as 'vendedor',v.tarjeta,v.efectivo, (select sum(cantidad*precio) from detalle_venta where detalle_venta.id_venta = v.id_venta) as 'suma' from venta v inner join usuario u on v.id_usuario=u.id_usuario where v.id_usuario=".$id." and v.fecha between '".$fecha."' and '".$fecha_final."' order by v.id_usuario ";
@@ -108,7 +121,7 @@ class Usuario extends database {
     $userName = $userVars['nombre'];
     $userRole = get_object_vars($userVars['rol']);
 
-    $q = "insert into usuario(id_role,nombre) values (".$userVars['id_role'].",'".$userName."');";
+    $q = "insert into usuario(id_role,nombre,password) values (".$userVars['id_role'].",'".$userName."','".$userVars['pass']."');";
     $this -> conectar();
     $query = $this->consulta($q);
     $queryObject = $this->consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role ORDER BY u.id_usuario DESC LIMIT 1; ");
@@ -128,7 +141,7 @@ class Usuario extends database {
 				$data2[] = $tsArray;
                 
                 $usuario_anterior = $data2[0]['nombre'];
-		$query = $this -> consulta("update usuario set nombre ='".$user['nombre']."', id_role = ".$user['id_role']." where id_usuario = ".$user['id_usuario'].";");
+		$query = $this -> consulta("update usuario set nombre ='".$user['nombre']."', id_role = ".$user['id_role'].", password='".$user['pass']."' where id_usuario = ".$user['id_usuario'].";");
                 $queryObject = $this -> consulta("SELECT u.id_usuario,u.nombre,r.id_role,r.nombre as 'role_name' FROM usuario u INNER JOIN role r ON u.id_role = r.id_role where u.id_usuario =".$user['id_usuario']." ORDER BY u.id_usuario DESC LIMIT 1; ");
 		$this ->disconnect();
 		if($this->numero_de_filas($queryObject) > 0){
