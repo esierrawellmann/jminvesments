@@ -1,6 +1,7 @@
 <?php
     $pt = "";
     $pp = "/backend/app/views";
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,53 +109,30 @@
                 <br>
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/caja/index.php"><i class="fa fa-inbox fa-fw"></i> Caja</a>
-                        </li>
+                        <?php if($_SESSION["role"]=="Administrador"){ ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/rol/index.php"><i class="fa fa-database fa-fw"></i> Roles</a>
                         </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/permiso/index.php"><i class="fa  fa-check fa-fw"></i> Permisos</a>
-                        </li>
+                        <?php } ?>
+                        <?php if($_SESSION["role"]=="Administrador"){ ?>
                         <li>
                             <a class="active" href="<?php echo $pp; ?>/usuario/index.php"><i class="fa fa-child fa-fw"></i> Usuarios</a>
                         </li>
+                        <?php } ?>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/tipoProducto/index.php"><i class="fa fa-cogs fa-fw"></i> Tipo de Producto</a>
+                            <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa fa-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/producto/index.php"><i class="fa fa-tasks fa-fw"></i> Producto</a>
+                            <a class="active" href="<?php echo $pp; ?>/citas/index.php"><i class="fa fa-pencil-square-o fa-fw"></i> Citas</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/mobiliario/index.php"><i class="fa fa-truck fa-fw"></i> Mobiliario</a>
+                            <a class="active" href="<?php echo $pp; ?>/propiedad/index.php"><i class="fa fa-building fa-fw"></i> Ingreso Propiedades</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/cajaChica/index.php"><i class="fa fa-archive fa-fw"></i> Caja Chica</a>
+                            <a class="active" href="<?php echo $pp; ?>/cotizador/index.php"><i class="fa fa-book fa-fw"></i> Cotizador</a>
                         </li>
                         <li>
-                            <a class="active" href="<?php echo $pp; ?>/vale/index.php"><i class="fa fa-money fa-fw"></i> Vale</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/calendario/index.php"><i class="fa fa-calendar fa-fw"></i> Calendario</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/gasto/index.php"><i class="fa fa-credit-card fa-fw"></i> Gastos</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/venta/index.php"><i class="fa fa-usd fa-fw"></i> Ventas</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/ventas/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Ventas</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/compra/index.php"><i class="fa fa-clipboard fa-fw"></i> Compras</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/compras/index.php"><i class="fa fa-list-alt fa-fw"></i> Catálogo de Compras</a>
-                        </li>
-                        <li>
-                            <a class="active" href="<?php echo $pp; ?>/rolePermiso/index.php"><i class="fa fa-th-list fa-fw"></i> Role Permiso</a>
+                            <a class="active" href="/app/views/busquedaInterna/index.php"><i class="fa fa-folder-open fa-fw"></i> Buscar Propiedades</a>
                         </li>
                     </ul>
                 </div>
@@ -162,7 +140,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
         <div id="page-wrapper">
             <div class="row">
         	

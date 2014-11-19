@@ -1,4 +1,6 @@
-<?php  include("../header.php");?>
+<?php  include("../header.php");
+        session_start();
+?>
 <script>
 var app = angular.module('moduloCompras', ['ngRoute']);
 angular.module('moduloCompras', ['ui.bootstrap']);
@@ -313,7 +315,9 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 											    <i class="fa fa-cog"></i>  Acciones <span class="caret"></span>
 											  </button>
 											  <ul class="dropdown-menu" role="menu">
+                                                <?php if($_SESSION["role"]=="Administrador"){ ?>
 											    <li><a href="#" ng-click="showUpdateDialog(compras,'lg')"> <i class="fa fa-pencil-square-o"></i>  Editar</a></li>
+                                                <?php } ?>
 											    <li><a href="#" ng-click="deleteCompra(compras)"> <i class="fa fa-minus-square"></i>  Eliminar</a></li>
                                               </ul>
 											</div>

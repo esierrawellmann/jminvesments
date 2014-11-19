@@ -19,6 +19,8 @@
                 $http.post('./../../../backend/app/controllers/propiedad/propiedadFunctions.php', '{"action":"detail","propiedad":'+JSON.stringify($scope.propiedad)+'}').success(function(data){
                     $scope.propiedad = data;
                     $scope.precio = $scope.propiedad.precio_venta;
+                    $scope.calculo();
+
                  });
             });
              
@@ -160,7 +162,7 @@
                                     <div class="col-lg-6 col-xs-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Plazo en Meses</label>
-                                            <input type="text" class="form-control" ng-model="plazo" ng-change="pmt()" id="exampleInputEmail1" placeholder="Plazo en Meses"/>
+                                            <input type="text" class="form-control" ng-model="plazo" ng-change="pmt(tasa/1200,plazo,-financiar)" id="exampleInputEmail1" placeholder="Plazo en Meses"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-xs-6">

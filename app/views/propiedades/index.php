@@ -96,7 +96,7 @@ hr{
                 ?>
             </div>
             <div class="col-lg-3" style="margin-top:20px;" >
-                 <button type="button" style="margin:0 auto;" class="btn btn-default btn-xs" onclick="cotizar(<?php echo $objPropiedad['id_propiedad'] ; ?>)">Cotizar</button>
+                 <button type="button" style="margin:0 auto;" class="btn btn-success btn-xs" onclick="cotizar(<?php echo $objPropiedad['id_propiedad'] ; ?>)">Cotizar</button>
             </div>
         </div>
 		

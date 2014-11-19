@@ -13,7 +13,7 @@
     </script>
 
 
-	<header id="myCarousel" class="carousel slide" style="margin-top:50px">
+	<header id="myCarousel" class="carousel slide" style="margin-top:75px">
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
