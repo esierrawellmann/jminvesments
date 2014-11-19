@@ -17,9 +17,9 @@ class Usuario extends database {
     }
   }
   
-  function getConexion(){
+  function getConexion($user,$pass){
       $this->conectar();
-    $query = $this->consulta("");
+    $query = $this->consulta("select * from usuario where nombre='".$user."' and password='".$pass."';");
     $this->disconnect();
     if($this->numero_de_filas($query) > 0){
       while ( $tsArray = $this->fetch_assoc($query) )

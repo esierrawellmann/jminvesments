@@ -4,9 +4,11 @@ require_once '../models/Usuario.php';
 session_start();
 global $user,$pass;
 $conexion = new database();
+$usuario = new Usuario();
 try{
         $conectar = $conexion->CrearConexion($_POST["user"], $_POST["pass"]);
-        if($conectar==="true"){
+        $conec = $usuario->getConexion($_POST["user"], $_POST["pass"]);
+        if( (count($conec)) > 0 ){
             $_SESSION["user"]=$_POST["user"];
             $_SESSION["pass"]=$_POST["pass"];
             
