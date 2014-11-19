@@ -6,7 +6,7 @@ $contador = count($json);
 <style>
     @media print {
         .row {
-            margin-left: 50px;
+            margin-left: 80px;
             margin:top:75px
         }
 
