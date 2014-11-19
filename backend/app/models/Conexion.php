@@ -11,7 +11,7 @@ class database {
  public function CrearConexion($user,$pass){
 
      try{
-            $conexion = mysql_connect("localhost",$user,$pass); 
+            $conexion = mysql_connect("localhost",'forich','For@each2014'); 
             $conecto = mysql_select_db("jm",$conexion);
         
                 if(!$conecto){
@@ -23,18 +23,8 @@ class database {
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
  {
-     
-     $user=$_SESSION["user"];
-     $pass=$_SESSION["pass"];
-     if(isset($_SESSION["user"])){
-      $this ->conexion = (mysql_connect("localhost",$user,$pass)) or die(mysql_error()); 
+      $this ->conexion = (mysql_connect("localhost",'forich','For@each2014')) or die(mysql_error()); 
             mysql_select_db("jm",$this->conexion) or die("Could not open the db");
-      
-     }else{
-      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
-            mysql_select_db("jm",$this->conexion) or die("Could not open the db");
-      
-     }
             
     }
   /* METODO PARA REALIZAR UNA CONSULTA 
