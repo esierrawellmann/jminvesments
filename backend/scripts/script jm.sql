@@ -11,13 +11,13 @@ create table usuario(
 id_usuario int auto_increment,
 id_role int not null,
 nombre varchar(512) not null,
+password varchar(45) not null,
 primary key(id_usuario),
 foreign key(id_role) references role(id_role)
 ) engine=InnoDB;
 
 insert into role(nombre) values ("Administrador");
-insert into usuario(id_role,nombre) values (1,"usuario"); 
-call ins_users('localhost','usuario','123');
+insert into usuario(id_role,nombre,password) values (1,"admin","123"); 
 
 create table agenda(
 id_agenda int auto_increment,
