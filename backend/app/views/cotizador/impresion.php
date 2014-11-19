@@ -6,8 +6,8 @@ $contador = count($json);
 <style>
     @media print {
         .row {
-            margin-left: 100px;
-            margin:top:75px
+            margin-left: 80px;
+            margin-top:0px
         }
 
     }
@@ -21,7 +21,7 @@ $contador = count($json);
                 <br><br><br>
                 <label>Señor(a)</label><br>
                 <label><?php echo $_POST['cliente']; ?></label><br>
-                <label>Presente</label><br><br><br>
+                <label>Presente</label><br><br>
                 
                 <label>Estimado <?php echo $_POST['cliente']; ?></label><br><br>
                 
@@ -35,7 +35,7 @@ $contador = count($json);
                        ?> 
                <div class="col-sm-12">
                     <label> <?php echo ($i+1).". "; echo $json[$i]['tipo']." - ".$json[$i]['nombre_proyecto']; ?> </label><br> 
-                    <div class="col-lg-5" style="margin-bottom:60px">
+                    <div class="col-lg-5" style="margin-bottom:20px">
                         <?php echo $json[$i]['ambiente']; ?>
                         <label>Area:</label> <?php echo $json[$i]['area']." Mts"; ?>
                         <label>Precio:</label> <?php echo "$ ".$json[$i]['precio_venta']; ?>

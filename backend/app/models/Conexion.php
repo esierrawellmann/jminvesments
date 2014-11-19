@@ -12,7 +12,7 @@ class database {
 
      try{
             $conexion = mysql_connect("localhost",$user,$pass); 
-            $conecto = mysql_select_db("forich",$conexion);
+            $conecto = mysql_select_db("jm",$conexion);
         
                 if(!$conecto){
                     return "false";
