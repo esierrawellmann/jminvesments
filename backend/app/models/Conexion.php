@@ -11,7 +11,7 @@ class database {
  public function CrearConexion($user,$pass){
 
      try{
-            $conexion = mysql_connect("localhost",'root',''); 
+            $conexion = mysql_connect("localhost",'esierra','123'); 
             $conecto = mysql_select_db("jm",$conexion);
         
                 if(!$conecto){
@@ -23,7 +23,7 @@ class database {
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
  {
-      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
+      $this ->conexion = (mysql_connect("localhost",'esierra','123')) or die(mysql_error()); 
             mysql_select_db("jm",$this->conexion) or die("Could not open the db");
             
     }

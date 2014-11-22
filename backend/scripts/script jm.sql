@@ -47,7 +47,7 @@ area varchar(254) not null,
 direccion varchar(1024) null,
 departamento varchar(512) null,
 municipio varchar(512) null, 
-primary key(id_propiedad) ON DELETE CASCADE ON UPDATE CASCADE,
+primary key(id_propiedad)
 ) engine=InnoDB;
 
 create table detalle_propiedad(
@@ -59,30 +59,6 @@ primary key (id_detalle_propiedad),
 foreign key (id_propiedad) references propiedad(id_propiedad)
 ) engine=InnoDB;
 
-DROP PROCEDURE IF EXISTS ins_users;
-DELIMITER $$
-CREATE PROCEDURE ins_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16),IN pass VARCHAR(16))
-BEGIN
-INSERT INTO mysql.user (HOST,USER,PASSWORD,select_priv,Insert_priv,Update_priv,Delete_priv, EXECUTE_priv,MAX_USER_CONNECTIONS,ssl_cipher, x509_issuer, x509_subject)
-VALUES ( cliente, usuario, PASSWORD(pass), 'Y', 'Y', 'Y', 'Y', 'Y',1, '', '', '');
-FLUSH PRIVILEGES;
-END$$
-
-DROP PROCEDURE IF EXISTS eli_users$$
-CREATE PROCEDURE eli_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16))
-BEGIN
-DELETE FROM mysql.user WHERE mysql.user.User=usuario AND mysql.user.Host=cliente;
-FLUSH PRIVILEGES;
-END$$
-
-DROP PROCEDURE IF EXISTS update_users$$
-CREATE PROCEDURE update_users(IN cliente VARCHAR(16),IN usuario VARCHAR(16),IN pass varchar(16),in oldusuario VARCHAR(16))
-BEGIN
-update mysql.user set mysql.user.User=usuario, mysql.user.Password=PASSWORD(pass) where mysql.user.User=oldusuario AND mysql.user.Host=cliente;
-FLUSH PRIVILEGES;
-END$$ 
-DELIMITER ;
 
 insert into role(nombre) values ("Administrador");
 insert into usuario(id_role,nombre) values (1,"usuario"); 
-call ins_users('localhost','usuario','123');

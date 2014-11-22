@@ -1,7 +1,9 @@
-/nbproject/private/
+/nbproject/
+/backend/nbproject/
 /phpmyadmin
 /.idea
 /.settings
 /.buildpath
 /.project
 /backend/images
+/backend/tmbs.iml
