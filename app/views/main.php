@@ -54,7 +54,7 @@
 
                 <?php
                 foreach ($objPropiedad as  $key=>$value) { 
-                    $amueblado = strcmp($value['amueblado'],'true') ? 'Si' : 'No'; 
+                    $amueblado = ($value['amueblado'] ==='true') ? 'Si' : 'No'; 
                     ?>
                 <div class="col-lg-6">
                     <div class="well" style="height:250px; overflow-y:auto; cursor:pointer;" onclick="singleView(<?php echo $value['id_propiedad']; ?>)">

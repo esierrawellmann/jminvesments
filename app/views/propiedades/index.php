@@ -65,7 +65,7 @@ hr{
                 <?php 
                     $singleProperty = new Propiedad();
                     $objPropiedad = $singleProperty ->getPropertyById($_GET['property']);
-                    $amueblado = strcmp($objPropiedad['amueblado'],'true') ? 'Si' : 'No'; 
+                    $amueblado = ($objPropiedad['amueblado'] === 'true') ? 'Si' : 'No'; 
 
                     echo '<h3><strong>Codigo : </strong> '.$objPropiedad['id_propiedad'].'</h3>';
                     echo '<hr>';

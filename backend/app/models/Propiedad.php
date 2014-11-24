@@ -62,7 +62,7 @@ function searchTopFor(){
 
     $propiedad = get_object_vars($propiedad);
     $departamento = get_object_vars($propiedad['departamento']);
-    $amueblada =  $propiedad['amueblada'] ? 'true':'false';
+    $amueblada =  $propiedad['amueblado'] ? 'true':'false';
     $this -> conectar();
     $q = "insert into propiedad(tipo,negocio,zona,estado,nombre_proyecto,nombre_propietario,dormitorios,precio_renta,precio_venta,amueblado,directa_compartida,direccion,departamento,municipio,ambiente,area) values ('".$propiedad['tipo']."','" . $propiedad['negocio'] . "','" . $propiedad['zona'] . "','" . $propiedad['estado'] ."','".$propiedad['nombre_proyecto']."','" . $propiedad['nombre_propietario'] . "','" . $propiedad['dormitorios'] . "'," . $propiedad['precio_renta'].",".$propiedad['precio_venta'].",'" .$amueblada. "','" . $propiedad['directa_compartida'] . "','" . $propiedad['direccion'] . "','". $departamento['nombre']."','" . $propiedad['municipio'] . "','".$propiedad['ambiente']."','".$propiedad['area']."');";
     $query = $this->consulta($q);
