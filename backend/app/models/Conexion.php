@@ -10,8 +10,8 @@ class database {
  public function CrearConexion($user,$pass){
 
      try{
-            $conexion = mysql_connect("forich.db.9717674.hostedresource.com",'forich','For@each2014'); 
-            $conecto = mysql_select_db("forich",$conexion);
+            $conexion = mysql_connect("localhost",'root',''); 
+            $conecto = mysql_select_db("jm",$conexion);
         
                 if(!$conecto){
                     return "false";
@@ -22,8 +22,8 @@ class database {
     /* METODO PARA CONECTAR CON LA BASE DE DATOS*/
  public function conectar()
  {
-      $this ->conexion = (mysql_connect("forich.db.9717674.hostedresource.com",'forich','For@each2014')) or die(mysql_error()); 
-            mysql_select_db("forich",$this->conexion) or die("Could not open the db");
+      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
+            mysql_select_db("jm",$this->conexion) or die("Could not open the db");
             
     }
   /* METODO PARA REALIZAR UNA CONSULTA 
