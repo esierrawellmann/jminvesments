@@ -118,8 +118,12 @@
 
             margin-left: 50px;
 
-            margin-top: 50px;
+            margin-top: 0px;
 
+        }
+        
+        .boton {
+            display: none;
         }
 
     }
@@ -131,7 +135,12 @@
 
  <div class="main-content" ng-class="{'print-margin':!showlogo}" > 
 
+    
 		<div class="container" >
+                    
+                     <div class="boton pull-right">
+                                <input type="button" value="Imprimir Cotizacion" class="btn btn-danger" onClick="window.print()">
+                    </div>
 
             <img src="/public/img/logojm.png" ng-show="showlogo">
 
