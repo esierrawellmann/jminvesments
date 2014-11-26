@@ -394,7 +394,7 @@
                                     </div>
 
                                 </div> 
-
+                                <?php  if(isset($_SESSION['user'])){ ?>
                                 <div class="row">
 
                                     <div class="col-lg-6 col-xs-6 hidden-print">
@@ -408,7 +408,7 @@
 
                                 </div> 
 
-                                
+                                <?php }else{ echo '<div style="display:none;">{{showlogo=true}}</div>';} ?>
 
                             </form>
 
