@@ -22,9 +22,9 @@ class database {
 
      try{
 
-            $conexion = mysql_connect("localhost",'root',''); 
+            $conexion = mysql_connect("forich.db.9717674.hostedresource.com",'forich','For@each2014'); 
 
-            $conecto = mysql_select_db("jm",$conexion);
+            $conecto = mysql_select_db("forich",$conexion);
     
                 if(!$conecto){
 
@@ -43,9 +43,9 @@ class database {
  public function conectar()
 
  {
-      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
+      $this ->conexion = (mysql_connect("forich.db.9717674.hostedresource.com",'forich','For@each2014')) or die(mysql_error()); 
 
-            mysql_select_db("jm",$this->conexion) or die("Could not open the db");            
+            mysql_select_db("forich",$this->conexion) or die("Could not open the db");            
 
     }
 
