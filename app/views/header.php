@@ -119,11 +119,6 @@
                        <a href="/app/views/contacto/index.php">Contacto</a>
 
                    </li>
-                   <li>
-
-                       <a href="/app/views/test/index.php">Test</a>
-
-                   </li>
 
                 </ul>
 
