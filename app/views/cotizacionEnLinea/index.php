@@ -62,8 +62,16 @@
 
             $scope.reserva = function(){
 
-                $scope.saldo =$scope.enganche - $scope.reservas;
+                $scope.saldo = $scope.enganche - $scope.reservas;
+                $scope.recalcular();
+                
+            } 
 
+          $scope.recalcular = function(){
+
+                $scope.financiar = $scope.precio - $scope.enganche;
+
+                
             } 
 
             
@@ -79,6 +87,9 @@
                 $scope.cuota = val.toFixed(2);
 
                 $scope.calificar = (val * 3.3).toFixed(2);
+                
+                $scope.reserva();
+
 
             }
 
@@ -96,11 +107,18 @@
 
     @media print {
 
-        .main-content {
+        .print-margin {
 
             margin-left: 120px;
 
             margin-top: 0px;
+
+        }
+        .main-content {
+
+            margin-left: 50px;
+
+            margin-top: 50px;
 
         }
 
@@ -108,11 +126,14 @@
 
 </style>
 
+<div ng-app="rol">
+    <div ng-controller="controller" >
 
+ <div class="main-content" ng-class="{'print-margin':!showlogo}" > 
 
- <div class="main-content" ng-app="rol"> 
+		<div class="container" >
 
-		<div class="container" ng-controller="controller">
+            <img src="/public/img/logojm.png" ng-show="showlogo">
 
 			<div class="row">
 
@@ -260,7 +281,7 @@
 
                                             <label for="exampleInputEmail1">Enganche</label>
 
-                                            <input type="text" class="form-control" ng-model="enganche" id="exampleInputEmail1" placeholder="Enganche"/>
+                                            <input type="text" class="form-control" ng-model="enganche" ng-change="pmt(tasa/1200,plazo,-financiar)" id="exampleInputEmail1" placeholder="Enganche"/>
 
                                         </div>
 
@@ -373,8 +394,21 @@
                                     </div>
 
                                 </div> 
+                                <?php  if(isset($_SESSION['user'])){ ?>
+                                <div class="row">
 
-                                
+                                    <div class="col-lg-6 col-xs-6 hidden-print">
+
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" ng-model="showlogo"> Mostrar Logo
+                                            </label>
+                                          </div>
+                                    </div>
+
+                                </div> 
+
+                                <?php }else{ echo '<div style="display:none;">{{showlogo=true}}</div>';} ?>
 
                             </form>
 
@@ -391,6 +425,8 @@
 		</div>
 
 	</div>
+</div>
+</div>
 
         
 
