@@ -21,11 +21,16 @@ class database {
 
 
      try{
+<<<<<<< HEAD
 
             $conexion = mysql_connect("localhost",'root',''); 
 
             $conecto = mysql_select_db("jm",$conexion);
 
+=======
+            $conexion = mysql_connect("localhost",'root',''); 
+            $conecto = mysql_select_db("jm",$conexion);
+>>>>>>> origin/master
         
 
                 if(!$conecto){
@@ -45,11 +50,16 @@ class database {
  public function conectar()
 
  {
+<<<<<<< HEAD
 
       $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
 
             mysql_select_db("jm",$this->conexion) or die("Could not open the db");
 
+=======
+      $this ->conexion = (mysql_connect("localhost",'root','')) or die(mysql_error()); 
+            mysql_select_db("jm",$this->conexion) or die("Could not open the db");
+>>>>>>> origin/master
             
 
     }
