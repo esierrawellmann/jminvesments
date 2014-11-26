@@ -40,7 +40,7 @@ class Propiedad extends database {
 
 function searchTopFor(){
 
-    $query = "select *,(select nombre from detalle_propiedad where propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) as 'imagen' from propiedad order by id_propiedad desc limit 4 ";
+    $query = "SELECT * ,(SELECT nombre FROM detalle_propiedad WHERE propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) AS 'imagen'  FROM propiedad WHERE id_propiedad IN (SELECT MAX(id_propiedad) FROM propiedad WHERE tipo IN('Apartamento','Bodega','Casa','Edificio') AND estado = 'Disponible' GROUP BY propiedad.tipo) ";
 
     $this->conectar();
 
