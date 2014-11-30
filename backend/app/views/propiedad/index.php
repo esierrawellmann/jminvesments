@@ -409,7 +409,7 @@ function controller($scope, $modal, $log , $http)
 
     $scope.action = action;
 
-    $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno"];
+    $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno","Oficina"];
 
     $scope.negocios =["Venta","Renta"];
 
@@ -499,7 +499,7 @@ function controller($scope, $modal, $log , $http)
 
     $scope.new = {"amueblada":false,"directa_compartida":"Directa","estado":"Disponible","departamento":{}};
 
-    $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno"];
+    $scope.tipos =["Apartamento","Bodega","Casa","Edificio","Local","Terreno","Oficina"];
 
     $scope.negocios =["Venta","Renta"];
 
@@ -614,7 +614,24 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                                 <tbody ng-show="comprasIniciales.compras.length > 0">
 
-                                    <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras"> 
+                                    <form>
+
+                                          <div class="form-group">
+
+                                            <div class="input-group">
+
+                                              <div class="input-group-addon">Filtro</div>
+
+                                              <input class="form-control" type="text" placeholder="Filtrar" ng-model="campo">
+
+                                            </div>
+
+                                          </div>
+
+                                    </form>
+
+
+                                    <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras | filter:campo"> 
 
                                         <td ng-click="viewDetail(compras)">{{compras.id_propiedad}}</td>
 
