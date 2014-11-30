@@ -31,6 +31,21 @@ function controller($scope, $modal, $log , $http)
         $http.post('./../../controllers/propiedad/propiedadFunctions.php', '{"action":"query"}').success(function(data){
 
             $scope.comprasIniciales = data;
+            
+             <?php
+            if(isset($_GET["idPropiedad"])){
+                $idPropiedad = $_GET["idPropiedad"];
+               ?>
+                var id = <?php echo $idPropiedad; ?>;
+                var pro = functiontofindIndexByKeyValue($scope.comprasIniciales.compras,"id_propiedad",id);
+                console.log(pro);
+                
+                $scope.viewDetail($scope.comprasIniciales.compras[pro]);
+                
+                <?php
+            }
+            
+            ?>
 
          });
 
@@ -854,7 +869,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                     <div class="form-group">
 
-                        <label for="precio_renta">Precio Renta</label>
+                        <label for="precio_renta">Precio Renta $</label>
 
                         <input type="number" class="form-control" ng-model="new.precio_renta" required="true" name="precio_renta" id="precio_renta" placeholder="Precio de Renta"/>
 
@@ -868,7 +883,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                     <div class="form-group">
 
-                        <label for="precio_venta">Precio Venta</label>
+                        <label for="precio_venta">Precio Venta $</label>
 
                         <input class="form-control" name="precio_venta" type="number" required="true" ng-model="new.precio_venta" id="precio_venta" placeholder="Precio de Venta"/>
 
@@ -902,7 +917,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                    <div class="form-group">
 
-                        <label for="area">Area</label>
+                        <label for="area">Área</label>
 
                         <input class="form-control" name="area" type="number" required="true" ng-model="new.area" id="area" placeholder="Area"/>
 
@@ -916,7 +931,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                     <div class="form-group">
 
-                        <label for="direccion">Direccion</label>
+                        <label for="direccion">Dirección</label>
 
                         <input type="text" class="form-control" required="true" ng-model="new.direccion" name="direccion" id="direccion" placeholder="Direccion"/>
 

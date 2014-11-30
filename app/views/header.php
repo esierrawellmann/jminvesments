@@ -112,7 +112,7 @@
 
                    </li>
 
-                    <li><a  href="/app/views/busqueda/index.php">Busqueda Avanzada</a></li>
+                    <li><a  href="/app/views/busqueda/index.php">Búsqueda Avanzada</a></li>
 
                    <li>
 
