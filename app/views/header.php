@@ -40,7 +40,9 @@
 
 	<link href="/public/css/main.css" rel="stylesheet">
 
+    <link href="/public/css/select2-bootstrap.css" rel="stylesheet">
 
+    <link href="/public/css/select2.css" rel="stylesheet">
 
 
 
@@ -144,6 +146,21 @@
     <!-- Bootstrap Core JavaScript -->
 
     <script src="/public/js/bootstrap.min.js"></script>
+
+    
+    <script src="/backend/public/js/angular.min.js" type="text/javascript"></script>
+
+    <!-- Morris Charts JavaScript -->
+
+    <script src="/backend/public/js/angular-route.min.js" type="text/javascript"></script>
+
+    <script src="/backend/public/js/ui-bootstrap-tpls-0.11.0.min.js" type="text/javascript"></script>
+
+    <script src="/public/js/app.config.js"></script>
+
+    <script src="/public/js/app.min.js"></script>
+
+    <script src="/public/js/plugins/select2.min.js"></script>
 
 				
 
