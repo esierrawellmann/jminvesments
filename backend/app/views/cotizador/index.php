@@ -337,8 +337,19 @@ function controller($scope, $modal, $log , $http,$location)
                                 </thead>
 
                                 <tbody ng-show="comprasIniciales.compras.length > 0">
+                                  <div class="form-group">
 
-                                    <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras"> 
+                                    <div class="input-group">
+
+                                      <div class="input-group-addon">Filtro</div>
+
+                                      <input class="form-control" type="text" placeholder="Filtrar" ng-model="campo">
+
+                                    </div>
+
+                                  </div>
+
+                                    <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras | filter:campo"> 
 
                                         <td>{{compras.id_propiedad}}</td>
 
