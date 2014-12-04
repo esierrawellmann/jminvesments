@@ -128,7 +128,7 @@ function searchTopFor(){
 
     $this -> conectar();
 
-    $q = "insert into propiedad(tipo,negocio,zona,estado,nombre_proyecto,nombre_propietario,dormitorios,precio_renta,precio_venta,amueblado,directa_compartida,direccion,departamento,municipio,ambiente,area,parqueos) values ('".$propiedad['tipo']."','" . $propiedad['negocio'] . "','" . $propiedad['zona'] . "','" . $propiedad['estado'] ."','".$propiedad['nombre_proyecto']."','" . $propiedad['nombre_propietario'] . "','" . $propiedad['dormitorios'] . "'," . $propiedad['precio_renta'].",".$propiedad['precio_venta'].",'" .$amueblada. "','" . $propiedad['directa_compartida'] . "','" . $propiedad['direccion'] . "','". $departamento['nombre']."','" . $propiedad['municipio'] . "','".$propiedad['ambiente']."','".$propiedad['area']."','".$propiedad['parqueos']."');";
+    $q = "insert into propiedad(tipo,negocio,zona,estado,nombre_proyecto,nombre_propietario,dormitorios,precio_renta,precio_venta,amueblado,directa_compartida,direccion,departamento,municipio,ambiente,area,parqueos,codigo_propiedad) values ('".$propiedad['tipo']."','" . $propiedad['negocio'] . "','" . $propiedad['zona'] . "','" . $propiedad['estado'] ."','".$propiedad['nombre_proyecto']."','" . $propiedad['nombre_propietario'] . "','" . $propiedad['dormitorios'] . "'," . $propiedad['precio_renta'].",".$propiedad['precio_venta'].",'" .$amueblada. "','" . $propiedad['directa_compartida'] . "','" . $propiedad['direccion'] . "','". $departamento['nombre']."','" . $propiedad['municipio'] . "','".$propiedad['ambiente']."','".$propiedad['area']."','".$propiedad['parqueos']."','".$propiedad['codigo_propiedad']."');";
 
     $query = $this->consulta($q);
 
@@ -164,7 +164,7 @@ function searchTopFor(){
 
         $amueblada =  $propiedad['amueblado'] ? 'true':'false';
 
-        $q = "update propiedad set  parqueos='".$propiedad['parqueos']."', tipo='".$propiedad['tipo']."',negocio='".$propiedad['negocio']."',zona='".$propiedad['zona']."',estado='".$propiedad['estado']."',nombre_proyecto='".$propiedad['nombre_proyecto']."',nombre_propietario='".$propiedad['nombre_propietario']."',dormitorios='".$propiedad['dormitorios']."',precio_renta=".$propiedad['precio_renta'].", precio_venta=".$propiedad['precio_venta'].",amueblado='" . $amueblada . "',directa_compartida='".$propiedad['directa_compartida']."',direccion='".$propiedad['direccion']."', departamento='".$departamento['nombre']."',municipio='".$propiedad['municipio']."',ambiente='".$propiedad['ambiente']."',area='".$propiedad['area']."' where id_propiedad=".$propiedad['id_propiedad'] .";";
+        $q = "update propiedad set  parqueos='".$propiedad['parqueos']."', tipo='".$propiedad['tipo']."',negocio='".$propiedad['negocio']."',zona='".$propiedad['zona']."',estado='".$propiedad['estado']."',nombre_proyecto='".$propiedad['nombre_proyecto']."',nombre_propietario='".$propiedad['nombre_propietario']."',dormitorios='".$propiedad['dormitorios']."',precio_renta=".$propiedad['precio_renta'].", precio_venta=".$propiedad['precio_venta'].",amueblado='" . $amueblada . "',directa_compartida='".$propiedad['directa_compartida']."',direccion='".$propiedad['direccion']."', departamento='".$departamento['nombre']."',municipio='".$propiedad['municipio']."',ambiente='".$propiedad['ambiente']."',area='".$propiedad['area']."',codigo_propiedad='".$propiedad['codigo_propiedad']."' where id_propiedad=".$propiedad['id_propiedad'] .";";
 
 
 

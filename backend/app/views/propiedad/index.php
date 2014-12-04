@@ -612,6 +612,8 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                     <tr>
 
                                         <th>Id</th>
+                                        
+                                        <th>Código Propiedad</th>
 
                                         <th>Ambiente</th>
 
@@ -647,6 +649,8 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
                                     <tr  class="odd gradeX" ng-repeat="compras in comprasIniciales.compras | filter:campo"> 
 
                                         <td ng-click="viewDetail(compras)">{{compras.id_propiedad}}</td>
+                                        
+                                        <td ng-click="viewDetail(compras)">{{compras.codigo_propiedad}}</td>
 
                                         <td ng-click="viewDetail(compras)">{{compras.ambiente}}</td>
 
@@ -783,8 +787,20 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
         <form role="form" name="userForm">
 
             <div class="row">
+            
+            <div class="col-lg-6">
 
-                <div class="col-lg-6">
+                    <div class="form-group">
+
+                        <label for="codigo_propiedad">Código Propiedad</label>
+
+                        <input type="text" class="form-control" name="codigo_propiedad" required="false" ng-model="new.codigo_propiedad" id="codigo_propiedad" placeholder="Código Propiedad"/>          
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
 
                     <div class="form-group">
 
@@ -798,7 +814,7 @@ function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-3">
 
                     <div class="form-group">
 

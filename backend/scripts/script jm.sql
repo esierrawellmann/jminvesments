@@ -98,6 +98,8 @@ municipio varchar(512) null,
 
 parqueos varchar(512) null,
 
+codigo_propiedad varchar(512) null,
+
 primary key(id_propiedad)
 
 ) engine=InnoDB;
