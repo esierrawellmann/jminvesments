@@ -44,6 +44,8 @@
 
     <link href="/public/css/select2.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="/public/font-awesome-4.1.0/css/font-awesome.min.css">
+
 
 
 
@@ -161,6 +163,8 @@
     <script src="/public/js/app.min.js"></script>
 
     <script src="/public/js/plugins/select2.min.js"></script>
+
+    <script src="/public/js/unslider.min.js"></script>
 
 				
 

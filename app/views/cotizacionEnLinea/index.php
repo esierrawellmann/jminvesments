@@ -37,7 +37,7 @@
                 $http.post('./../../../backend/app/controllers/propiedad/propiedadFunctions.php', '{"action":"detail","propiedad":'+JSON.stringify($scope.propiedad)+'}').success(function(data){
 
                     $scope.propiedad = data;
-                    console.log($scope.propiedad);
+                    
                     $scope.precio = $scope.propiedad.precio_venta;
 
                     $scope.calculo();
