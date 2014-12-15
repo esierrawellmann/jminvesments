@@ -1,7 +1,9 @@
 <?php  include("../header.php"); ?> 
-<div class="row" style="padding-top: 20px;">
 
+ <div class="main-content"> 
 
+		<div class="container" > 
+                    
                 <div class="col-lg-6" style="">
 
                     <div class="well" style="height:200px; overflow-y:auto; cursor:pointer;" onclick="singleView('Apartamento')">
@@ -19,8 +21,7 @@
                         </div>
 
                     </div>
-                
-                
-
-                </div>
+                    
+                     </div>
+    </div>
 <?php  include("../footer.php"); ?>
