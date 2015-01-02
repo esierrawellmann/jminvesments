@@ -28,11 +28,10 @@
                         
                 ?>  
                 
-                <div class="col-lg-6" style="">
+                <div class="col-lg-2" style="">
 
-                    <div class="well" style="height:200px; overflow-y:auto; cursor:pointer;" onclick="singleView('<?php echo $array[$i]['zona']; ?>')">
+                    <div class="well" style="height:90px; overflow-y:auto; cursor:pointer;" onclick="singleView('<?php echo $array[$i]['zona']; ?>')">
                      <h2 style="margin-top: 0;"><?php echo $array[$i]['zona']; ?></h2>
-                     <img class="img-responsive" src="bodega.jpg">
                         </div>
 
                     </div>
