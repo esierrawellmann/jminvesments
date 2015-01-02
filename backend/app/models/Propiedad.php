@@ -61,6 +61,32 @@ function getZonas($negocio,$tipo)
     }
 
   }
+  
+  function getPropiedadesManuales($negocio,$tipo,$zona)
+
+  {
+
+    $this->conectar();
+
+    $query = $this->consulta("select * from PROPIEDAD where negocio='".$negocio."' and tipo='".$tipo."'and zona='".$zona."';");
+
+    $this->disconnect();
+
+    if($this->numero_de_filas($query) > 0){
+
+      while ( $tsArray = $this->fetch_assoc($query) )
+
+        $data[] = $tsArray;   
+
+        return $data;
+
+    }else{
+
+      return array();
+
+    }
+
+  }
 
 
 

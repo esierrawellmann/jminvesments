@@ -9,9 +9,11 @@
 ?> 
 
 <script>
-     function singleView(tipo){
+     function singleView(zona){
 
-        window.location = "/app/views/zonas/index.php?zona="+tipo;
+        var tipo = '<?php echo $tipo; ?>'; 
+        var negocio = '<?php echo $negocio; ?>'; 
+        window.location = "/app/views/propiedadesZona/index.php?zona="+zona+"&tipo="+tipo+"&negocio="+negocio;
 
     }
     </script>
