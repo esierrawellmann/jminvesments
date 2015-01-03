@@ -20,7 +20,12 @@
 
  <div class="main-content"> 
 
-		<div class="container" > 
+		<div class="container"> 
+                    
+                    <span class="label label-primary">Seleccione la zona:</span>
+                   
+                    <div class="row">
+                    
                     
                 <?php  
                     $contador = count($array);
@@ -39,6 +44,7 @@
                     <?php 
                     }
                     ?> 
+                    </div>
                     
                      </div>
     </div>
