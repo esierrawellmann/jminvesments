@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9265bed-9e8e-4c6d-baed-8e32e4ed9ab6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/apartamento.JPG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/bodega.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/casas.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/edificios.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/local.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/oficina.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/rent.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/sell.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/terreno.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/auto/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/propiedadesZona/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/zonas/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/app/models/Propiedad.php" afterPath="$PROJECT_DIR$/backend/app/models/Propiedad.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/busqueda/index.php" afterPath="$PROJECT_DIR$/app/views/busqueda/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/main.php" afterPath="$PROJECT_DIR$/app/views/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jminvesments.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -132,8 +119,8 @@
       <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/busqueda/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="6596">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="6970">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1120,8 +1107,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/busqueda/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="6596">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="6970">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
