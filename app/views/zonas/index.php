@@ -21,6 +21,12 @@
  <div class="main-content"> 
 
 		<div class="container" > 
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h1 class="page-header">Zonas </h1>
+
+                </div>
                     
                 <?php  
                     $contador = count($array);
@@ -28,10 +34,10 @@
                         
                 ?>  
                 
-                <div class="col-lg-2" style="">
+                <div class="col-lg-3 col-md-4 col-xs-6" style="text-align:center; padding:60px;">
 
-                    <div class="well" style="height:90px; overflow-y:auto; cursor:pointer;" onclick="singleView('<?php echo $array[$i]['zona']; ?>')">
-                     <h2 style="margin-top: 0;"><?php echo $array[$i]['zona']; ?></h2>
+                    <div class="well" style="height:150px;  cursor:pointer;  vertical-align: middle;" onclick="singleView('<?php echo $array[$i]['zona']; ?>')">
+                     <h2 style="font-size:76px; font-weight: bold;"><?php echo $array[$i]['zona']; ?></h2>
                         </div>
 
                     </div>
@@ -40,6 +46,8 @@
                     }
                     ?> 
                     
-                     </div>
+             </div>
+         </div>
+
     </div>
 <?php  include("../footer.php"); ?>
