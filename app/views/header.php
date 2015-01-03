@@ -68,11 +68,12 @@
 
 
 
-<body>
+<body >
 
 
-
-    <!-- Navigation -->
+    <div>
+        <div id="mainContainer">
+        <!-- Navigation -->
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background:#0C1A26">
 
