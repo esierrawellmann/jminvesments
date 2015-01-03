@@ -28,6 +28,11 @@
 
                 </div>
                     
+                    <span class="label label-primary">Seleccione la zona:</span>
+                   
+                    <div class="row">
+                    
+                    
                 <?php  
                     $contador = count($array);
                    for ($i = 0; $i < $contador; $i++) {
