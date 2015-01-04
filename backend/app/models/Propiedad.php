@@ -42,7 +42,7 @@ function getZonas($negocio,$tipo)
 
     $this->conectar();
 
-    $query = $this->consulta("select zona from PROPIEDAD where negocio='".$negocio."' and tipo='".$tipo."' group by zona order by CAST(zona AS UNSIGNED) asc;");
+    $query = $this->consulta("select zona from propiedad where negocio='".$negocio."' and tipo='".$tipo."' group by zona order by CAST(zona AS UNSIGNED) asc;");
 
     $this->disconnect();
 
@@ -68,7 +68,7 @@ function getZonas($negocio,$tipo)
 
     $this->conectar();
 
-    $query = $this->consulta("select *,(SELECT nombre FROM detalle_propiedad WHERE propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) AS 'imagen' from PROPIEDAD where negocio='".$negocio."' and tipo='".$tipo."'and zona='".$zona."';");
+    $query = $this->consulta("select *,(SELECT nombre FROM detalle_propiedad WHERE propiedad.id_propiedad = detalle_propiedad.id_propiedad LIMIT 1) AS 'imagen' from propiedad where negocio='".$negocio."' and tipo='".$tipo."'and zona='".$zona."';");
 
     $this->disconnect();
 
