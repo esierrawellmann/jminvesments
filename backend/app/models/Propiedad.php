@@ -257,91 +257,109 @@ function searchForProperties($params){
 
     $query .= " estado = 'Disponible'";
 
-     if(isset($params['precio_renta'])){
-        switch($params['precio_renta']){
-          case "8" :
-            $query .= " and precio_renta between 0 and 500 ";
-          break;
-          case "9" :
-            $query .= " and precio_renta between 501 and 1000 ";
-          break;
-          case "10" :
-            $query .= " and precio_renta between 1001 and 1500 ";
-          break;
-          case "11" :
-           $query .= " and precio_renta between 1501 and 2000 ";
-          break;
-          case "12" :
-           $query .= " and precio_renta between 2001 and 2500 ";
-          break;
-          case "13" :
-           $query .= " and precio_renta between 2501 and 3000 ";
-          break;
-          case "14" :
-           $query .= " and precio_renta between 3000 and 9223372036854775807 ";
-          break;
-        }
-        
-     }
+     if(isset($params['precio_renta']) && count($params['precio_renta']) > 0 && $params['negocio'] ==="Renta" ){
 
-     if(isset($params['precio_venta'])){
-      switch($params['precio_venta']){
-          case "1" :
-            $query .= " and precio_venta between 0 and 75000 ";
-          break;
-          case "2" :
-            $query .= " and precio_venta between 75001 and 100000 ";
-          break;
-          case "3" :
-            $query .= " and precio_venta between 100001 and 150000 ";
-          break;
-          case "4" :
-           $query .= " and precio_venta between 150001 and 200000 ";
-          break;
-          case "5" :
-           $query .= " and precio_venta between 200001 and 250000 ";
-          break;
-          case "6" :
-           $query .= " and precio_venta between 250001 and 300000 ";
-          break;
-          case "7" :
-           $query .= " and precio_venta between 300001 and 9223372036854775807 ";
-          break;
+          $operador = " and ";
+          foreach ($params['precio_renta'] as $key => $value) {
+            if($key > 0){
+              $operador = " or ";
+            }
+        $query .= $operador;
+            # code...
+            switch($value){
+            case "8" :
+              $query .= "  precio_renta between 0 and 500 ";
+            break;
+            case "9" :
+              $query .= "  precio_renta between 501 and 1000 ";
+            break;
+            case "10" :
+              $query .= "  precio_renta between 1001 and 1500 ";
+            break;
+            case "11" :
+             $query .= "  precio_renta between 1501 and 2000 ";
+            break;
+            case "12" :
+             $query .= "  precio_renta between 2001 and 2500 ";
+            break;
+            case "13" :
+             $query .= "  precio_renta between 2501 and 3000 ";
+            break;
+            case "14" :
+             $query .= "  precio_renta between 3000 and 9223372036854775807 ";
+            break;
+          }
         }
      }
 
-    if(isset($params['tipo'])){
+     if(isset($params['precio_venta']) && count($params['precio_venta']) > 0 && $params['negocio'] ==="Venta" ){
+      $operador = " and ";
+      foreach ($params['precio_venta'] as $key => $value) {
+        # code...
+        if($key > 0){
+          $operador = " or ";
+        }
+        $query .= $operador;
+        switch($value){
+            case "1" :
+              $query .= " precio_venta between 0 and 75000 ";
+            break;
+            case "2" :
+              $query .= " precio_venta between 75001 and 100000 ";
+            break;
+            case "3" :
+              $query .= " precio_venta between 100001 and 150000 ";
+            break;
+            case "4" :
+             $query .= " precio_venta between 150001 and 200000 ";
+            break;
+            case "5" :
+             $query .= " precio_venta between 200001 and 250000 ";
+            break;
+            case "6" :
+             $query .= " precio_venta between 250001 and 300000 ";
+            break;
+            case "7" :
+             $query .= " precio_venta between 300001 and 9223372036854775807 ";
+            break;
+          }
+      }
+      
+     }
+
+    if(isset($params['tipo']) && count($params['tipo']) > 0  ){
 
         $query .= " and tipo in('".implode("','",$params['tipo'])."')";
 
     }
 
-    if(isset($params['negocio'])){
+    if(isset($params['negocio'])  && $params['negocio'] !==""){
 
-        $query .= " and negocio in('".implode("','",$params['negocio'])."')";
+        $query .= " and negocio in('".$params['negocio']."')";
 
     }
 
-    if(isset($params['zona'])){
+    if(isset($params['zona'])  && count($params['zona']) > 0 ){
 
          $query .= " and zona in('".implode("','",$params['zona'])."')";
 
     }
 
-    if(isset($params['dormitorios'])){
+    if(isset($params['dormitorios'])  && $params['dormitorios'] !==""){
 
          $query .= " and dormitorios = '".$params['dormitorios']."' ";
 
     }    
 
-    if(isset($params['amueblado'])){
+    if(isset($params['amueblado'])  && $params['amueblado'] !==""){
         $varAmueblado = $params['amueblado'] ? 'true': 'false';
         $query .= "and amueblado = '".$varAmueblado."'";
 
     }
-
+   
     $query .= ";";
 
+    
     $this->conectar();
 
     $query = $this->consulta($query);
@@ -361,7 +379,6 @@ function searchForProperties($params){
       return array();
 
     }
-
 }
 
 
